@@ -49,7 +49,7 @@ target_include_directories(${PACKAGE_NAME} SYSTEM PRIVATE
 )
 
 
-target_link_libraries(${PACKAGE_NAME} PRIVATE OrganizedPointFilters::OPF)
+target_link_libraries(${PACKAGE_NAME} PRIVATE eigen OrganizedPointFilters::OPF)
 if (${PYTHON_VERSION_MAJOR} EQUAL 2)
     target_compile_definitions(${PACKAGE_NAME} PRIVATE PYTHON_2_FALLBACK)
 endif ()

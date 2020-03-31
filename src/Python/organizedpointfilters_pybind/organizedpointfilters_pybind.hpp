@@ -6,6 +6,7 @@
 #include <pybind11/pybind11.h> // Include first to suppress compiler warnings
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
+// #include <pybind11/eigen.h>
 
 #include "OrganizedPointFilters/OrganizedPointFilters.hpp"
 

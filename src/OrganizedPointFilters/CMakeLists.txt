@@ -53,7 +53,7 @@ $<$<CXX_COMPILER_ID:MSVC>:
 # OPTION Build with OpenMP Support
 if (OPF_WITH_OPENMP)
   find_package(OpenMP)
-  target_link_libraries(${PROJECT_NAME} PUBLIC OpenMP::OpenMP_CXX)
+  target_link_libraries(${PROJECT_NAME} PUBLIC OpenMP::OpenMP_CXX eigen)
 endif()
 
 # Set Properties
