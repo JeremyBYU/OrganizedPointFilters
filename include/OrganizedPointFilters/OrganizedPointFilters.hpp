@@ -27,6 +27,10 @@
 #include <vector>
 #include <algorithm>
 
+#include "OrganizedPointFilters/Types.hpp"
+#include "OrganizedPointFilters/Helper.hpp"
+#include "OrganizedPointFilters/RS/SpatialFilter.hpp"
+
 namespace OrganizedPointFilters {
 /**
  * \brief Says hello with a name
@@ -36,16 +40,6 @@ namespace OrganizedPointFilters {
  */
 std::string Hello(std::string& name);
 
-/**
- * \brief Multiplies a generic array by a scalar
- * 
- * \tparam T 
- * \param vec 
- * \param scalar 
- * \return std::vector<T> 
- */
-template <typename T>
-std::vector<T> MultiplyByScalar(std::vector<T>& vec, T scalar);
 
 } // namespace OrganizedPointFilters
 
