@@ -1,28 +1,50 @@
 import numpy as np
+
+from .utility.helper import get_np_buffer_ptr
 import organizedpointfilters as opf
 from organizedpointfilters import Matrix3f, Matrix3fRef
 
-def get_np_buffer_ptr(a):
-    pointer, read_only_flag = a.__array_interface__['data']
-    return hex(pointer)
-
 def main():
-    a = np.arange(5*5*3).reshape((5,5,3)).astype(np.float32)
-    b = np.ones((5, 5, 3), dtype=np.float32)
-
+    a = np.random.randn(5, 5, 3).astype(np.float32)
+    print(a)
     print("Call by Ref")
     a_ref = Matrix3fRef(a)
-    b_ref = Matrix3fRef(b)
+
 
     print(get_np_buffer_ptr(a))
-    c = opf.kernel.laplacian(a_ref, b_ref,  3)
+    b_ref = opf.kernel.laplacian(a_ref, iterations=1)
+    print("Result")
+    print(np.asarray(b_ref))
 
     print("Call by Copy")
 
     a_cp = Matrix3f(a)
-    b_cp = Matrix3f(b)
 
-    d = opf.kernel.laplacian(a_cp, b_cp,  3)
+    b_cp = opf.kernel.laplacian(a_cp)
+
+    print("Result")
+    print(np.asarray(b_cp))
+
+# def main():
+#     a = np.arange(5*5*3).reshape((5,5,3)).astype(np.float32)
+#     print(a)
+#     print("Call by Ref")
+#     a_ref = Matrix3fRef(a)
+
+
+#     print(get_np_buffer_ptr(a))
+#     b_ref = opf.kernel.laplacian(a_ref, iterations=1)
+#     print("Result")
+#     print(np.asarray(b_ref))
+
+#     print("Call by Copy")
+
+#     a_cp = Matrix3f(a)
+
+#     b_cp = opf.kernel.laplacian(a_cp)
+
+#     print("Result")
+#     print(np.asarray(b_cp))
 
 
 if __name__ == "__main__":

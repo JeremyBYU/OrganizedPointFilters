@@ -3,3 +3,5 @@ sphinx
 sphinx_rtd_theme
 breathe
 exhale
+open3d
+pypcd@https://api.github.com/repos/jeremybyu/pypcd/tarball/
