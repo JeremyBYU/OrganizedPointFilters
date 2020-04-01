@@ -17,5 +17,6 @@ endif()
 # Google Benchmark needs threads!
 find_package(Threads REQUIRED)
 
-add_executable(run-bench ${CMAKE_CURRENT_SOURCE_DIR}/run-bench.cpp ${CMAKE_CURRENT_SOURCE_DIR}/bench-lib.cpp)
+add_executable(run-bench ${CMAKE_CURRENT_SOURCE_DIR}/run-bench.cpp ${CMAKE_CURRENT_SOURCE_DIR}/bench-image.cpp
+${CMAKE_CURRENT_SOURCE_DIR}/bench-opc.cpp)
 target_link_libraries(run-bench PRIVATE OrganizedPointFilters::OPF benchmark Threads::Threads)
