@@ -69,14 +69,18 @@ extern "C"
     }
 
 
-    __device__ void Print2DPointArray(float *point, rows, cols)
+    __device__ void Print2DPointArray(float *point, int rows, int cols)
     {
+        printf("Shared Memory Size: %d\n ", rows);
         for(int i = 0; i < rows; ++i)
         {
-            for(int j = 0; i < rows; ++i)
+            for(int j = 0; j < cols; ++j)
             {
-                
+                int idx = i * cols + j;
+                // printf("(%.2f,%.2f,%.2f), ", point[idx*3], point[idx*3 + 1], point[idx*3 + 2]);
+                printf("(%.4f), ", point[idx*3 + 1]);
             }
+            printf("\n\n");
 
         }
     }
@@ -95,7 +99,7 @@ extern "C"
     {
         __shared__ float SHM_POINTS[SHM_SIZE*3 * SHM_SIZE*3];  // block of 3D Points in shared memory
 
-        // printf("lambda: %.2f", lambda);
+        
 
  		int shmRow_y = threadIdx.y + HALF_RADIUS;             // row of shared memory, interior
  		int shmCol_x = threadIdx.x + HALF_RADIUS;             // col of shared memory, interior
@@ -107,16 +111,15 @@ extern "C"
 
         int srcIdx_temp = srcIdx;
 
-        // Copy inside portion of shared memory
         LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx);           // Copy Point(x,y,z) into shared memory
-
-        // float dummy[3];
-        // LoadPoint(dummy, opc, 0, srcIdx);
-        // printf("All; Row,Col: %d,%d; Point: (%.4f, %.4f, %.4f);\n", srcRow_y, srcCol_x, dummy[0], dummy[1], dummy[2]);
-
+        if (srcRow_y > 0 && srcRow_y < (rows - 1) && srcCol_x > 0 && srcCol_x < (cols - 1))
         // Branch divergence near borders of image
-        if (srcRow_y > 0 && srcRow_y < rows - 1 && srcCol_x > 0 && srcCol_x < cols - 1)
         {
+            // Copy inside portion of shared memory
+
+            // float dummy[3];
+            // LoadPoint(dummy, opc, 0, srcIdx);
+            // printf("All; Row,Col: %d,%d; Point: (%.4f, %.4f, %.4f);\n", srcRow_y, srcCol_x, dummy[0], dummy[1], dummy[2]);
 
             // Copy Halo Cells, will have LOTS of branch divergence here
             if (threadIdx.x == 0)
@@ -145,7 +148,7 @@ extern "C"
                     LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
                 }
             }
-            if (threadIdx.x == blockDim.x)
+            if (threadIdx.x == (blockDim.x - 1))
             {
                 // Right Column, inner border
                 shmIdx = shmRow_y * SHM_SIZE + (shmCol_x + 1);
@@ -172,16 +175,29 @@ extern "C"
                 shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x);
                 srcIdx_temp = (srcRow_y - 1) * cols + (srcCol_x);
                 LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
+
+                float point[3];
+                float point_temp[3];
+                LoadPoint(point, opc, 0, srcIdx);
+                LoadPoint(point_temp, SHM_POINTS, 0, shmIdx);
+                // printf("Top Row; Row,Col: %d,%d; Point: (%.4f, %.4f, %.4f); Top Point: (%.4f, %.4f, %.4f)\n", srcRow_y, srcCol_x, point[0], point[1], point[2], point_temp[0], point_temp[1], point_temp[2]);
             }
-            if (threadIdx.y == blockDim.y)
+            if (threadIdx.y == (blockDim.y - 1))
             {
-                // Top Row
+                // Bottom Row
                 shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x);
                 srcIdx_temp = (srcRow_y + 1) * cols + (srcCol_x);
                 LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
             }
 
             __syncthreads();
+
+            //if(blockIdx.y == 1 && blockIdx.x == 1 && threadIdx.y == 0 && threadIdx.x == 0)
+            //{
+            //    printf("Block (1,1); Row,Col: %d,%d; \n", srcRow_y, srcCol_x);
+            //    printf("block dim: %d \n", blockDim.x);
+            //    Print2DPointArray(SHM_POINTS, SHM_SIZE, SHM_SIZE);
+            //}
 
 
             // TODO - Try and use Eigen instead of manual math
@@ -322,7 +338,6 @@ def tab40():
 def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
-    print("lambda", _lambda)
     opc_float_gpu_a = cp.asarray(opc_float)  # move the data to the current device.
     opc_float_gpu_b = cp.copy(opc_float_gpu_a)
 
@@ -346,8 +361,10 @@ def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
             laplacian_K3(grid_size, block_size, (opc_float_gpu_b, opc_float_gpu_a, opc_height, opc_width, np.float32(0.5)))   # y = x1 + x2
             use_b = False
 
-    # print(opc_float[237, 192:224, :])
     cp.cuda.Stream.null.synchronize()
+    # print(opc_float[32, 1:32])
+    # print(opc_float[31, 1:32])
+    # print(opc_float[31:65, 31:65, 1])
     # print(opc_float[208, 64, :], opc_float[208, 63, :])
 
     opc_float_out = cp.asnumpy(opc_float_gpu_b) if use_b else cp.asnumpy(opc_float_gpu_a)
