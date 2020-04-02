@@ -84,7 +84,7 @@ def laplacian_opc(opc, stride=2, loops=5, _lambda=0.5, kernel_size=3):
     a_ref = Matrix3fRef(opc_float)
 
     t1 = time.perf_counter()
-    b_cp = opf.kernel.laplacian(a_ref, _lambda=_lambda, iterations=loops, kernel_size=kernel_size)
+    b_cp = opf.kernel.laplacian_K3(a_ref, _lambda=_lambda, iterations=loops)
     t2 = time.perf_counter()
     logger.info("OPC Mesh Smoothing Took (ms): %.2f", (t2 - t1) * 1000)
 

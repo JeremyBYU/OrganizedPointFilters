@@ -33,7 +33,8 @@ inline void smooth_point(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixX
             sum_vertex += weight * opc(row, col);
         }
     }
-    opc_out(i, j) = point + lambda * (sum_vertex / total_weight - point);
+    auto new_point = sum_vertex / total_weight;
+    opc_out(i, j) = point + lambda * (new_point - point);
 }
 
 // template<typename kernel_size>
@@ -105,6 +106,11 @@ inline void SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixX
             sum_vertex += weight * opc(row_, col_);
         }
     }
+    // if (i == 246 && j == 248)
+    // {
+    //     auto new_point = sum_vertex / total_weight;
+    //     std::cout << "Row,Col: " << i << ", " << j <<  "; Old Point: " << point <<  "; New Point:" << new_point << std::endl;
+    // }
     opc_out(i, j) = point + lambda * (sum_vertex / total_weight - point);
 }
 
