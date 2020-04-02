@@ -1,27 +1,18 @@
 loaded_from_source = r'''
 extern "C" 
 {
-    #define EPS 1e-12f
+    // Dummy kernel to kickstart CUDA, not sure if necessary...
     __global__ void test_sum(const float* x1, const float* x2, float* y, \
-                            unsigned int N, double echo)
+                            unsigned int N)
     {
-        // printf("echo: %.2f", echo);
         unsigned int tid = blockDim.x * blockIdx.x + threadIdx.x;
         if (tid < N)
         {
             y[tid] = x1[tid] + x2[tid];
         }
     }
-    __global__ void test_multiply(const float* x1, const float* x2, float* y, \
-                                unsigned int N)
-    {
-        unsigned int tid = blockDim.x * blockIdx.x + threadIdx.x;
-        if (tid < N)
-        {
-            y[tid] = x1[tid] * x2[tid];
-        }
-    }
 
+    //////// Start Helper Functions /////////
     __device__ void LoadPoint(float* out, const float* in, int outIdx, int inIdx)
     {
         out[outIdx * 3 + 0] = in[inIdx * 3 + 0];          // x cordinate
@@ -58,17 +49,6 @@ extern "C"
         return norm3df(x3, y3, z3);
     }
 
-    __device__ void SmoothPointFunction(int &nbr_shmIdx, float* SHM_POINTS, float *point_temp, float *point, float &total_weight, float* sum_point)
-    {
-        LoadPoint(point_temp, SHM_POINTS, 0, nbr_shmIdx);
-        float dist = PointDistance(point, point_temp);
-        float weight = 1.0f / (dist + EPS);
-        total_weight += weight;
-        ScalePointInPlace(point_temp, weight);
-        AddPointsInPlace(sum_point, point_temp);
-    }
-
-
     __device__ void Print2DPointArray(float *point, int rows, int cols)
     {
         printf("Shared Memory Size: %d\n ", rows);
@@ -84,13 +64,22 @@ extern "C"
 
         }
     }
+    //////// End Helper Functions /////////
 
+    #define EPS 1e-12f
     #define BLOCK_WIDTH 32
     #define KERNEL_SIZE 3
     #define SHM_SIZE (BLOCK_WIDTH + KERNEL_SIZE -1)
     #define HALF_RADIUS KERNEL_SIZE/2
-    #define IMG_IDX(row, col, Col) row * Col + row
-    #define IMG_ROW(idx, Row, Col) 
+    __device__ void IntegeratePoint(int &nbr_shmIdx, float* SHM_POINTS, float *point_temp, float *point, float &total_weight, float* sum_point)
+    {
+        LoadPoint(point_temp, SHM_POINTS, 0, nbr_shmIdx);
+        float dist = PointDistance(point, point_temp);
+        float weight = 1.0f / (dist + EPS);
+        total_weight += weight;
+        ScalePointInPlace(point_temp, weight);
+        AddPointsInPlace(sum_point, point_temp);
+    }
 
     __device__ void ReadBlockAndHalo(float *SHM_POINTS, const float *opc, const int &shmRow_y, const int &shmCol_x, const int &srcRow_y, const int &srcCol_x, const int &cols)
     {
@@ -158,11 +147,85 @@ extern "C"
 
     }
 
+    __global__ void SmoothPoint(float* SHM_POINTS, const float *opc, float *opc_out, const int &srcIdx, 
+                                const int &shmRow_y, const int &shmCol_x, const int &srcRow_y, 
+                                const int &srcCol_x, const int &cols, const float &lambda)
+    {
+
+        int this_shmIdx = shmRow_y * SHM_SIZE + shmCol_x;  // shm point index for this points row/col
+
+        float point[3];                     // will contain x,y,z point of this row/col
+        float point_temp[3];                // a temporary for a point in stencil
+        float sum_point[3] = {0,0,0};       // the weighted sum of points in stencil
+        float dist = 0.0;                   // distance between point and neighbor
+        float weight = 0.0;                 // weighting for point
+        float total_weight = 0.0;           // total weight for scaling new point
+        int nbr_shmIdx = 0;                 // nbr shared index
+
+        LoadPoint(point, SHM_POINTS, 0, this_shmIdx);
+
+        // I manually unwrapped the 3X3 Kernel loop below
+        // Mostly because the center point should not occur in the kernel
+        // and I didn't want an if statement for branch divergence
+
+        //////// Left ////////////
+        //////// Left Top ////////
+        nbr_shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x - 1);
+        LoadPoint(point_temp, SHM_POINTS, 0, nbr_shmIdx);
+        dist = PointDistance(point, point_temp);
+        weight = 1.0f / (dist + EPS);
+        total_weight += weight;
+        ScalePointInPlace(point_temp, weight);
+        AddPointsInPlace(sum_point, point_temp);
+      
+        //////// Left Center ////////
+        nbr_shmIdx = (shmRow_y) * SHM_SIZE + (shmCol_x - 1);
+        IntegeratePoint(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
+
+        //////// Left Bottom ////////
+        nbr_shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x - 1);
+        IntegeratePoint(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
+
+
+        //////// Center  ////////////
+        //////// Center Top /////////
+        nbr_shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x);
+        IntegeratePoint(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
+
+        //////// Center Bottom /////////
+        nbr_shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x);
+        IntegeratePoint(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
+
+
+        //////// Right  ////////////
+        //////// Right Top /////////
+        nbr_shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x + 1);
+        IntegeratePoint(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
+
+        //////// Right Mid /////////
+        nbr_shmIdx = (shmRow_y) * SHM_SIZE + (shmCol_x + 1);
+        IntegeratePoint(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
+
+        //////// Right Bottom /////////
+        nbr_shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x + 1);
+        IntegeratePoint(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
+
+        //////// Combine into New Point /////////
+        /// This they very convoluted way of doing this -> opc_out(i, j) = point + lambda * (sum_point / total_weight - point);
+        float new_scale = 1.0f / total_weight;
+        ScalePointInPlace(sum_point, new_scale);
+        SubtractPointsInPlace(sum_point, point);
+        ScalePointInPlace(sum_point, lambda);
+        AddPointsInPlace(sum_point, point);
+    
+        // store in global memory
+        LoadPoint(opc_out, sum_point, srcIdx, 0);
+
+    }
+
     __global__ void LaplacianLoopK3(float* opc, float* opc_out, int rows, int cols, float lambda)
     {
         __shared__ float SHM_POINTS[SHM_SIZE*3 * SHM_SIZE*3];  // block of 3D Points in shared memory
-
-        
 
  		int shmRow_y = threadIdx.y + HALF_RADIUS;             // row of shared memory, interior
  		int shmCol_x = threadIdx.x + HALF_RADIUS;             // col of shared memory, interior
@@ -172,87 +235,17 @@ extern "C"
         int srcCol_x = blockIdx.x * blockDim.x + threadIdx.x; // col in global memory
         int srcIdx = srcRow_y * cols + srcCol_x;              // idx in global memory
 
-        // int srcIdx_temp = srcIdx;
-
-        LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx);           // Copy Point(x,y,z) into shared memory
+        LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx);           // Copy global memory point (x,y,z) into shared memory
         if (srcRow_y > 0 && srcRow_y < (rows - 1) && srcCol_x > 0 && srcCol_x < (cols - 1))
         // Branch divergence near borders of image
         {
             // Copy Halo Cells, will have LOTS of branch divergence here
+            // After this call SHM_POINTS is completely filled 
             ReadBlockAndHalo(SHM_POINTS, opc, shmRow_y, shmCol_x, srcRow_y, srcCol_x, cols);
             __syncthreads();
 
-            // TODO - Try and use Eigen instead of manual math
-            ////// Smooth Point Operation ////
-            int this_shmIdx = shmRow_y * SHM_SIZE + shmCol_x;  // shm point index for this i,j
-            float total_weight = 0.0;
-
-            float point[3];                     // will contain x,y,z point of this row/col
-            float point_temp[3];                // a temporary for a point in stencil
-            float sum_point[3] = {0,0,0};                 // the weighted sum of points in stencil
-
-            LoadPoint(point, SHM_POINTS, 0, this_shmIdx);
-
-
-            float dist = 0.0;
-            float weight = 0.0;
-            int nbr_shmIdx = 0;
-
-
-            //////// Left ////////////
-            //////// Left Top ////////
-            nbr_shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x - 1);
-            LoadPoint(point_temp, SHM_POINTS, 0, nbr_shmIdx);
-            dist = PointDistance(point, point_temp);
-            weight = 1.0f / (dist + EPS);
-            total_weight += weight;
-            ScalePointInPlace(point_temp, weight);
-            AddPointsInPlace(sum_point, point_temp);
-            // printf("Row,Col: %d,%d; Old Point: (%.4f, %.4f, %.4f); Weight: %.4f, Left Top Point Weighted: (%.4f, %.4f, %.4f); Dist: %.4f \n", srcRow_y, srcCol_x, point[0], point[1], point[2], weight,  point_temp[0], point_temp[1], point_temp[2], dist);
-
-
-            //////// Left Center ////////
-            nbr_shmIdx = (shmRow_y) * SHM_SIZE + (shmCol_x - 1);
-            SmoothPointFunction(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
-            // printf("Row,Col: %d,%d; Old Point: (%.4f, %.4f, %.4f); Weight: %.4f, Left Center Point Weighted: (%.4f, %.4f, %.4f); Dist: %.4f \n", srcRow_y, srcCol_x, point[0], point[1], point[2], weight,  point_temp[0], point_temp[1], point_temp[2], dist);
-
-            //////// Left Bottom ////////
-            nbr_shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x - 1);
-            SmoothPointFunction(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
-
-
-            //////// Center  ////////////
-            //////// Center Top /////////
-            nbr_shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x);
-            SmoothPointFunction(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
-
-            //////// Center Bottom /////////
-            nbr_shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x);
-            SmoothPointFunction(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
-
-
-            //////// Right  ////////////
-            //////// Right Top /////////
-            nbr_shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x + 1);
-            SmoothPointFunction(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
-
-            //////// Right Mid /////////
-            nbr_shmIdx = (shmRow_y) * SHM_SIZE + (shmCol_x + 1);
-            SmoothPointFunction(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
-
-            //////// Right Bottom /////////
-            nbr_shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x + 1);
-            SmoothPointFunction(nbr_shmIdx, SHM_POINTS, point_temp, point, total_weight, sum_point);
-
-            float new_scale = 1.0f / total_weight;
-            ScalePointInPlace(sum_point, new_scale);
-            SubtractPointsInPlace(sum_point, point);
-            ScalePointInPlace(sum_point, lambda);
-            AddPointsInPlace(sum_point, point);
-            //printf("Row,Col: %d,%d; Old Point: (%.4f, %.4f, %.4f); New Point (%.4f, %.4f, %.4f); lambda: %.2f\n", srcRow_y, srcCol_x, point[0], point[1], point[2], sum_point[0], sum_point[1], sum_point[2], lambda);
-
-            // store in global memory
-            LoadPoint(opc_out, sum_point, srcIdx, 0);
+            ////// Smooth Point Operation //////
+            SmoothPoint(SHM_POINTS, opc, opc_out, srcIdx, shmRow_y, shmCol_x, srcRow_y, srcCol_x, cols, lambda);
 
         }
 
@@ -261,25 +254,6 @@ extern "C"
 
 '''
 
-
-        # int blockId = blockIdx.x + blockIdx.y * gridDim.x;
-        # int threadId = blockId * (blockDim.x * blockDim.y)+ (threadIdx.y * blockDim.x)+ threadIdx.x;
-        # // multiply by 3 for every threadID to get start of first float in x for (x,y,z) of point
-        # int pointId = 3 * threadId;
-
-        # int shmIdx = threadIdx.y * BLOCK_WIDTH + threadIdx.x;
- 		# int shmRow_y = shmIdx / SHM_SIZE;  // row of shared memory
- 		# int shmCol_x = shmIdx % SHM_SIZE;  // col of shared memory
-
-        # int srcRow_y = blockIdx.y * BLOCK_WIDTH + shmRow_y - HALF_RADIUS
-        # int srcCol_x = blockIdx.x * BLOCK_WIDTH + shmCol_x - HALF_RADIUS;
-
-        # int srcIdx = (srcRow_y * rows + srcCol_x) * 3;   // index of start of float for point
-
- 		# if(srcY>= 0 && srcY < height && srcX>=0 && srcX < width)
- 		# 	N_ds[destY][destX] = InputImageData[src];  // copy element of image in shared memory
- 		# else
- 		# 	N_ds[destY][destX] = 0;
 
 import logging
 
@@ -290,25 +264,26 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 from .o3d_util import create_open_3d_pcd
 
-BLOCK_SIZE = 32
-KERNEL_SIZE = 3
-
 logger = logging.getLogger("PPB")
 
-cp.cuda.Stream.null.synchronize()
+
 
 module = cp.RawModule(code=loaded_from_source)
 ker_sum = module.get_function('test_sum')
 laplacian_K3 = module.get_function('LaplacianLoopK3')
-N = 10
-x1 = cp.arange(N**2, dtype=cp.float32).reshape(N, N)
-x2 = cp.ones((N, N), dtype=cp.float32)
-y = cp.zeros((N, N), dtype=cp.float32)
-ker_sum((N,), (N,), (x1, x2, y, N**2, 0.1))   # y = x1 + x2
-assert(cp.allclose(y, x1 + x2))
 
-cp.cuda.Stream.null.synchronize()
+BLOCK_SIZE = 32
+KERNEL_SIZE = 3
 
+
+
+def run_cuda_once():
+    N = 10
+    x1 = cp.arange(N**2, dtype=cp.float32).reshape(N, N)
+    x2 = cp.ones((N, N), dtype=cp.float32)
+    y = cp.zeros((N, N), dtype=cp.float32)
+    ker_sum((N,), (N,), (x1, x2, y, N**2, 0.1))   # y = x1 + x2
+    assert(cp.allclose(y, x1 + x2))
 
 def tab40():
     """A discrete colormap with 40 unique colors"""
@@ -316,12 +291,14 @@ def tab40():
     return colors.ListedColormap(colors_)
 
 
+def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=KERNEL_SIZE, **kwargs):
 
-def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
+    t1 = time.perf_counter()
+    # These device memory allocation take about 1.4 (ms) on my 2070 Super (250X250)
     opc_float_gpu_a = cp.asarray(opc_float)  # move the data to the current device.
-    opc_float_gpu_b = cp.copy(opc_float_gpu_a)
+    opc_float_gpu_b = cp.copy(opc_float_gpu_a) # make copy for the data
 
     opc_width = opc_float.shape[0]
     opc_height = opc_float.shape[1]
@@ -329,34 +306,25 @@ def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
     num_points = opc_width * opc_height
     block_size = (BLOCK_SIZE, BLOCK_SIZE)
     grid_size = (int((opc_width - 1) / (BLOCK_SIZE - KERNEL_SIZE + 1)), int((opc_height - 1) / (BLOCK_SIZE - KERNEL_SIZE + 1)))
-    # print(num_points)
-    # print(grid_size)
-    t1 = time.perf_counter()
 
-
+    # One iteration takes about 0.18 ms, 5 iterations takes 0.21 ms, must be start up cost? 
     use_b = True
     for i in range(loops):
         if (i % 2) == 0:
-            laplacian_K3(grid_size, block_size, (opc_float_gpu_a, opc_float_gpu_b, opc_height, opc_width, np.float32(0.5)))   # y = x1 + x2
+            laplacian_K3(grid_size, block_size, (opc_float_gpu_a, opc_float_gpu_b, opc_height, opc_width, np.float32(_lambda)))   # y = x1 + x2
             use_b = True
         else:
-            laplacian_K3(grid_size, block_size, (opc_float_gpu_b, opc_float_gpu_a, opc_height, opc_width, np.float32(0.5)))   # y = x1 + x2
+            laplacian_K3(grid_size, block_size, (opc_float_gpu_b, opc_float_gpu_a, opc_height, opc_width, np.float32(_lambda)))   # y = x1 + x2
             use_b = False
-
-    cp.cuda.Stream.null.synchronize()
-    # print(opc_float[32, 1:32])
-    # print(opc_float[31, 1:32])
-    # print(opc_float[31:65, 31:65, 1])
-    # print(opc_float[208, 64, :], opc_float[208, 63, :])
 
     opc_float_out = cp.asnumpy(opc_float_gpu_b) if use_b else cp.asnumpy(opc_float_gpu_a)
     t2 = time.perf_counter()
-    logger.info("OPC CUDA Mesh Smoothing Took (ms): %.2f", (t2 - t1) * 1000)
 
+    logger.info("OPC CUDA Laplacian Mesh Smoothing Took (ms): %.2f", (t2 - t1) * 1000)
+    cp.cuda.Stream.null.synchronize()
 
-    # opc_float_out = cp.asnumpy(opc_float_gpu_b)
+    # only for visualization purposes here
     opc_out = opc_float_out.astype(np.float64)
-
     num_points = opc_out.shape[0] * opc_out.shape[1]
     opc_out_flat = opc_out.reshape((num_points, 3))
 
@@ -366,3 +334,5 @@ def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
 
 
     return opc_out, pcd_out
+
+run_cuda_once()

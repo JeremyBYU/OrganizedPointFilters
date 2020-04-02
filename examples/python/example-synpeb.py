@@ -14,7 +14,7 @@ from .utility.laplacian_cuda import laplacian_opc_cuda
 
 
 def main():
-    kwargs = dict(loops=20, stride=2, _lambda=0.5, kernel_size=3)
+    kwargs = dict(loops=10, stride=2, _lambda=1.0, kernel_size=3)
     pc, pc_image, pcd_o3d, tri_mesh, tri_mesh_o3d = load_pcd_and_meshes('/home/jeremy/Documents/UMICH/Research/polylidar-plane-benchmark/data/synpeb/train/var4/pc_01.pcd', **kwargs)
 
     # Not Smooth Mesh
@@ -28,7 +28,6 @@ def main():
 
 
     plot_meshes(tri_mesh_noisy_o3d, tri_mesh_o3d, tri_mesh_opc_o3d, tri_mesh_opc_gpu_o3d)
-    # plot_meshes(tri_mesh_noisy_o3d, tri_mesh_opc_gpu_o3d)
 
 
 
