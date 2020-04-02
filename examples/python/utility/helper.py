@@ -10,6 +10,7 @@ import open3d as o3d
 
 from polylidar import extract_point_cloud_from_float_depth, extract_tri_mesh_from_organized_point_cloud, MatrixDouble
 import organizedpointfilters as opf
+import organizedpointfilters.cuda as opf_cuda
 from organizedpointfilters import Matrix3f, Matrix3fRef
 
 from .o3d_util import create_open_3d_pcd, plot_meshes, get_arrow, create_open_3d_mesh, open_3d_mesh_to_tri_mesh, assign_vertex_colors, get_colors
@@ -98,6 +99,29 @@ def laplacian_opc(opc, stride=2, loops=5, _lambda=0.5, kernel_size=3):
     classes = opc[:,:, 3].reshape((num_points, ))
     cmap = tab40()
     pcd_out = create_open_3d_pcd(opc_out_flat, classes, cmap)
+
+    return opc_out, pcd_out
+
+
+def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, **kwargs):
+
+    opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
+
+    t1 = time.perf_counter()
+    opc_float_out = opf_cuda.kernel.laplacian_K3_cuda(opc_float, loops=loops, _lambda=_lambda, **kwargs)
+    t2 = time.perf_counter()
+
+    logger.info("OPC CUDA Laplacian Mesh Smoothing Took (ms): %.2f", (t2 - t1) * 1000)
+
+    # only for visualization purposes here
+    opc_out = opc_float_out.astype(np.float64)
+    num_points = opc_out.shape[0] * opc_out.shape[1]
+    opc_out_flat = opc_out.reshape((num_points, 3))
+
+    classes = opc[:,:, 3].reshape((num_points, ))
+    cmap = tab40()
+    pcd_out = create_open_3d_pcd(opc_out_flat, classes, cmap)
+
 
     return opc_out, pcd_out
 

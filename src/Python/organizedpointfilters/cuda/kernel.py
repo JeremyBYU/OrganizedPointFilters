@@ -92,7 +92,6 @@ extern "C"
             shmIdx = shmRow_y * SHM_SIZE + (shmCol_x - 1);
             srcIdx_temp = srcRow_y * cols + (srcCol_x - 1);
             LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
-            // printf("Left Column; Row,Col: %d,%d; Point: (%.4f, %.4f, %.4f); Left Point: (%.4f, %.4f, %.4f)\n", srcRow_y, srcCol_x, point[0], point[1], point[2], point_temp[0], point_temp[1], point_temp[2]);
             if (threadIdx.y == 0)
             {
                 // Top Left Corner 
@@ -237,7 +236,7 @@ extern "C"
 
         LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx);           // Copy global memory point (x,y,z) into shared memory
         if (srcRow_y > 0 && srcRow_y < (rows - 1) && srcCol_x > 0 && srcCol_x < (cols - 1))
-        // Branch divergence near borders of image
+        // Only perform smoothing in interior of image/opc, branch divergence occurs here
         {
             // Copy Halo Cells, will have LOTS of branch divergence here
             // After this call SHM_POINTS is completely filled 
@@ -260,12 +259,6 @@ import logging
 import cupy as cp
 import numpy as np
 import time
-import matplotlib.pyplot as plt
-import matplotlib.colors as colors
-from .o3d_util import create_open_3d_pcd
-
-logger = logging.getLogger("PPB")
-
 
 
 module = cp.RawModule(code=loaded_from_source)
@@ -276,7 +269,6 @@ BLOCK_SIZE = 32
 KERNEL_SIZE = 3
 
 
-
 def run_cuda_once():
     N = 10
     x1 = cp.arange(N**2, dtype=cp.float32).reshape(N, N)
@@ -285,20 +277,28 @@ def run_cuda_once():
     ker_sum((N,), (N,), (x1, x2, y, N**2, 0.1))   # y = x1 + x2
     assert(cp.allclose(y, x1 + x2))
 
-def tab40():
-    """A discrete colormap with 40 unique colors"""
-    colors_ = np.vstack([plt.cm.tab20c.colors, plt.cm.tab20b.colors])
-    return colors.ListedColormap(colors_)
 
-
-def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=KERNEL_SIZE, **kwargs):
-
-    opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
+def laplacian_K3_cuda(opc_float, loops=5, _lambda=0.5, **kwargs):
+    """Perform laplacian smoothing on point cloud using CUDA
+    
+    Arguments:
+        opc_float {ndarray} -- Numpy array of size MXNX3 dtype==np.float32
+    
+    Keyword Arguments:
+        loops {int} -- Number of loop interations of smoothing (default: {5})
+        _lambda {float} -- [0-1.0] (default: {0.5})
+    
+    Returns:
+        ndarray -- MXNX3 smoothed point cloud, dtype==np.float32
+    """
+    assert opc_float.dtype == np.float32, "Numpy array must be float32"
+    assert opc_float.ndim == 3, "Numpy array must have 3 dimensions, an organized point cloud"
+    assert opc_float.shape[2] == 3, "Numpy last dimension must be size 3, representing a point (x,y,z)"
 
     t1 = time.perf_counter()
     # These device memory allocation take about 1.4 (ms) on my 2070 Super (250X250)
     opc_float_gpu_a = cp.asarray(opc_float)  # move the data to the current device.
-    opc_float_gpu_b = cp.copy(opc_float_gpu_a) # make copy for the data
+    opc_float_gpu_b = cp.copy(opc_float_gpu_a) # make copy for the data (really only needed for ghost cells on second iter)
 
     opc_width = opc_float.shape[0]
     opc_height = opc_float.shape[1]
@@ -320,19 +320,7 @@ def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=KERNEL_SIZE, **kwa
     opc_float_out = cp.asnumpy(opc_float_gpu_b) if use_b else cp.asnumpy(opc_float_gpu_a)
     t2 = time.perf_counter()
 
-    logger.info("OPC CUDA Laplacian Mesh Smoothing Took (ms): %.2f", (t2 - t1) * 1000)
     cp.cuda.Stream.null.synchronize()
 
-    # only for visualization purposes here
-    opc_out = opc_float_out.astype(np.float64)
-    num_points = opc_out.shape[0] * opc_out.shape[1]
-    opc_out_flat = opc_out.reshape((num_points, 3))
 
-    classes = opc[:,:, 3].reshape((num_points, ))
-    cmap = tab40()
-    pcd_out = create_open_3d_pcd(opc_out_flat, classes, cmap)
-
-
-    return opc_out, pcd_out
-
-run_cuda_once()
+    return opc_float_out
