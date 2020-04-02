@@ -24,7 +24,7 @@ Eigen::Ref<RowMatrixXVec3X<T>> py_array_to_matrix(py::array_t<T, py::array::c_st
     size_t channels = array.shape(2);
 
     auto info = array.request();
-    Eigen::Vector3f* ptr = reinterpret_cast<Eigen::Vector3f*>(info.ptr);
+    auto ptr = reinterpret_cast<Eigen::Matrix<T, 3, 1>*>(info.ptr);
     auto new_matrix = Eigen::Map<RowMatrixXVec3X<T>>(ptr, rows, cols);
     return new_matrix;
 }

@@ -8,7 +8,7 @@ def get_np_buffer_ptr(a):
     return hex(pointer)
 
 def main():
-    a = np.arange(5*5*2).reshape((5,5,3)).astype(np.float32)
+    a = np.arange(5*5*3).reshape((5,5,3)).astype(np.float32)
     print("By Ref")
     print(a)
     print(a.shape)
