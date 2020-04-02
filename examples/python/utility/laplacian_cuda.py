@@ -22,7 +22,7 @@ extern "C"
         }
     }
 
-    __device__ void LoadPoint(float* out, float* in, int outIdx, int inIdx)
+    __device__ void LoadPoint(float* out, const float* in, int outIdx, int inIdx)
     {
         out[outIdx * 3 + 0] = in[inIdx * 3 + 0];          // x cordinate
         out[outIdx * 3 + 1] = in[inIdx * 3 + 1];          // y cordinate
@@ -85,16 +85,79 @@ extern "C"
         }
     }
 
-
-
-
-
     #define BLOCK_WIDTH 32
     #define KERNEL_SIZE 3
     #define SHM_SIZE (BLOCK_WIDTH + KERNEL_SIZE -1)
     #define HALF_RADIUS KERNEL_SIZE/2
     #define IMG_IDX(row, col, Col) row * Col + row
     #define IMG_ROW(idx, Row, Col) 
+
+    __device__ void ReadBlockAndHalo(float *SHM_POINTS, const float *opc, const int &shmRow_y, const int &shmCol_x, const int &srcRow_y, const int &srcCol_x, const int &cols)
+    {
+        // Copy Halo Cells, will have LOTS of branch divergence here
+        int shmIdx = 0;
+        int srcIdx_temp = 0;
+        if (threadIdx.x == 0)
+        {
+            // Left Column, inner border
+            shmIdx = shmRow_y * SHM_SIZE + (shmCol_x - 1);
+            srcIdx_temp = srcRow_y * cols + (srcCol_x - 1);
+            LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
+            // printf("Left Column; Row,Col: %d,%d; Point: (%.4f, %.4f, %.4f); Left Point: (%.4f, %.4f, %.4f)\n", srcRow_y, srcCol_x, point[0], point[1], point[2], point_temp[0], point_temp[1], point_temp[2]);
+            if (threadIdx.y == 0)
+            {
+                // Top Left Corner 
+                shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x - 1);
+                srcIdx_temp = (srcRow_y - 1) * cols + (srcCol_x - 1);
+                LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
+            }
+            if (threadIdx.y == (blockDim.y - 1))
+            {
+                // Bottom Left Corner
+                shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x - 1);
+                srcIdx_temp = (srcRow_y + 1) * cols + (srcCol_x - 1);
+                LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
+            }
+        }
+        if (threadIdx.x == (blockDim.x - 1))
+        {
+            // Right Column, inner border
+            shmIdx = shmRow_y * SHM_SIZE + (shmCol_x + 1);
+            srcIdx_temp = srcRow_y * cols + (srcCol_x + 1);
+            LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
+            if (threadIdx.y == 0)
+            {
+                // Top Right Corner 
+                shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x + 1);
+                srcIdx_temp = (srcRow_y - 1) * cols + (srcCol_x + 1);
+                LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
+            }
+            if (threadIdx.y == (blockDim.y - 1))
+            {
+                // Bottom Right Corner
+                shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x + 1);
+                srcIdx_temp = (srcRow_y + 1) * cols + (srcCol_x + 1);
+                LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
+            }
+        }
+        if (threadIdx.y == 0)
+        {
+            // Top Row
+            shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x);
+            srcIdx_temp = (srcRow_y - 1) * cols + (srcCol_x);
+            LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
+            // printf("Top Row; Row,Col: %d,%d; Point: (%.4f, %.4f, %.4f); Top Point: (%.4f, %.4f, %.4f)\n", srcRow_y, srcCol_x, point[0], point[1], point[2], point_temp[0], point_temp[1], point_temp[2]);
+        }
+        if (threadIdx.y == (blockDim.y - 1))
+        {
+            // Bottom Row
+            shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x);
+            srcIdx_temp = (srcRow_y + 1) * cols + (srcCol_x);
+            LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
+        }
+
+    }
+
     __global__ void LaplacianLoopK3(float* opc, float* opc_out, int rows, int cols, float lambda)
     {
         __shared__ float SHM_POINTS[SHM_SIZE*3 * SHM_SIZE*3];  // block of 3D Points in shared memory
@@ -109,99 +172,18 @@ extern "C"
         int srcCol_x = blockIdx.x * blockDim.x + threadIdx.x; // col in global memory
         int srcIdx = srcRow_y * cols + srcCol_x;              // idx in global memory
 
-        int srcIdx_temp = srcIdx;
+        // int srcIdx_temp = srcIdx;
 
         LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx);           // Copy Point(x,y,z) into shared memory
         if (srcRow_y > 0 && srcRow_y < (rows - 1) && srcCol_x > 0 && srcCol_x < (cols - 1))
         // Branch divergence near borders of image
         {
-            // Copy inside portion of shared memory
-
-            // float dummy[3];
-            // LoadPoint(dummy, opc, 0, srcIdx);
-            // printf("All; Row,Col: %d,%d; Point: (%.4f, %.4f, %.4f);\n", srcRow_y, srcCol_x, dummy[0], dummy[1], dummy[2]);
-
             // Copy Halo Cells, will have LOTS of branch divergence here
-            if (threadIdx.x == 0)
-            {
-                // Left Column, inner border
-                shmIdx = shmRow_y * SHM_SIZE + (shmCol_x - 1);
-                srcIdx_temp = srcRow_y * cols + (srcCol_x - 1);
-                LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
-                float point[3];
-                float point_temp[3];
-                LoadPoint(point, opc, 0, srcIdx);
-                LoadPoint(point_temp, SHM_POINTS, 0, shmIdx);
-                // printf("Left Column; Row,Col: %d,%d; Point: (%.4f, %.4f, %.4f); Left Point: (%.4f, %.4f, %.4f)\n", srcRow_y, srcCol_x, point[0], point[1], point[2], point_temp[0], point_temp[1], point_temp[2]);
-                if (threadIdx.y == 0)
-                {
-                    // Top Left Corner 
-                    shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x - 1);
-                    srcIdx_temp = (srcRow_y - 1) * cols + (srcCol_x - 1);
-                    LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
-                }
-                if (threadIdx.y == (blockDim.y - 1))
-                {
-                    // Bottom Left Corner
-                    shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x - 1);
-                    srcIdx_temp = (srcRow_y + 1) * cols + (srcCol_x - 1);
-                    LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
-                }
-            }
-            if (threadIdx.x == (blockDim.x - 1))
-            {
-                // Right Column, inner border
-                shmIdx = shmRow_y * SHM_SIZE + (shmCol_x + 1);
-                srcIdx_temp = srcRow_y * cols + (srcCol_x + 1);
-                LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
-                if (threadIdx.y == 0)
-                {
-                    // Top Right Corner 
-                    shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x + 1);
-                    srcIdx_temp = (srcRow_y - 1) * cols + (srcCol_x + 1);
-                    LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
-                }
-                if (threadIdx.y == (blockDim.y - 1))
-                {
-                    // Bottom Right Corner
-                    shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x + 1);
-                    srcIdx_temp = (srcRow_y + 1) * cols + (srcCol_x + 1);
-                    LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
-                }
-            }
-            if (threadIdx.y == 0)
-            {
-                // Top Row
-                shmIdx = (shmRow_y - 1) * SHM_SIZE + (shmCol_x);
-                srcIdx_temp = (srcRow_y - 1) * cols + (srcCol_x);
-                LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
-
-                float point[3];
-                float point_temp[3];
-                LoadPoint(point, opc, 0, srcIdx);
-                LoadPoint(point_temp, SHM_POINTS, 0, shmIdx);
-                // printf("Top Row; Row,Col: %d,%d; Point: (%.4f, %.4f, %.4f); Top Point: (%.4f, %.4f, %.4f)\n", srcRow_y, srcCol_x, point[0], point[1], point[2], point_temp[0], point_temp[1], point_temp[2]);
-            }
-            if (threadIdx.y == (blockDim.y - 1))
-            {
-                // Bottom Row
-                shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x);
-                srcIdx_temp = (srcRow_y + 1) * cols + (srcCol_x);
-                LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
-            }
-
+            ReadBlockAndHalo(SHM_POINTS, opc, shmRow_y, shmCol_x, srcRow_y, srcCol_x, cols);
             __syncthreads();
 
-            //if(blockIdx.y == 1 && blockIdx.x == 1 && threadIdx.y == 0 && threadIdx.x == 0)
-            //{
-            //    printf("Block (1,1); Row,Col: %d,%d; \n", srcRow_y, srcCol_x);
-            //    printf("block dim: %d \n", blockDim.x);
-            //    Print2DPointArray(SHM_POINTS, SHM_SIZE, SHM_SIZE);
-            //}
-
-
             // TODO - Try and use Eigen instead of manual math
-            // Smooth Point
+            ////// Smooth Point Operation ////
             int this_shmIdx = shmRow_y * SHM_SIZE + shmCol_x;  // shm point index for this i,j
             float total_weight = 0.0;
 
