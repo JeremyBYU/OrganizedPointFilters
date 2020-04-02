@@ -140,7 +140,7 @@ extern "C"
                     srcIdx_temp = (srcRow_y - 1) * cols + (srcCol_x - 1);
                     LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
                 }
-                if (threadIdx.y == blockDim.y)
+                if (threadIdx.y == (blockDim.y - 1))
                 {
                     // Bottom Left Corner
                     shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x - 1);
@@ -161,7 +161,7 @@ extern "C"
                     srcIdx_temp = (srcRow_y - 1) * cols + (srcCol_x + 1);
                     LoadPoint(SHM_POINTS, opc, shmIdx, srcIdx_temp);
                 }
-                if (threadIdx.y == blockDim.y)
+                if (threadIdx.y == (blockDim.y - 1))
                 {
                     // Bottom Right Corner
                     shmIdx = (shmRow_y + 1) * SHM_SIZE + (shmCol_x + 1);
