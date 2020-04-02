@@ -11,7 +11,7 @@
 -----------
 
 OrganizedPointFilters: A Great OrganizedPointFilters
-===============================================
+=======================================================
 
 .. only: not latex
 
@@ -39,6 +39,7 @@ OrganizedPointFilters: A Great OrganizedPointFilters
     :caption: Python API
 
     python_api/organizedpointfilters
+    python_api/organizedpointfilters.kernel
 
 .. _cpp_api_index:
 

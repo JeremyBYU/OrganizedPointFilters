@@ -13,7 +13,7 @@ Prerequisites
 -------------
 
 1. Build OrganizedPointFilters from source
-``````````````````````````````````````
+``````````````````````````````````````````````
 
 Clone and build OrganizedPointFilters from source.
 
