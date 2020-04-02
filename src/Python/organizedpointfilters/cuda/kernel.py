@@ -320,6 +320,7 @@ def laplacian_K3_cuda(opc_float, loops=5, _lambda=0.5, **kwargs):
     opc_float_out = cp.asnumpy(opc_float_gpu_b) if use_b else cp.asnumpy(opc_float_gpu_a)
     t2 = time.perf_counter()
 
+    # print((t2-t1) * 1000)
     cp.cuda.Stream.null.synchronize()
 
 
