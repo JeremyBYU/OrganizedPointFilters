@@ -20,10 +20,12 @@ ${DESIRED_WARNINGS}>
 $<$<CXX_COMPILER_ID:MSVC>:
 /W4>)
 
+target_link_libraries(${PROJECT_NAME} PRIVATE eigen)
+
 # OPTION Build with OpenMP Support
 if (OPF_WITH_OPENMP)
   find_package(OpenMP)
-  target_link_libraries(${PROJECT_NAME} PUBLIC OpenMP::OpenMP_CXX eigen)
+  target_link_libraries(${PROJECT_NAME} PUBLIC OpenMP::OpenMP_CXX)
 endif()
 
 # Set Properties
