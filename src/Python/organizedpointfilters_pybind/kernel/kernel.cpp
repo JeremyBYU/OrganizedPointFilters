@@ -13,7 +13,7 @@ void pybind_kernel(py::module& m)
                     "Performs Laplacian Smoothing on Organized Point Cloud");
 
     m_submodule.def("laplacian_K3", &Kernel::LaplacianT<3>, "opc"_a, "_lambda"_a = OPF_KERNEL_DEFAULT_LAMBDA,
-                    "iterations"_a = OPF_KERNEL_DEFAULT_ITER,
+                    "iterations"_a = OPF_KERNEL_DEFAULT_ITER, "max_dist"_a=OPF_KERNEL_MAX_FLOAT,
                     "Performs Laplacian Smoothing w/ a Kernel Size of 3 on an Organized Point Cloud");
 
     m_submodule.def("laplacian",

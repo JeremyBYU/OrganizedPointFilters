@@ -42,7 +42,40 @@ def create_open_3d_mesh(tri_mesh):
     vertices = np.asarray(tri_mesh.vertices)
     create_open_3d_mesh(triangles, vertices)
 
-def create_open_3d_mesh(triangles, points, triangle_normals=None, color=COLOR_PALETTE[0]):
+# def create_open_3d_mesh(triangles, points, triangle_normals=None, color=COLOR_PALETTE[0]):
+#     """Create an Open3D Mesh given triangles vertices
+
+#     Arguments:
+#         triangles {ndarray} -- Triangles array
+#         points {ndarray} -- Points array
+
+#     Keyword Arguments:
+#         color {list} -- RGB COlor (default: {[1, 0, 0]})
+
+#     Returns:
+#         mesh -- Open3D Mesh
+#     """
+#     mesh_2d = o3d.geometry.TriangleMesh()
+#     if points.ndim == 1:
+#         points = points.reshape((int(points.shape[0] / 3), 3))
+#     if triangles.ndim == 1:
+#         triangles = triangles.reshape((int(triangles.shape[0] / 3), 3))
+#         # Open 3D expects triangles to be counter clockwise
+#         triangles = np.ascontiguousarray(np.flip(triangles, 1))
+#     mesh_2d.triangles = o3d.utility.Vector3iVector(triangles)
+
+#     mesh_2d.vertices = o3d.utility.Vector3dVector(points)
+#     if triangle_normals is None:
+#         mesh_2d.compute_vertex_normals()
+#         mesh_2d.compute_triangle_normals()
+#     elif triangle_normals.ndim == 1:
+#         triangle_normals_ = triangle_normals.reshape((int(triangle_normals.shape[0] / 3), 3))
+#         # triangles = np.ascontiguousarray(np.flip(triangles, 1))
+#         mesh_2d.triangle_normals = o3d.utility.Vector3dVector(triangle_normals_)
+#     mesh_2d.paint_uniform_color(color)
+#     return mesh_2d
+
+def create_open_3d_mesh(triangles, points, triangle_normals=None, color=COLOR_PALETTE[0], counter_clock_wise=True):
     """Create an Open3D Mesh given triangles vertices
 
     Arguments:
@@ -61,16 +94,15 @@ def create_open_3d_mesh(triangles, points, triangle_normals=None, color=COLOR_PA
     if triangles.ndim == 1:
         triangles = triangles.reshape((int(triangles.shape[0] / 3), 3))
         # Open 3D expects triangles to be counter clockwise
+    if not counter_clock_wise:
         triangles = np.ascontiguousarray(np.flip(triangles, 1))
     mesh_2d.triangles = o3d.utility.Vector3iVector(triangles)
-
     mesh_2d.vertices = o3d.utility.Vector3dVector(points)
     if triangle_normals is None:
         mesh_2d.compute_vertex_normals()
         mesh_2d.compute_triangle_normals()
     elif triangle_normals.ndim == 1:
         triangle_normals_ = triangle_normals.reshape((int(triangle_normals.shape[0] / 3), 3))
-        # triangles = np.ascontiguousarray(np.flip(triangles, 1))
         mesh_2d.triangle_normals = o3d.utility.Vector3dVector(triangle_normals_)
     mesh_2d.paint_uniform_color(color)
     return mesh_2d

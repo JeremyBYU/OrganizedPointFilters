@@ -141,8 +141,7 @@ def create_mesh_from_organized_point_cloud_with_o3d(pcd:np.ndarray, rows=500, co
 
     return tri_mesh, tri_mesh_o3d
     
-
-
+    
 def create_mesh_from_organized_point_cloud(pcd, rows=500, cols=500, stride=2):
     pcd_mat = MatrixDouble(pcd)
     pcd_mat_np = np.asarray(pcd_mat)
@@ -167,6 +166,8 @@ def load_pcd_file(fpath, stride=2):
     pc_np = np.column_stack((x, y, z, i))
     # Image Point Cloud (organized)
     pc_np_image = np.reshape(pc_np, (width, height, 4))
+    # I'm expecting the "image" to have the rows/y-axis going down
+    pc_np_image = np.ascontiguousarray(np.flip(pc_np_image, 0))
 
     if stride is not None:
         pc_np_image = pc_np_image[::stride, ::stride, :]

@@ -1,19 +1,21 @@
 
 #ifndef ORGANIZEDPOINTFILTERS_KERNEL
 #define ORGANIZEDPOINTFILTERS_KERNEL
+#include <iostream>
 
 #include "OrganizedPointFilters/Types.hpp"
-#include <iostream>
 
 #define eps 1e-12f
 #define OPF_KERNEL_DEFAULT_LAMBDA 0.5f
 #define OPF_KERNEL_DEFAULT_ITER 1
 #define OPF_KERNEL_DEFAULT_KERNEL_SIZE 3
 #define OPF_KERNEL_OMP_MAX_THREAD 16
+#define OPF_KERNEL_MAX_FLOAT 1000000.0
 
 namespace OrganizedPointFilters {
 
 namespace Kernel {
+
 
 inline void smooth_point(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixXVec3f>& opc_out, const int i,
                          const int j, const float lambda = OPF_KERNEL_DEFAULT_LAMBDA, const int kernel_size = 3)
@@ -81,7 +83,7 @@ inline RowMatrixXVec3f Laplacian(Eigen::Ref<RowMatrixXVec3f> opc, float lambda =
 
 template<int kernel_size = 3>
 inline void SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixXVec3f>& opc_out, const int i,
-                         const int j, const float lambda = OPF_KERNEL_DEFAULT_LAMBDA)
+                         const int j, const float lambda = OPF_KERNEL_DEFAULT_LAMBDA, float max_dist=OPF_KERNEL_MAX_FLOAT)
 {
     constexpr int shift = static_cast<const int>(kernel_size / 2);
 
@@ -100,6 +102,8 @@ inline void SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixX
 
             if (i == row_ && j == col_) continue;
             float dist = (point - opc(row_, col_)).norm();
+            if (dist > max_dist)
+                continue;
             float weight = 1. / (dist + eps);
             total_weight += weight;
             sum_vertex += weight * opc(row_, col_);
@@ -110,7 +114,7 @@ inline void SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixX
 
 template<int kernel_size = 3>
 inline void LaplacianLoopT(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<RowMatrixXVec3f> opc_out,
-                          const float lambda = OPF_KERNEL_DEFAULT_LAMBDA)
+                          const float lambda = OPF_KERNEL_DEFAULT_LAMBDA, float max_dist=OPF_KERNEL_MAX_FLOAT)
 {
     const int rows = opc.rows();
     const int cols = opc.cols();
@@ -127,14 +131,14 @@ inline void LaplacianLoopT(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<RowMatrix
     {
         for (int col = shift; col < cols_max; ++col)
         {
-            SmoothPointT<kernel_size>(opc, opc_out, row, col, lambda);
+            SmoothPointT<kernel_size>(opc, opc_out, row, col, lambda, max_dist);
         }
     }
 }
 
 template<int kernel_size = 3>
 inline RowMatrixXVec3f LaplacianT(Eigen::Ref<RowMatrixXVec3f> opc, float lambda = OPF_KERNEL_DEFAULT_LAMBDA,
-                                 int iterations = OPF_KERNEL_DEFAULT_ITER)
+                                 int iterations = OPF_KERNEL_DEFAULT_ITER, float max_dist=OPF_KERNEL_MAX_FLOAT)
 {
     // TODO - Only really need to copy the ghost/halo cells on border
     RowMatrixXVec3f opc_out(opc);
@@ -143,12 +147,12 @@ inline RowMatrixXVec3f LaplacianT(Eigen::Ref<RowMatrixXVec3f> opc, float lambda 
     {
         if (i % 2 == 0)
         {
-            LaplacianLoopT<kernel_size>(opc, opc_out, lambda);
+            LaplacianLoopT<kernel_size>(opc, opc_out, lambda, max_dist);
             need_copy = false;
         }
         else
         {
-            LaplacianLoopT<kernel_size>(opc_out, opc, lambda);
+            LaplacianLoopT<kernel_size>(opc_out, opc, lambda, max_dist);
             need_copy = true;
         }
     }
