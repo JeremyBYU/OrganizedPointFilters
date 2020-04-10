@@ -71,10 +71,13 @@ extern "C"
     #define KERNEL_SIZE 3
     #define SHM_SIZE (BLOCK_WIDTH + KERNEL_SIZE -1)
     #define HALF_RADIUS KERNEL_SIZE/2
-    __device__ void IntegeratePoint(int &nbr_shmIdx, float* SHM_POINTS, float *point_temp, float *point, float &total_weight, float* sum_point)
+    __device__ void IntegeratePoint(int &nbr_shmIdx, float* SHM_POINTS, float *point_temp, float *point, float &total_weight, float* sum_point, float max_dist=0.25)
     {
         LoadPoint(point_temp, SHM_POINTS, 0, nbr_shmIdx);
         float dist = PointDistance(point, point_temp);
+        // branch divergence
+        if (dist > max_dist)
+            return;
         float weight = 1.0f / (dist + EPS);
         total_weight += weight;
         ScalePointInPlace(point_temp, weight);

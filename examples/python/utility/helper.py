@@ -79,13 +79,13 @@ def create_meshes(pc_points, stride=2, loops=5, _lambda=0.5, **kwargs):
 
     return tri_mesh, tri_mesh_o3d
 
-def laplacian_opc(opc, stride=2, loops=5, _lambda=0.5, kernel_size=3):
+def laplacian_opc(opc, stride=2, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
     a_ref = Matrix3fRef(opc_float)
 
     t1 = time.perf_counter()
-    b_cp = opf.kernel.laplacian_K3(a_ref, _lambda=_lambda, iterations=loops)
+    b_cp = opf.kernel.laplacian_K3(a_ref, _lambda=_lambda, iterations=loops, **kwargs)
     t2 = time.perf_counter()
     logger.info("OPC Mesh Smoothing Took (ms): %.2f", (t2 - t1) * 1000)
 

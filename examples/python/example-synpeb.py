@@ -19,7 +19,7 @@ def main():
     # Not Smooth Mesh
     tri_mesh_noisy, tri_mesh_noisy_o3d = create_mesh_from_organized_point_cloud_with_o3d(np.ascontiguousarray(pc[:, :3]))
 
-    opc_smooth, pcd_smooth = laplacian_opc(pc_image, **kwargs)
+    opc_smooth, pcd_smooth = laplacian_opc(pc_image, **kwargs, max_dist=0.25)
     tri_mesh_opc, tri_mesh_opc_o3d = create_mesh_from_organized_point_cloud_with_o3d(opc_smooth)
 
     opc_smooth_gpu, pcd_smooth_gpu = laplacian_opc_cuda(pc_image, **kwargs)

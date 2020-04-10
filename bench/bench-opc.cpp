@@ -44,7 +44,7 @@ static void BM_LaplacianT(benchmark::State& st)
     int lambda = 0.5;
     for (auto _ : st)
     {
-        auto result = Kernel::LaplacianT<3>(a, lambda, iterations);
+        auto result = Kernel::LaplacianT<3>(a, lambda, iterations, 0.25);
         benchmark::DoNotOptimize(result.data());
     }
 }
