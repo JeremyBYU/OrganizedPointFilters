@@ -79,7 +79,7 @@ def create_meshes(pc_points, stride=2, loops=5, _lambda=0.5, **kwargs):
 
     return tri_mesh, tri_mesh_o3d
 
-def laplacian_opc(opc, stride=2, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
+def laplacian_opc(opc, loops=5, _lambda=0.5, **kwargs):
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
     a_ref = Matrix3fRef(opc_float)

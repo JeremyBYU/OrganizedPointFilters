@@ -86,7 +86,6 @@ inline void OppositePointK3(const int& row, const int& col, int& new_row, int& n
     new_col = col;
     if (col == 0 || col == 2)
     {
-        // std::cout << "Opposite Function Row, Col: " << row << ", " << col << std::endl;
         new_col = col == 0 ? 2 : 0;
         new_row = row;
     }

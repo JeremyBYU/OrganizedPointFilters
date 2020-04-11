@@ -26,7 +26,7 @@ static void BM_Laplacian(benchmark::State& st)
     // std::cout << a.rows() << std::endl;
     int iterations = 5;
     int kernel_size = 3;
-    int lambda = 0.5;
+    float lambda = 1.0;
     for (auto _ : st)
     {
         auto result = Kernel::Laplacian(a, lambda, iterations, kernel_size);
@@ -41,7 +41,7 @@ static void BM_LaplacianT(benchmark::State& st)
     // std::cout << a.rows() << std::endl;
     int iterations = 5;
     int kernel_size = 3;
-    int lambda = 0.5;
+    float lambda = 1.0;
     for (auto _ : st)
     {
         auto result = Kernel::LaplacianT<3>(a, lambda, iterations, 0.25);
