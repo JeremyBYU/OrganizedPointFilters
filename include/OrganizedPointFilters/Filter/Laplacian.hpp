@@ -14,7 +14,7 @@
 
 namespace OrganizedPointFilters {
 
-namespace Kernel {
+namespace Filter {
 
 inline void smooth_point(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixXVec3f>& opc_out, const int i,
                          const int j, const float lambda = OPF_KERNEL_DEFAULT_LAMBDA, const int kernel_size = 3)
@@ -212,7 +212,7 @@ inline RowMatrixXVec3f LaplacianT(Eigen::Ref<RowMatrixXVec3f> opc, float lambda 
     return opc_out;
 }
 
-} // namespace Kernel
+} // namespace Filter
 } // namespace OrganizedPointFilters
 
 #endif

@@ -86,9 +86,9 @@ def laplacian_opc(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
 
     t1 = time.perf_counter()
     if kernel_size == 3:
-        b_cp = opf.kernel.laplacian_K3(a_ref, _lambda=_lambda, iterations=loops, **kwargs)
+        b_cp = opf.filter.laplacian_K3(a_ref, _lambda=_lambda, iterations=loops, **kwargs)
     else:
-        b_cp = opf.kernel.laplacian_K5(a_ref, _lambda=_lambda, iterations=loops, **kwargs)
+        b_cp = opf.filter.laplacian_K5(a_ref, _lambda=_lambda, iterations=loops, **kwargs)
     t2 = time.perf_counter()
     logger.info("OPC Mesh Smoothing Took (ms): %.2f", (t2 - t1) * 1000)
 
@@ -111,7 +111,7 @@ def compute_normals_opc(opc, **kwargs):
     a_ref = Matrix3fRef(opc_float)
 
     t1 = time.perf_counter()
-    normals = opf.kernel.compute_normals(a_ref)
+    normals = opf.filter.compute_normals(a_ref)
     t2 = time.perf_counter()
     logger.info("OPC Compute Normals Took (ms): %.2f", (t2 - t1) * 1000)
     print(normals)

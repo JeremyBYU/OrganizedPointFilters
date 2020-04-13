@@ -1,7 +1,7 @@
 
 #include "organizedpointfilters_pybind/organizedpointfilters_pybind.hpp"
 #include "organizedpointfilters_pybind/docstring/docstring.hpp"
-#include "organizedpointfilters_pybind/kernel/kernel.hpp"
+#include "organizedpointfilters_pybind/filter/filter.hpp"
 #include "organizedpointfilters_pybind/types/bind_types.hpp"
 
 using namespace OrganizedPointFilters;
@@ -18,5 +18,5 @@ PYBIND11_MODULE(organizedpointfilters, m)
     docstring::FunctionDocInject(m, "hello", {{"name", "The name to say hello with"}});
 
     // Submodules
-    pybind_kernel(m);
+    pybind_filter(m);
 }

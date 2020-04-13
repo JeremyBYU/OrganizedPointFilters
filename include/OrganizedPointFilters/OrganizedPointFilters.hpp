@@ -30,8 +30,8 @@
 #include "OrganizedPointFilters/Types.hpp"
 #include "OrganizedPointFilters/Helper.hpp"
 #include "OrganizedPointFilters/RS/SpatialFilter.hpp"
-#include "OrganizedPointFilters/Kernel/Kernel.hpp"
-#include "OrganizedPointFilters/Kernel/Normal.hpp"
+#include "OrganizedPointFilters/Filter/Laplacian.hpp"
+#include "OrganizedPointFilters/Filter/Normal.hpp"
 
 namespace OrganizedPointFilters {
 /**

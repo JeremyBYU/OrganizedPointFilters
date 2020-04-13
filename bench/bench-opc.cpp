@@ -3,7 +3,8 @@
 #include <vector>
 
 #include <benchmark/benchmark.h>
-#include "OrganizedPointFilters/Kernel/Kernel.hpp"
+#include "OrganizedPointFilters/Filter/Laplacian.hpp"
+#include "OrganizedPointFilters/Filter/Normal.hpp"
 #include "OrganizedPointFilters/Types.hpp"
 
 using namespace OrganizedPointFilters;
@@ -29,7 +30,19 @@ static void BM_Laplacian(benchmark::State& st)
     float lambda = 1.0;
     for (auto _ : st)
     {
-        auto result = Kernel::Laplacian(a, lambda, iterations, kernel_size);
+        auto result = Filter::Laplacian(a, lambda, iterations, kernel_size);
+        benchmark::DoNotOptimize(result.data());
+    }
+}
+
+static void BM_ComputeNormals(benchmark::State& st)
+{
+    RowMatrixXVec3f a(st.range(0), st.range(0));
+    InitRandom(a);
+    // std::cout << a.rows() << std::endl;
+    for (auto _ : st)
+    {
+        auto result = Filter::ComputeNormals(a);
         benchmark::DoNotOptimize(result.data());
     }
 }
@@ -44,7 +57,7 @@ static void BM_LaplacianT(benchmark::State& st)
     float lambda = 1.0;
     for (auto _ : st)
     {
-        auto result = Kernel::LaplacianT<kernel_size>(a, lambda, iterations, 0.25);
+        auto result = Filter::LaplacianT<kernel_size>(a, lambda, iterations, 0.25);
         benchmark::DoNotOptimize(result.data());
     }
 }
@@ -52,3 +65,4 @@ static void BM_LaplacianT(benchmark::State& st)
 BENCHMARK(BM_Laplacian)->UseRealTime()->DenseRange(250, 500, 250)->Unit(benchmark::kMillisecond);
 BENCHMARK_TEMPLATE(BM_LaplacianT, 3)->UseRealTime()->DenseRange(250, 500, 250)->Unit(benchmark::kMillisecond);
 BENCHMARK_TEMPLATE(BM_LaplacianT, 5)->UseRealTime()->DenseRange(250, 500, 250)->Unit(benchmark::kMillisecond);
+BENCHMARK(BM_ComputeNormals)->UseRealTime()->DenseRange(250, 500, 250)->Unit(benchmark::kMillisecond);

@@ -12,7 +12,7 @@ def main():
 
 
     print(get_np_buffer_ptr(a))
-    b_ref = opf.kernel.laplacian(a_ref, iterations=1)
+    b_ref = opf.filter.laplacian(a_ref, iterations=1)
     print("Result")
     print(np.asarray(b_ref))
 
@@ -20,7 +20,7 @@ def main():
 
     a_cp = Matrix3f(a)
 
-    b_cp = opf.kernel.laplacian(a_cp)
+    b_cp = opf.filter.laplacian(a_cp)
 
     print("Result")
     print(np.asarray(b_cp))
@@ -33,7 +33,7 @@ def main():
 
 
 #     print(get_np_buffer_ptr(a))
-#     b_ref = opf.kernel.laplacian(a_ref, iterations=1)
+#     b_ref = opf.filter.laplacian(a_ref, iterations=1)
 #     print("Result")
 #     print(np.asarray(b_ref))
 
@@ -41,7 +41,7 @@ def main():
 
 #     a_cp = Matrix3f(a)
 
-#     b_cp = opf.kernel.laplacian(a_cp)
+#     b_cp = opf.filter.laplacian(a_cp)
 
 #     print("Result")
 #     print(np.asarray(b_cp))
