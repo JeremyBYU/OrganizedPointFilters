@@ -79,13 +79,16 @@ def create_meshes(pc_points, stride=2, loops=5, _lambda=0.5, **kwargs):
 
     return tri_mesh, tri_mesh_o3d
 
-def laplacian_opc(opc, loops=5, _lambda=0.5, **kwargs):
+def laplacian_opc(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
     a_ref = Matrix3fRef(opc_float)
 
     t1 = time.perf_counter()
-    b_cp = opf.kernel.laplacian_K3(a_ref, _lambda=_lambda, iterations=loops, **kwargs)
+    if kernel_size == 3:
+        b_cp = opf.kernel.laplacian_K3(a_ref, _lambda=_lambda, iterations=loops, **kwargs)
+    else:
+        b_cp = opf.kernel.laplacian_K5(a_ref, _lambda=_lambda, iterations=loops, **kwargs)
     t2 = time.perf_counter()
     logger.info("OPC Mesh Smoothing Took (ms): %.2f", (t2 - t1) * 1000)
 
@@ -101,6 +104,21 @@ def laplacian_opc(opc, loops=5, _lambda=0.5, **kwargs):
     pcd_out = create_open_3d_pcd(opc_out_flat, classes, cmap)
 
     return opc_out, pcd_out
+
+def compute_normals_opc(opc, **kwargs):
+    opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
+
+    a_ref = Matrix3fRef(opc_float)
+
+    t1 = time.perf_counter()
+    normals = opf.kernel.compute_normals(a_ref)
+    t2 = time.perf_counter()
+    logger.info("OPC Compute Normals Took (ms): %.2f", (t2 - t1) * 1000)
+    print(normals)
+    normals_float_out = np.asarray(normals)
+    normals_out = normals_float_out.astype(np.float64)
+
+    return normals_out
 
 
 def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, **kwargs):

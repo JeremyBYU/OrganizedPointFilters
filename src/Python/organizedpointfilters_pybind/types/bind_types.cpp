@@ -59,6 +59,29 @@ RowMatrixXVec3X<T> py_array_to_matrix_copy(py::array_t<T, py::array::c_style | p
     return new_matrix;
 }
 
+TriangleNormalMatrix py_array_to_triangle_matrix_copy(py::array_t<float, py::array::c_style | py::array::forcecast> array)
+{
+    // return std::vector<std::array<T, dim>>();
+    // std::cout << "Calling py_array_to_matrix" << std::endl;
+    if (array.ndim() != 4)
+    {
+        throw py::cast_error(
+            "Numpy array must have exactly 4 Dimensions to be transformed to RowMatrixXVec3X<T>, MXNX2X3");
+    }
+    if (array.shape(3) != 3 || array.shape(2) != 2)
+    {
+        throw py::cast_error("Numpy array last dimension must be 3, e.g., MXNX2X3");
+    }
+    size_t rows = array.shape(0);
+    size_t cols = array.shape(1);
+    size_t triangles_per_cell = array.shape(2);
+    size_t channels = array.shape(3);
+
+    TriangleNormalMatrix new_matrix(rows, cols);
+    return new_matrix;
+}
+
+
 
 void pybind_matrix_types(py::module& m)
 {
@@ -92,4 +115,22 @@ void pybind_matrix_types(py::module& m)
                                    {sizeof(float) * cols * channels,       /* Strides (in bytes) for each index */
                                     sizeof(float) * channels, sizeof(float)});
         });
+
+    py::class_<TriangleNormalMatrix>(m, "TriangleNormalMatrix", py::buffer_protocol())
+        .def(py::init<>(&py_array_to_triangle_matrix_copy), "triangle_normals"_a)
+        .def_buffer([](TriangleNormalMatrix& m) -> py::buffer_info {
+            size_t rows = m.rows();
+            size_t cols = m.cols();
+            size_t tris_per_cell = 2UL;
+            size_t channels = 3UL;
+            return py::buffer_info(m.data(),                               /* Pointer to buffer */
+                                   sizeof(float),                          /* Size of one scalar */
+                                   py::format_descriptor<float>::format(), /* Python struct-style format descriptor */
+                                   4UL,                                    /* Number of dimensions */
+                                   {rows, cols, tris_per_cell, channels},                 /* Buffer dimensions */
+                                   {sizeof(float) * cols * channels * tris_per_cell,       /* Strides (in bytes) for each index */
+                                   sizeof(float) * channels * tris_per_cell, 
+                                    sizeof(float) * channels, sizeof(float)});
+        });
+
 }

@@ -1,4 +1,5 @@
 #include "OrganizedPointFilters/Kernel/Kernel.hpp"
+#include "OrganizedPointFilters/Kernel/Normal.hpp"
 
 #include "organizedpointfilters_pybind/kernel/kernel.hpp"
 
@@ -15,6 +16,12 @@ void pybind_kernel(py::module& m)
     m_submodule.def("laplacian_K3", &Kernel::LaplacianT<3>, "opc"_a, "_lambda"_a = OPF_KERNEL_DEFAULT_LAMBDA,
                     "iterations"_a = OPF_KERNEL_DEFAULT_ITER, "max_dist"_a=OPF_KERNEL_MAX_FLOAT,
                     "Performs Laplacian Smoothing w/ a Kernel Size of 3 on an Organized Point Cloud");
+
+    m_submodule.def("laplacian_K5", &Kernel::LaplacianT<5>, "opc"_a, "_lambda"_a = OPF_KERNEL_DEFAULT_LAMBDA,
+                    "iterations"_a = OPF_KERNEL_DEFAULT_ITER, "max_dist"_a=OPF_KERNEL_MAX_FLOAT,
+                    "Performs Laplacian Smoothing w/ a Kernel Size of 5 on an Organized Point Cloud");
+
+    m_submodule.def("compute_normals", &Kernel::ComputeNormals, "opc"_a, "Computes Normals for an Organized Point Cloud");
 
     m_submodule.def("laplacian",
                     [](RowMatrixXVec3f& a, float lambda, int iterations, int kernel_size) {

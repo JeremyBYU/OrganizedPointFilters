@@ -20,7 +20,7 @@ inline void smooth_point(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixX
                          const int j, const float lambda = OPF_KERNEL_DEFAULT_LAMBDA, const int kernel_size = 3)
 {
     const int shift = static_cast<const int>(kernel_size / 2);
-    double total_weight = 0.0;
+    float total_weight = 0.0;
     auto& point = opc(i, j);
     Eigen::Vector3f sum_vertex(0, 0, 0);
     for (auto row = i - shift; row <= i + shift; ++row)
@@ -29,7 +29,7 @@ inline void smooth_point(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixX
         {
             if (i == row && j == col) continue;
             float dist = (point - opc(row, col)).norm();
-            float weight = 1. / (dist + eps);
+            float weight = 1.0f / (dist + eps);
             total_weight += weight;
             sum_vertex += weight * opc(row, col);
         }
@@ -104,7 +104,7 @@ inline void SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixX
 {
     constexpr int shift = static_cast<const int>(kernel_size / 2);
 
-    double total_weight = 0.0;
+    float total_weight = 0.0;
     auto& point = opc(i, j);
     Eigen::Vector3f sum_vertex(0, 0, 0);
     float weight = 0.0;
@@ -133,25 +133,25 @@ inline void SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixX
             // the below code just looks for an opposite nbr point e.g. (0,0) -> (0, 2)
             // a vector is constructed from the center point and added to the center point
             // This makes the function about 20% slower then just simply not adding the nbr
-            if (dist > max_dist)
-            {
-                OppositePointK3(row, col, opp_row, opp_col);
-                auto global_row = i - shift + opp_row;
-                auto global_col = j - shift + opp_col;
-                synthetic_point = opc(global_row, global_col);
-                dist = (point - synthetic_point).norm();
-                if (dist > max_dist) continue;
-                weight = 1. / (2.0f * dist + eps);
-                nbr_point = (point - synthetic_point) + point;  
-            }
-            else
-            {
-                weight = 1. / (dist + eps);
-            }
+            // if (dist > max_dist)
+            // {
+            //     OppositePointK3(row, col, opp_row, opp_col);
+            //     auto global_row = i - shift + opp_row;
+            //     auto global_col = j - shift + opp_col;
+            //     synthetic_point = opc(global_row, global_col);
+            //     dist = (point - synthetic_point).norm();
+            //     if (dist > max_dist) continue;
+            //     weight = 1. / (2.0f * dist + eps);
+            //     nbr_point = (point - synthetic_point) + point;  
+            // }
+            // else
+            // {
+            //     weight = 1. / (dist + eps);
+            // }
 
             // this is faster than above but leads to really small triangles near edges of surfaces
-            // if (dist > max_dist) continue;
-            // weight = 1. / (dist + eps);
+            if (dist > max_dist || std::isnan(dist)) continue;
+            weight = 1.0f / (dist + eps);
 
 
             total_weight += weight;

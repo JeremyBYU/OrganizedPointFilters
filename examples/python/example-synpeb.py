@@ -16,6 +16,7 @@ def main():
     kwargs = dict(loops=10, stride=2, _lambda=1.0, kernel_size=3)
     pc, pc_image, pcd_o3d, tri_mesh, tri_mesh_o3d = load_pcd_and_meshes('/home/jeremy/Documents/UMICH/Research/polylidar-plane-benchmark/data/synpeb/train/var4/pc_01.pcd', **kwargs)
 
+    del kwargs['stride']
     # Not Smooth Mesh
     tri_mesh_noisy, tri_mesh_noisy_o3d = create_mesh_from_organized_point_cloud_with_o3d(np.ascontiguousarray(pc[:, :3]))
 
