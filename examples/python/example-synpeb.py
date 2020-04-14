@@ -13,7 +13,7 @@ from .utility.o3d_util import create_open_3d_pcd, plot_meshes, get_arrow, create
 
 
 def main():
-    kwargs = dict(loops=10, stride=2, _lambda=1.0, kernel_size=3)
+    kwargs = dict(loops=5, stride=2, _lambda=1.0, kernel_size=3)
     pc, pc_image, pcd_o3d, tri_mesh, tri_mesh_o3d = load_pcd_and_meshes('/home/jeremy/Documents/UMICH/Research/polylidar-plane-benchmark/data/synpeb/train/var4/pc_01.pcd', **kwargs)
 
     del kwargs['stride']
@@ -26,8 +26,12 @@ def main():
     opc_smooth_gpu, pcd_smooth_gpu = laplacian_opc_cuda(pc_image, **kwargs)
     tri_mesh_opc_gpu, tri_mesh_opc_gpu_o3d = create_mesh_from_organized_point_cloud_with_o3d(opc_smooth_gpu)
 
+    kwargs['kernel_size'] = 5
+    opc_smooth_gpu_k5, pcd_smooth_gpu_k5 = laplacian_opc_cuda(pc_image, **kwargs)
+    tri_mesh_opc_gpu_k5, tri_mesh_opc_gpu_o3d_k5 = create_mesh_from_organized_point_cloud_with_o3d(opc_smooth_gpu_k5)
 
-    plot_meshes(tri_mesh_noisy_o3d, tri_mesh_o3d, tri_mesh_opc_o3d, tri_mesh_opc_gpu_o3d)
+
+    plot_meshes(tri_mesh_noisy_o3d, tri_mesh_o3d, tri_mesh_opc_o3d, tri_mesh_opc_gpu_o3d, tri_mesh_opc_gpu_o3d_k5)
 
 
 

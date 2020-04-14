@@ -172,12 +172,15 @@ def smooth_normals_opc(opc, loops=5, sigma_angle=0.17453, **kwargs):
     return normals_out
 
 
-def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, **kwargs):
+def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
 
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
     t1 = time.perf_counter()
-    opc_float_out = opf_cuda.kernel.laplacian_K3_cuda(opc_float, loops=loops, _lambda=_lambda, **kwargs)
+    if kernel_size == 3:
+        opc_float_out = opf_cuda.kernel.laplacian_K3_cuda(opc_float, loops=loops, _lambda=_lambda, **kwargs)
+    else:
+        opc_float_out = opf_cuda.kernel.laplacian_K5_cuda(opc_float, loops=loops, _lambda=_lambda, **kwargs)
     t2 = time.perf_counter()
 
     logger.info("OPC CUDA Laplacian Mesh Smoothing Took (ms): %.2f", (t2 - t1) * 1000)
