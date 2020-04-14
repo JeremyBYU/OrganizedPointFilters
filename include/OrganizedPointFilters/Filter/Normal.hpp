@@ -5,15 +5,16 @@
 
 #include "OrganizedPointFilters/Types.hpp"
 
-#define OPF_BILATERAL_DEFAULT_ITER 1
-#define OPF_BILATERAL_DEFAULT_SIGMA_LENGTH 0.1f     // 10 centimeters
-#define OPF_BILATERAL_DEFAULT_SIGMA_ANGLE 0.174533f // 10 degrees
+#define OPF_NORMAL_OMP_MAX_THREAD 16
 
 namespace OrganizedPointFilters {
 
 namespace Filter {
 
-inline void ComputeNormal(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<TriangleNormalMatrix>& normals,
+namespace NormalCore
+
+{
+inline void ComputeNormal(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<OrganizedTriangleMatrix> normals,
                           const int row_tri, const int col_tri)
 {
     // All points involved in the TWO triangles in this cell
@@ -35,57 +36,85 @@ inline void ComputeNormal(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<TriangleN
     cell_normals.block<1, 3>(1, 0) = (p4 - p1).cross(p3 - p4).normalized();
 }
 
-inline void ComputeNormalLoop(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<TriangleNormalMatrix> normals)
+inline void ComputeCentroid(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<OrganizedTriangleMatrix> centroids,
+                            const int row_tri, const int col_tri)
 {
-    // Rows and cols in OPC (POINTS)
-    const int rows_points = static_cast<int>(opc.rows());
-    const int cols_points = static_cast<int>(opc.cols());
+    // All points involved in the TWO triangles in this cell
+    auto& p1 = opc(row_tri, col_tri);         // top left
+    auto& p2 = opc(row_tri, col_tri + 1);     // top right
+    auto& p3 = opc(row_tri + 1, col_tri + 1); // bottom right
+    auto& p4 = opc(row_tri + 1, col_tri);     // bottom left
 
-    // Rows and columns in MESH (Triangels)
-    // Each cell is composied of two triangles fromed by a right earcut
-    const int rows_tris = rows_points - 1;
-    const int cols_tris = cols_points - 1;
+    auto& cell_centroid = centroids(row_tri, col_tri);
 
-#if defined(_OPENMP)
-    int num_threads = std::min(omp_get_max_threads(), OPF_KERNEL_OMP_MAX_THREAD);
-    num_threads = std::max(num_threads, 1);
-#pragma omp parallel for schedule(guided) num_threads(num_threads)
-#endif
-    for (int row_tri = 0; row_tri < rows_tris; ++row_tri)
-    {
-        for (int col_tri = 0; col_tri < cols_tris; ++col_tri)
-        {
-            ComputeNormal(opc, normals, row_tri, col_tri);
-        }
-    }
+    // Triangle one is - p3, p2, p1
+    // Triangle two is - p1, p4, p3
+
+    // I'm concerned that eigen is actually worse than my hand written optimized normal calculation in polylidar
+    // what you see is about 470 us for 250X250 opc
+    // basically is (p2 - p3) doing a malloc? is stack allocated only once in the the calling function
+    // the normalization creates new memory and then assigns, its faster just to normalize in place
+    cell_centroid.block<1, 3>(0, 0) = (p3 + p2 + p1) / 3.0f;
+    cell_centroid.block<1, 3>(1, 0) = (p1 + p4 + p3) / 3.0f;
 }
 
-inline TriangleNormalMatrix ComputeNormals(Eigen::Ref<RowMatrixXVec3f> opc)
-{
-    // Rows and cols in OPC (POINTS)
-    const int rows_points = static_cast<int>(opc.rows());
-    const int cols_points = static_cast<int>(opc.cols());
+} // namespace NormalCore
 
-    const int rows_tris = rows_points - 1;
-    const int cols_tris = cols_points - 1;
+// inline void ComputeNormalLoop(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<OrganizedTriangleMatrix> normals)
+// {
+//     // Rows and cols in OPC (POINTS)
+//     const int rows_points = static_cast<int>(opc.rows());
+//     const int cols_points = static_cast<int>(opc.cols());
 
-    TriangleNormalMatrix normals(rows_tris, cols_tris);
-    ComputeNormalLoop(opc, normals);
+//     // Rows and columns in MESH (Triangels)
+//     // Each cell is composied of two triangles fromed by a right earcut
+//     const int rows_tris = rows_points - 1;
+//     const int cols_tris = cols_points - 1;
 
-    return normals;
-}
+// #if defined(_OPENMP)
+//     int num_threads = std::min(omp_get_max_threads(), OPF_KERNEL_OMP_MAX_THREAD);
+//     num_threads = std::max(num_threads, 1);
+// #pragma omp parallel for schedule(guided) num_threads(num_threads)
+// #endif
+//     for (int row_tri = 0; row_tri < rows_tris; ++row_tri)
+//     {
+//         for (int col_tri = 0; col_tri < cols_tris; ++col_tri)
+//         {
+//             NormalCore::ComputeNormal(opc, normals, row_tri, col_tri);
+//         }
+//     }
+// }
 
-inline TriangleNormalMatrix BilateralFilterNormals(Eigen::Ref<RowMatrixXVec3f> opc,
-                                                   Eigen::Ref<TriangleNormalMatrix> normals,
-                                                   int loops = OPF_BILATERAL_DEFAULT_ITER,
-                                                   float sigma_length = OPF_BILATERAL_DEFAULT_SIGMA_LENGTH,
-                                                   float sigma_angle = OPF_BILATERAL_DEFAULT_SIGMA_ANGLE)
+// inline void ComputeCentroidLoop(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<OrganizedTriangleMatrix> centroids)
+// {
+//     // Rows and cols in OPC (POINTS)
+//     const int rows_points = static_cast<int>(opc.rows());
+//     const int cols_points = static_cast<int>(opc.cols());
 
-{
-    TriangleNormalMatrix new_normals(normals.rows(), normals.cols());
+//     // Rows and columns in MESH (Triangels)
+//     // Each cell is composied of two triangles fromed by a right earcut
+//     const int rows_tris = rows_points - 1;
+//     const int cols_tris = cols_points - 1;
 
-    return new_normals;
-}
+// #if defined(_OPENMP)
+//     int num_threads = std::min(omp_get_max_threads(), OPF_KERNEL_OMP_MAX_THREAD);
+//     num_threads = std::max(num_threads, 1);
+// #pragma omp parallel for schedule(guided) num_threads(num_threads)
+// #endif
+//     for (int row_tri = 0; row_tri < rows_tris; ++row_tri)
+//     {
+//         for (int col_tri = 0; col_tri < cols_tris; ++col_tri)
+//         {
+//             NormalCore::ComputeCentroid(opc, centroids, row_tri, col_tri);
+//         }
+//     }
+// }
+
+OrganizedTriangleMatrix ComputeNormals(Eigen::Ref<RowMatrixXVec3f> opc);
+
+OrganizedTriangleMatrix ComputeCentroids(Eigen::Ref<RowMatrixXVec3f> opc);
+
+std::tuple<OrganizedTriangleMatrix, OrganizedTriangleMatrix> ComputeNormalsAndCentroids(Eigen::Ref<RowMatrixXVec3f> opc);
 
 } // namespace Filter
 } // namespace OrganizedPointFilters

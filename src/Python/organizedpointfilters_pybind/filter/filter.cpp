@@ -1,5 +1,6 @@
 #include "OrganizedPointFilters/Filter/Laplacian.hpp"
 #include "OrganizedPointFilters/Filter/Normal.hpp"
+#include "OrganizedPointFilters/Filter/Bilateral.hpp"
 
 #include "organizedpointfilters_pybind/filter/filter.hpp"
 
@@ -22,6 +23,10 @@ void pybind_filter(py::module& m)
                     "Performs Laplacian Smoothing w/ a Filter Size of 5 on an Organized Point Cloud");
 
     m_submodule.def("compute_normals", &Filter::ComputeNormals, "opc"_a, "Computes Normals for an Organized Point Cloud");
+
+    m_submodule.def("bilateral_K3", &Filter::BilateralFilterNormals<3>, "opc"_a, "iterations"_a = OPF_BILATERAL_DEFAULT_ITER,
+                    "sigma_length"_a = OPF_BILATERAL_DEFAULT_SIGMA_LENGTH, "sigma_angle"_a=OPF_BILATERAL_DEFAULT_SIGMA_ANGLE,
+                    "Performs Bilateral Smoothing w/ a Filter Size of 3 on an Organized Point Cloud Normals");
 
     m_submodule.def("laplacian",
                     [](RowMatrixXVec3f& a, float lambda, int iterations, int kernel_size) {

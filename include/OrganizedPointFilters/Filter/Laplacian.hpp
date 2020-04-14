@@ -158,6 +158,9 @@ inline void SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixX
             sum_vertex += weight * nbr_point;
         }
     }
+
+    if (total_weight == 0.0) return;
+    
     opc_out(i, j) = point + lambda * (sum_vertex / total_weight - point);
 }
 

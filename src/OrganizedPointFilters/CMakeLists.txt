@@ -3,7 +3,7 @@ set(ORGANIZEDPOINTFILTERS_SRC "${CMAKE_CURRENT_SOURCE_DIR}")
 set(INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
 set(ORGANIZEDPOINTFILTERS_INCLUDE_DIR "${INCLUDE_DIR}/OrganizedPointFilters")
 set(ORGANIZEDPOINTFILTERS_SOURCE_FILES ${ORGANIZEDPOINTFILTERS_SRC}/OrganizedPointFilters.cpp ${ORGANIZEDPOINTFILTERS_SRC}/SpatialFilter.cpp
-                                        ${ORGANIZEDPOINTFILTERS_SRC}/Helper.cpp)
+                                        ${ORGANIZEDPOINTFILTERS_SRC}/Helper.cpp ${ORGANIZEDPOINTFILTERS_SRC}/Filters.cpp )
 set(ORGANIZEDPOINTFILTERS_HEADER_FILES ${ORGANIZEDPOINTFILTERS_INCLUDE_DIR}/OrganizedPointFilters.hpp ${ORGANIZEDPOINTFILTERS_INCLUDE_DIR}/Helper.hpp
                                         ${ORGANIZEDPOINTFILTERS_INCLUDE_DIR}/Types.hpp ${ORGANIZEDPOINTFILTERS_INCLUDE_DIR}/RS/SpatialFilter.hpp
                                         ${ORGANIZEDPOINTFILTERS_INCLUDE_DIR}/RS/DisparityTransform.hpp)
@@ -21,6 +21,10 @@ $<$<CXX_COMPILER_ID:MSVC>:
 /W4>)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE eigen)
+
+# Fast Exponential
+set(FASTEXP_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/thirdparty")
+target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${FASTEXP_INCLUDE_DIR})
 
 # OPTION Build with OpenMP Support
 if (OPF_WITH_OPENMP)

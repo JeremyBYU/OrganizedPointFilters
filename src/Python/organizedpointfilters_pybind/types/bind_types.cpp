@@ -59,7 +59,7 @@ RowMatrixXVec3X<T> py_array_to_matrix_copy(py::array_t<T, py::array::c_style | p
     return new_matrix;
 }
 
-TriangleNormalMatrix py_array_to_triangle_matrix_copy(py::array_t<float, py::array::c_style | py::array::forcecast> array)
+OrganizedTriangleMatrix py_array_to_triangle_matrix_copy(py::array_t<float, py::array::c_style | py::array::forcecast> array)
 {
     // return std::vector<std::array<T, dim>>();
     // std::cout << "Calling py_array_to_matrix" << std::endl;
@@ -77,7 +77,7 @@ TriangleNormalMatrix py_array_to_triangle_matrix_copy(py::array_t<float, py::arr
     size_t triangles_per_cell = array.shape(2);
     size_t channels = array.shape(3);
 
-    TriangleNormalMatrix new_matrix(rows, cols);
+    OrganizedTriangleMatrix new_matrix(rows, cols);
     return new_matrix;
 }
 
@@ -116,9 +116,9 @@ void pybind_matrix_types(py::module& m)
                                     sizeof(float) * channels, sizeof(float)});
         });
 
-    py::class_<TriangleNormalMatrix>(m, "TriangleNormalMatrix", py::buffer_protocol())
-        .def(py::init<>(&py_array_to_triangle_matrix_copy), "triangle_normals"_a)
-        .def_buffer([](TriangleNormalMatrix& m) -> py::buffer_info {
+    py::class_<OrganizedTriangleMatrix>(m, "OrganizedTriangleMatrix", py::buffer_protocol())
+        .def(py::init<>(&py_array_to_triangle_matrix_copy), "triangle_matrix"_a)
+        .def_buffer([](OrganizedTriangleMatrix& m) -> py::buffer_info {
             size_t rows = m.rows();
             size_t cols = m.cols();
             size_t tris_per_cell = 2UL;

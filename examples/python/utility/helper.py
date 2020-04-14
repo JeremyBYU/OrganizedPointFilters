@@ -114,7 +114,20 @@ def compute_normals_opc(opc, **kwargs):
     normals = opf.filter.compute_normals(a_ref)
     t2 = time.perf_counter()
     logger.info("OPC Compute Normals Took (ms): %.2f", (t2 - t1) * 1000)
-    print(normals)
+    normals_float_out = np.asarray(normals)
+    normals_out = normals_float_out.astype(np.float64)
+
+    return normals_out
+
+def smooth_normals_opc(opc, loops=5, sigma_angle=0.17453, **kwargs):
+    opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
+
+    a_ref = Matrix3fRef(opc_float)
+
+    t1 = time.perf_counter()
+    normals = opf.filter.bilateral_K3(a_ref, iterations=loops, sigma_angle=sigma_angle)
+    t2 = time.perf_counter()
+    logger.info("OPC Bilateral Smooth Normals Took (ms): %.2f", (t2 - t1) * 1000)
     normals_float_out = np.asarray(normals)
     normals_out = normals_float_out.astype(np.float64)
 
