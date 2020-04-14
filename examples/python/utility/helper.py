@@ -105,6 +105,44 @@ def laplacian_opc(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
 
     return opc_out, pcd_out
 
+def laplacian_then_bilateral_opc(opc, loops_laplacian=5, _lambda=0.5, kernel_size=3, loops_bilateral=0, sigma_length=0.1, sigma_angle=0.261, **kwargs):
+    opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
+
+    a_ref = Matrix3fRef(opc_float)
+
+    t1 = time.perf_counter()
+    if kernel_size == 3:
+        b_cp = opf.filter.laplacian_K3(a_ref, _lambda=_lambda, iterations=loops_laplacian, **kwargs)
+    else:
+        b_cp = opf.filter.laplacian_K5(a_ref, _lambda=_lambda, iterations=loops_laplacian, **kwargs)
+    t2 = time.perf_counter()
+    logger.info("OPC Mesh Smoothing Took (ms): %.2f", (t2 - t1) * 1000)
+
+    opc_float_out = np.asarray(b_cp)
+    b_ref = Matrix3fRef(opc_float_out)
+
+    opc_normals_float = opf.filter.bilateral_K3(b_ref, iterations=loops_bilateral, sigma_length=sigma_length, sigma_angle=sigma_angle)
+    t3 = time.perf_counter()
+    logger.info("OPC Bilateral Normal Filter Took (ms): %.2f", (t3 - t2) * 1000)
+
+
+    opc_normals_float_out = np.asarray(opc_normals_float)
+    total_triangles = int(opc_normals_float_out.size / 3)
+    opc_normals_out = opc_normals_float_out.astype(np.float64)
+    opc_normals_out = opc_normals_float_out.reshape((total_triangles, 3))
+
+
+    opc_out = opc_float_out.astype(np.float64)
+
+    num_points = opc_out.shape[0] * opc_out.shape[1]
+    opc_out_flat = opc_out.reshape((num_points, 3))
+
+    classes = opc[:,:, 3].reshape((num_points, ))
+    cmap = tab40()
+    pcd_out = create_open_3d_pcd(opc_out_flat, classes, cmap)
+
+    return opc_out, opc_normals_out, pcd_out
+
 def compute_normals_opc(opc, **kwargs):
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
