@@ -6,6 +6,7 @@ include requirements.txt
 # Compiled module
 include organizedpointfilters/organizedpointfilters*.pyd
 include organizedpointfilters/organizedpointfilters*.so
+include organizedpointfilters/cuda/*.cu
 
 # Exclude
 global-exclude *.py[co]
