@@ -78,21 +78,6 @@ __device__ float PointDistance(const float* point1, const float* point2)
     return norm3df(x3, y3, z3);
 }
 
-__device__ void Print2DPointArray(float* point, int rows, int cols)
-{
-    printf("Shared Memory Size: %d\n ", rows);
-    for (int i = 0; i < rows; ++i)
-    {
-        for (int j = 0; j < cols; ++j)
-        {
-            int idx = i * cols + j;
-            // printf("(%.2f,%.2f,%.2f), ", point[idx*3], point[idx*3 + 1], point[idx*3 + 2]);
-            printf("(%.4f), ", point[idx * 3 + 1]);
-        }
-        printf("\n\n");
-    }
-}
-
 __device__ void Print2DArrayWithOffset(float* points, int rows, int cols, int points_per_cell = 6, int offset = 0)
 {
     printf("Shared Memory Size: %d\n ", rows);
@@ -113,19 +98,6 @@ __device__ void Print2DArrayWithOffset(float* points, int rows, int cols, int po
 }
 
 __device__ void PrintVec3f(float* point) { printf("(%.2f, %.2f, %.2f)\n", point[0], point[1], point[2]); }
-
-__device__ void IntegeratePoint(int& nbr_shmIdx, float* SHM_POINTS, float* point_temp, float* point,
-                                float& total_weight, float* sum_point, float max_dist = 0.25)
-{
-    LoadPoint(point_temp, SHM_POINTS, 0, nbr_shmIdx);
-    float dist = PointDistance(point, point_temp);
-    // branch divergence
-    if (dist > max_dist || isnan(dist)) return;
-    float weight = 1.0f / (dist + EPS);
-    total_weight += weight;
-    ScalePointInPlace(point_temp, weight);
-    AddPointsInPlace(sum_point, point_temp);
-}
 
 __device__ float GaussianWeight(float value, float sigma_squared) { return __expf(-(value * value) / sigma_squared); }
 
@@ -149,55 +121,6 @@ __device__ void IntegerateNormal(int& nbr_shmIdx, float* SHM_NORMALS, float* SHM
 
     ScalePointInPlace(temp_normal, weight);
     AddPointsInPlace(sum_normal, temp_normal);
-}
-
-__device__ void IntegerateNormalPrint(int& nbr_shmIdx, float* SHM_NORMALS, float* SHM_CENTROIDS, float* temp_normal,
-                                 float* temp_centroid, float* normal, float* centroid, float& total_weight,
-                                 float* sum_normal, const float& sls, const float& sas, int nbr_starting_idx, const bool print=false)
-{
-    // Get First Nbr Triangle Normal and Centroid
-    LoadSinglePoint(temp_normal, nbr_starting_idx, SHM_NORMALS, nbr_shmIdx);
-    LoadSinglePoint(temp_centroid, nbr_starting_idx, SHM_CENTROIDS, nbr_shmIdx);
-    if (print)
-    {
-        printf("NBr Normal: \n");
-        PrintVec3f(temp_normal);
-    
-        printf("\n Nbr Centroid: \n");
-        PrintVec3f(temp_centroid);
-    }
-
-    float dist_normal = PointDistance(normal, temp_normal);
-    float dist_centroid = PointDistance(centroid, temp_centroid);
-
-
-    if (print)
-    {
-        printf("NBr Normal Dist: %.3f \n", dist_normal);
-        printf("\n Nbr Centroid Dist: %.3f \n", dist_centroid);
-    }
-
-    // branch divergence ---   : (
-    if (isnan(dist_centroid) || isnan(dist_normal)) return;
-
-    float weight = GaussianWeight(dist_normal, sas) * GaussianWeight(dist_centroid, sls);
-
-
-    if (print)
-    {
-        printf("Weight: %.3f\n", weight);
-    }
-
-    total_weight += weight;
-
-    ScalePointInPlace(temp_normal, weight);
-    AddPointsInPlace(sum_normal, temp_normal);
-
-    if (print)
-    {
-        printf("Sum Normal\n");
-        PrintVec3f(sum_normal);
-    }
 }
 
 //////// End Helper Functions /////////
@@ -272,6 +195,9 @@ __device__ void ReadBlockAndHaloK3(float* SHM_POINTS, const float* normals_in, c
     }
 }
 
+// Each thread is responsible for ONE cell whcih has TWO triangles
+// I call them the first and second respsectively
+// They will integrate normals from neighboring cells (which also have 2 triangles first/second)
 __global__ void SmoothPointK3(float* SHM_NORMALS, float* SHM_CENTROIDS, float* normals_out, const int& srcIdx,
                               const int& shmRow_y, const int& shmCol_x, const int& srcRow_y, const int& srcCol_x,
                               const int& cols, const float& sls, const float& sas)
@@ -287,56 +213,26 @@ __global__ void SmoothPointK3(float* SHM_NORMALS, float* SHM_CENTROIDS, float* n
     float temp_normal[3];   // a temporary normal in stencil
     float temp_centroid[3]; // a temporary centroid in stencil
 
-    float first_sum_normal[3] = {0, 0, 0}; // first normal sum
-    float second_sum_normal[3] = {0, 0, 0}; // first normal sum
+    float first_sum_normal[3] = {0, 0, 0}; // first normal sum, MUST BE ZERO INITIALIZED
+    float second_sum_normal[3] = {0, 0, 0}; // first normal sum, MUST BE ZERO INITIALIZED
 
     float first_total_weight = 0.0;  // total weight (scaling) of first triangle
     float second_total_weight = 0.0; // total weight (scaling) of second triangle
 
     int nbr_shmIdx = 0; // nbr shared index
 
-    // Each thread is responsible for ONE cell whcih has TWO triangles
-    // I call them the first and second respsectively
-    // They will integrate normals from neighboring cells (which also have 2 triangles first/second)
-
     // Load from shared memory to local registers, will be used multiple times
     LoadDoublePoint(first_normal, second_normal, SHM_NORMALS, this_shmIdx);
     LoadDoublePoint(first_centroid, second_centroid, SHM_CENTROIDS, this_shmIdx);
 
-    // if (srcCol_x == 2 && srcRow_y == 2)
-    // {
-    //     printf("First Normal: \n");
-    //     PrintVec3f(first_normal);
-    //     printf("Second Normal: \n");
-    //     PrintVec3f(second_normal);
-
-    //     printf("\nFirst Centroid: \n");
-    //     PrintVec3f(first_centroid);
-    //     printf("Second Centroid: \n");
-    //     PrintVec3f(second_centroid);
-    // }
-
     // I manually unwrapped the 3X3 Kernel loop below
     // Mostly because the center point should not occur in the kernel
     // and I didn't want an if statement for branch divergence
-    // sometimes I regret my decisions
+    // sometimes I regret my decisions....
 
     //////// Left ////////////
     //////// Left Top ////////
     nbr_shmIdx = (shmRow_y - 1) * SHM_SIZE_K3 + (shmCol_x - 1);
-
-    /// TESTING
-    // if (srcCol_x == 2 && srcRow_y == 2)
-    // {
-    //     // First Neighbor Triangle
-    //     printf("\n First Neighbor\n");
-    //     IntegerateNormalPrint(nbr_shmIdx, SHM_NORMALS, SHM_CENTROIDS, temp_normal, temp_centroid, first_normal, first_centroid,
-    //         first_total_weight, first_sum_normal, sls, sas, 0, true);
-    //     printf("\n Second Neighbor\n");
-    //     IntegerateNormalPrint(nbr_shmIdx, SHM_NORMALS, SHM_CENTROIDS, temp_normal, temp_centroid, first_normal, first_centroid,
-    //         first_total_weight, first_sum_normal, sls, sas, 3, true);
-    // }
-
     // First Neighbor Triangle
     IntegerateNormal(nbr_shmIdx, SHM_NORMALS, SHM_CENTROIDS, temp_normal, temp_centroid, first_normal, first_centroid,
                      first_total_weight, first_sum_normal, sls, sas, 0);
@@ -505,16 +401,8 @@ __global__ void BilateralLoopK3(float* normals_in, float* centroids_in, float* n
     int srcCol_x = blockIdx.x * blockDim.x + threadIdx.x; // col in global memory
     int srcIdx = srcRow_y * cols + srcCol_x;              // idx in global memory
 
-    // printf("Loading Interior of Shared memory \n");
     LoadPoint(SHM_NORMALS, normals_in, shmIdx, srcIdx);     // Copy global memory point (x,y,z) into shared memory
     LoadPoint(SHM_CENTROIDS, centroids_in, shmIdx, srcIdx); // Copy global memory point (x,y,z) into shared memory
-    // if (srcRow_y == 225 && srcCol_x == 225)
-    // {
-    //     printf("Block ID: (%d, %d); Thread Id: (%d, %d) \n", blockIdx.x, blockIdx.y, threadIdx.x, threadIdx.y);
-    //     Print2DArrayWithOffset(SHM_NORMALS, SHM_SIZE_K3, SHM_SIZE_K3);
-    // }
-
-    // __syncthreads();
 
     if (srcRow_y > 0 && srcRow_y < (rows - 1) && srcCol_x > 0 && srcCol_x < (cols - 1))
     // Only perform smoothing in interior of image/opc, branch divergence occurs here
@@ -525,17 +413,7 @@ __global__ void BilateralLoopK3(float* normals_in, float* centroids_in, float* n
         ReadBlockAndHaloK3(SHM_CENTROIDS, centroids_in, shmRow_y, shmCol_x, srcRow_y, srcCol_x, cols);
         __syncthreads();
 
-        // if (srcRow_y == 225 && srcCol_x == 225)
-        // {
-        //     printf("Block ID: (%d, %d); Thread Id: (%d, %d) \n", blockIdx.x, blockIdx.y, threadIdx.x, threadIdx.y);
-        //     Print2DArrayWithOffset(SHM_NORMALS, SHM_SIZE_K3, SHM_SIZE_K3);
-        // }
-
-        // return;
-
-        // printf("After sync threads\n");
-
-        ////// Smooth Point Operation //////
+        ////// Smooth Normal Operation //////
         SmoothPointK3(SHM_NORMALS, SHM_CENTROIDS, normals_out, srcIdx, shmRow_y, shmCol_x, srcRow_y, srcCol_x, cols,
                       sls, sas);
     }
