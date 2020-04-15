@@ -1,7 +1,34 @@
+#include "OrganizedPointFilters/Filter/Laplacian.hpp"
 #include "OrganizedPointFilters/Filter/Bilateral.hpp"
 #include "OrganizedPointFilters/Filter/Normal.hpp"
 
 using namespace OrganizedPointFilters;
+
+template <int kernel_size = 3>
+RowMatrixXVec3f Filter::LaplacianT(Eigen::Ref<RowMatrixXVec3f> opc, float lambda, int iterations, float max_dist)
+{
+    // TODO - Only really need to copy the ghost/halo cells on border
+    RowMatrixXVec3f opc_out(opc);
+    bool need_copy = false;
+    for (int i = 0; i < iterations; ++i)
+    {
+        if (i % 2 == 0)
+        {
+            LaplacianCore::LaplacianLoopT<kernel_size>(opc, opc_out, lambda, max_dist);
+            need_copy = false;
+        }
+        else
+        {
+            LaplacianCore::LaplacianLoopT<kernel_size>(opc_out, opc, lambda, max_dist);
+            need_copy = true;
+        }
+    }
+    if (need_copy)
+    {
+        opc_out = opc;
+    }
+    return opc_out;
+}
 
 template <int kernel_size = 3>
 OrganizedTriangleMatrix Filter::BilateralFilterNormals(Eigen::Ref<RowMatrixXVec3f> opc, int iterations,
@@ -128,7 +155,11 @@ Filter::ComputeNormalsAndCentroids(Eigen::Ref<RowMatrixXVec3f> opc)
     return std::make_tuple(std::move(normals), std::move(centroids));
 }
 
-
-
 template OrganizedTriangleMatrix Filter::BilateralFilterNormals<3>(Eigen::Ref<RowMatrixXVec3f> opc, int iterations,
-                                                                float sigma_length, float sigma_angle);
+                                                                   float sigma_length, float sigma_angle);
+
+template RowMatrixXVec3f Filter::LaplacianT<3>(Eigen::Ref<RowMatrixXVec3f> opc, float lambda, int iterations,
+                                               float max_dist);
+
+template RowMatrixXVec3f Filter::LaplacianT<5>(Eigen::Ref<RowMatrixXVec3f> opc, float lambda, int iterations,
+                                               float max_dist);

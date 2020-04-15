@@ -60,56 +60,6 @@ inline void ComputeCentroid(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<Organize
 
 } // namespace NormalCore
 
-// inline void ComputeNormalLoop(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<OrganizedTriangleMatrix> normals)
-// {
-//     // Rows and cols in OPC (POINTS)
-//     const int rows_points = static_cast<int>(opc.rows());
-//     const int cols_points = static_cast<int>(opc.cols());
-
-//     // Rows and columns in MESH (Triangels)
-//     // Each cell is composied of two triangles fromed by a right earcut
-//     const int rows_tris = rows_points - 1;
-//     const int cols_tris = cols_points - 1;
-
-// #if defined(_OPENMP)
-//     int num_threads = std::min(omp_get_max_threads(), OPF_KERNEL_OMP_MAX_THREAD);
-//     num_threads = std::max(num_threads, 1);
-// #pragma omp parallel for schedule(guided) num_threads(num_threads)
-// #endif
-//     for (int row_tri = 0; row_tri < rows_tris; ++row_tri)
-//     {
-//         for (int col_tri = 0; col_tri < cols_tris; ++col_tri)
-//         {
-//             NormalCore::ComputeNormal(opc, normals, row_tri, col_tri);
-//         }
-//     }
-// }
-
-// inline void ComputeCentroidLoop(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<OrganizedTriangleMatrix> centroids)
-// {
-//     // Rows and cols in OPC (POINTS)
-//     const int rows_points = static_cast<int>(opc.rows());
-//     const int cols_points = static_cast<int>(opc.cols());
-
-//     // Rows and columns in MESH (Triangels)
-//     // Each cell is composied of two triangles fromed by a right earcut
-//     const int rows_tris = rows_points - 1;
-//     const int cols_tris = cols_points - 1;
-
-// #if defined(_OPENMP)
-//     int num_threads = std::min(omp_get_max_threads(), OPF_KERNEL_OMP_MAX_THREAD);
-//     num_threads = std::max(num_threads, 1);
-// #pragma omp parallel for schedule(guided) num_threads(num_threads)
-// #endif
-//     for (int row_tri = 0; row_tri < rows_tris; ++row_tri)
-//     {
-//         for (int col_tri = 0; col_tri < cols_tris; ++col_tri)
-//         {
-//             NormalCore::ComputeCentroid(opc, centroids, row_tri, col_tri);
-//         }
-//     }
-// }
-
 OrganizedTriangleMatrix ComputeNormals(Eigen::Ref<RowMatrixXVec3f> opc);
 
 OrganizedTriangleMatrix ComputeCentroids(Eigen::Ref<RowMatrixXVec3f> opc);

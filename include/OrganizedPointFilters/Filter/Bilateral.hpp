@@ -9,9 +9,9 @@
 #include "FastExp/fastexp.h"
 
 #define OPF_BILATERAL_DEFAULT_ITER 1
-#define OPF_BILATERAL_DEFAULT_SIGMA_LENGTH 0.1f  // 10 centimeters
-// Technically a default should be scaling by distance of unit normals, but angle (rad) and dist are similar for <90 degrees
-// Not: user can pass in parameter that is a better scaling parameter for Gaussian Weight
+#define OPF_BILATERAL_DEFAULT_SIGMA_LENGTH 0.1f // 10 centimeters
+// Technically a default should be scaling by distance of unit normals, but angle (rad) and dist are similar for <90
+// degrees Not: user can pass in parameter that is a better scaling parameter for Gaussian Weight
 #define OPF_BILATERAL_DEFAULT_SIGMA_ANGLE 0.261f // 15 degrees
 #define OPF_BILATERAL_OMP_MAX_THREAD 16
 
@@ -68,10 +68,6 @@ inline void SmoothNormal(Eigen::Ref<OrganizedTriangleMatrix> normals_in, Eigen::
     Eigen::Vector3f first_sum_normal(0, 0, 0);
     Eigen::Vector3f second_sum_normal(0, 0, 0);
 
-    // float first_weight = 0.0f;
-    // float second_weight = 0.0f;
-
-    // float temp_weight = 0.0f;
 
     for (auto row = 0; row < kernel_size; ++row)
     {
@@ -148,44 +144,6 @@ OrganizedTriangleMatrix BilateralFilterNormals(Eigen::Ref<RowMatrixXVec3f> opc,
                                                int iterations = OPF_BILATERAL_DEFAULT_ITER,
                                                float sigma_length = OPF_BILATERAL_DEFAULT_SIGMA_LENGTH,
                                                float sigma_angle = OPF_BILATERAL_DEFAULT_SIGMA_ANGLE);
-
-// {
-
-//     OrganizedTriangleMatrix normals;
-//     OrganizedTriangleMatrix centroids;
-
-//     float sigma_length_squared = 2.0f * sigma_length * sigma_length;
-//     float sigma_angle_squared = 2.0f * sigma_angle * sigma_angle;
-
-//     std::tie(normals, centroids) = ComputeNormalsAndCentroids(opc);
-//     // allocation
-//     // OrganizedTriangleMatrix new_normals(normals.rows(), normals.cols());
-//     OrganizedTriangleMatrix new_normals(normals);
-
-//     bool need_copy = false;
-//     for (int i = 0; i < iterations; ++i)
-//     {
-//         if (i % 2 == 0)
-//         {
-//             BilateralCore::BilateralNormalLoop<kernel_size>(normals, centroids, new_normals, sigma_length_squared,
-//                                              sigma_angle_squared);
-//             need_copy = false;
-//         }
-//         else
-//         {
-//             BilateralCore::BilateralNormalLoop<kernel_size>(new_normals, centroids, normals, sigma_length_squared,
-//                                              sigma_angle_squared);
-//             need_copy = true;
-//         }
-//     }
-
-//     if (need_copy)
-//     {
-//         new_normals = normals;
-//     }
-
-//     return new_normals;
-// }
 
 } // namespace Filter
 } // namespace OrganizedPointFilters

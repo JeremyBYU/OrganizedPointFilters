@@ -21,20 +21,6 @@ void InitRandom(Eigen::Ref<RowMatrixXVec3f> a)
     }
 }
 
-static void BM_Laplacian(benchmark::State& st)
-{
-    RowMatrixXVec3f a(st.range(0), st.range(0));
-    InitRandom(a);
-    // std::cout << a.rows() << std::endl;
-    int iterations = 5;
-    int kernel_size = 3;
-    float lambda = 1.0;
-    for (auto _ : st)
-    {
-        auto result = Filter::Laplacian(a, lambda, iterations, kernel_size);
-        benchmark::DoNotOptimize(result.data());
-    }
-}
 
 static void BM_ComputeNormals(benchmark::State& st)
 {
@@ -103,7 +89,7 @@ static void BM_BilateralNormalFiltering(benchmark::State& st)
     }
 }
 
-BENCHMARK(BM_Laplacian)->UseRealTime()->DenseRange(250, 500, 250)->Unit(benchmark::kMillisecond);
+// BENCHMARK(BM_Laplacian)->UseRealTime()->DenseRange(250, 500, 250)->Unit(benchmark::kMillisecond);
 BENCHMARK_TEMPLATE(BM_LaplacianT, 3)->UseRealTime()->DenseRange(250, 500, 250)->Unit(benchmark::kMillisecond);
 BENCHMARK_TEMPLATE(BM_LaplacianT, 5)->UseRealTime()->DenseRange(250, 500, 250)->Unit(benchmark::kMillisecond);
 BENCHMARK(BM_BilateralNormalFiltering)->UseRealTime()->DenseRange(250, 500, 250)->Unit(benchmark::kMillisecond);

@@ -21,7 +21,7 @@ add_executable(run-bench ${CMAKE_CURRENT_SOURCE_DIR}/run-bench.cpp ${CMAKE_CURRE
 ${CMAKE_CURRENT_SOURCE_DIR}/bench-opc.cpp)
 target_link_libraries(run-bench PRIVATE OrganizedPointFilters::OPF benchmark Threads::Threads)
 
-set(OPTIMIZATION_FLAGS_BENCH "-O3 -DNDEBUG")
+set(OPTIMIZATION_FLAGS_BENCH "-O3 -DNDEBUG -ffast-math -funsafe-math-optimizations -msse4.2")
 separate_arguments(OPTIMIZATION_FLAGS_BENCH)
 
 target_compile_options(run-bench  PRIVATE
