@@ -41,6 +41,7 @@ inline void IntegrateTriangle(Eigen::Block<EigenDoubleVector3f, 1, 3>& normal,
     sum_normal += weight * nbr_normal;
 }
 
+// Note loop unrolling is actually WORSE. Dont unroll loops here
 template <int kernel_size = 3>
 inline void SmoothNormal(Eigen::Ref<OrganizedTriangleMatrix> normals_in, Eigen::Ref<OrganizedTriangleMatrix> centroids,
                          Eigen::Ref<OrganizedTriangleMatrix> normals_out, int i, int j, float sls, float sas)
@@ -70,11 +71,9 @@ inline void SmoothNormal(Eigen::Ref<OrganizedTriangleMatrix> normals_in, Eigen::
 
     // float temp_weight = 0.0f;
 
-#pragma unroll
     for (auto row = 0; row < kernel_size; ++row)
     {
         int row_ = i - shift + row;
-#pragma unroll
         for (auto col = 0; col < kernel_size; ++col)
         {
             int col_ = j - shift + col;
@@ -144,9 +143,9 @@ inline void BilateralNormalLoop(Eigen::Ref<OrganizedTriangleMatrix> normals_in,
 
 template <int kernel_size = 3>
 OrganizedTriangleMatrix BilateralFilterNormals(Eigen::Ref<RowMatrixXVec3f> opc,
-                                                      int iterations = OPF_BILATERAL_DEFAULT_ITER,
-                                                      float sigma_length = OPF_BILATERAL_DEFAULT_SIGMA_LENGTH,
-                                                      float sigma_angle = OPF_BILATERAL_DEFAULT_SIGMA_ANGLE);
+                                               int iterations = OPF_BILATERAL_DEFAULT_ITER,
+                                               float sigma_length = OPF_BILATERAL_DEFAULT_SIGMA_LENGTH,
+                                               float sigma_angle = OPF_BILATERAL_DEFAULT_SIGMA_ANGLE);
 
 // {
 

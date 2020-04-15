@@ -98,6 +98,7 @@ inline void OppositePointK3(const int& row, const int& col, int& new_row, int& n
 }
 
 template <int kernel_size = 3>
+__attribute__((optimize("unroll-loops")))
 inline void SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixXVec3f>& opc_out, const int i,
                          const int j, const float lambda = OPF_KERNEL_DEFAULT_LAMBDA,
                          float max_dist = OPF_KERNEL_MAX_FLOAT)
@@ -113,11 +114,9 @@ inline void SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixX
     int opp_col = 0;
     Eigen::Vector3f synthetic_point(0,0,0);
 
-#pragma unroll
     for (auto row = 0; row < kernel_size; ++row)
     {
         int row_ = i - shift + row;
-#pragma unroll
         for (auto col = 0; col < kernel_size; ++col)
         {
             int col_ = j - shift + col;
@@ -159,7 +158,7 @@ inline void SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixX
         }
     }
 
-    if (total_weight == 0.0) return;
+    if (total_weight <= 0.0) return;
     
     opc_out(i, j) = point + lambda * (sum_vertex / total_weight - point);
 }
