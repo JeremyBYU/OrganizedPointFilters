@@ -34,7 +34,6 @@ DEFAULT_PPB_FILE_SECONDARY = SYNPEB_DIR_TRAIN_ALL[0] / "pc_02.pcd"
 SYNPEB_ALL_FNAMES = ["pc_{:02}.pcd".format(i) for i in range(1, 31)]
 
 
-
 logger = logging.getLogger("PPB")
 
 
@@ -42,6 +41,7 @@ def tab40():
     """A discrete colormap with 40 unique colors"""
     colors_ = np.vstack([plt.cm.tab20c.colors, plt.cm.tab20b.colors])
     return colors.ListedColormap(colors_)
+
 
 def load_pcd_and_meshes(input_file, stride=2, loops=5, _lambda=0.5, **kwargs):
     """Load PCD and Meshes
@@ -59,6 +59,7 @@ def load_pcd_and_meshes(input_file, stride=2, loops=5, _lambda=0.5, **kwargs):
     tri_mesh, tri_mesh_o3d = create_meshes(pc_points, stride=stride, loops=loops, _lambda=_lambda)
 
     return pc_raw, pc_image, pcd_o3d, tri_mesh, tri_mesh_o3d
+
 
 def create_meshes(pc_points, stride=2, loops=5, _lambda=0.5, **kwargs):
     tri_mesh = create_mesh_from_organized_point_cloud(pc_points, stride=stride)
@@ -78,6 +79,7 @@ def create_meshes(pc_points, stride=2, loops=5, _lambda=0.5, **kwargs):
     tri_mesh = open_3d_mesh_to_tri_mesh(tri_mesh_o3d)
 
     return tri_mesh, tri_mesh_o3d
+
 
 def laplacian_opc(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
@@ -99,11 +101,12 @@ def laplacian_opc(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
     num_points = opc_out.shape[0] * opc_out.shape[1]
     opc_out_flat = opc_out.reshape((num_points, 3))
 
-    classes = opc[:,:, 3].reshape((num_points, ))
+    classes = opc[:, :, 3].reshape((num_points, ))
     cmap = tab40()
     pcd_out = create_open_3d_pcd(opc_out_flat, classes, cmap)
 
     return opc_out, pcd_out
+
 
 def laplacian_then_bilateral_opc(opc, loops_laplacian=5, _lambda=0.5, kernel_size=3, loops_bilateral=0, sigma_length=0.1, sigma_angle=0.261, **kwargs):
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
@@ -121,27 +124,27 @@ def laplacian_then_bilateral_opc(opc, loops_laplacian=5, _lambda=0.5, kernel_siz
     opc_float_out = np.asarray(b_cp)
     b_ref = Matrix3fRef(opc_float_out)
 
-    opc_normals_float = opf.filter.bilateral_K3(b_ref, iterations=loops_bilateral, sigma_length=sigma_length, sigma_angle=sigma_angle)
+    opc_normals_float = opf.filter.bilateral_K3(
+        b_ref, iterations=loops_bilateral, sigma_length=sigma_length, sigma_angle=sigma_angle)
     t3 = time.perf_counter()
     logger.info("OPC Bilateral Normal Filter Took (ms): %.2f", (t3 - t2) * 1000)
-
 
     opc_normals_float_out = np.asarray(opc_normals_float)
     total_triangles = int(opc_normals_float_out.size / 3)
     opc_normals_out = opc_normals_float_out.astype(np.float64)
     opc_normals_out = opc_normals_float_out.reshape((total_triangles, 3))
 
-
     opc_out = opc_float_out.astype(np.float64)
 
     num_points = opc_out.shape[0] * opc_out.shape[1]
     opc_out_flat = opc_out.reshape((num_points, 3))
 
-    classes = opc[:,:, 3].reshape((num_points, ))
+    classes = opc[:, :, 3].reshape((num_points, ))
     cmap = tab40()
     pcd_out = create_open_3d_pcd(opc_out_flat, classes, cmap)
 
     return opc_out, opc_normals_out, pcd_out
+
 
 def compute_normals_opc(opc, **kwargs):
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
@@ -157,17 +160,54 @@ def compute_normals_opc(opc, **kwargs):
 
     return normals_out
 
-def smooth_normals_opc(opc, loops=5, sigma_angle=0.17453, **kwargs):
+
+def compute_normals_and_centroids_opc(opc, convert_f64=True, **kwargs):
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
     a_ref = Matrix3fRef(opc_float)
 
     t1 = time.perf_counter()
-    normals = opf.filter.bilateral_K3(a_ref, iterations=loops, sigma_angle=sigma_angle)
+    normals, centroids = opf.filter.compute_normals_and_centroids(a_ref)
     t2 = time.perf_counter()
-    logger.info("OPC Bilateral Smooth Normals Took (ms): %.2f", (t2 - t1) * 1000)
+    logger.info("OPC Compute Normals and Centroids Took (ms): %.2f", (t2 - t1) * 1000)
+    normals_float_out = np.asarray(normals)
+    centroids_float_out = np.asarray(centroids)
+
+    if not convert_f64:
+        return (normals_float_out, centroids_float_out)
+
+    return (normals_float_out.astype(np.float64), centroids_float_out.astype(np.float64))
+
+
+def bilateral_opc(opc, loops=5, sigma_length=0.1, sigma_angle=0.261, **kwargs):
+    opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
+
+    a_ref = Matrix3fRef(opc_float)
+
+    t1 = time.perf_counter()
+    normals = opf.filter.bilateral_K3(a_ref, iterations=loops, sigma_length=sigma_length, sigma_angle=sigma_angle)
+    t2 = time.perf_counter()
+    logger.info("OPC Bilateral Filter Took (ms): %.2f", (t2 - t1) * 1000)
     normals_float_out = np.asarray(normals)
     normals_out = normals_float_out.astype(np.float64)
+
+    return normals_out
+
+
+def bilateral_opc_cuda(opc, loops=5, sigma_length=0.1, sigma_angle=0.261, **kwargs):
+
+    normals_opc, centroids_opc = compute_normals_and_centroids_opc(opc, convert_f64=False)
+    assert normals_opc.dtype == np.float32
+    assert centroids_opc.dtype == np.float32
+
+    t1 = time.perf_counter()
+    normals_float_out = opf_cuda.kernel.bilateral_K3_cuda(
+        normals_opc, centroids_opc, loops=loops, sigma_length=sigma_length, sigma_angle=sigma_angle, **kwargs)
+    t2 = time.perf_counter()
+
+    normals_out = normals_float_out.astype(np.float64)
+
+    logger.info("OPC CUDA Bilateral Filter Took (ms): %.2f", (t2 - t1) * 1000)
 
     return normals_out
 
@@ -190,20 +230,20 @@ def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
     num_points = opc_out.shape[0] * opc_out.shape[1]
     opc_out_flat = opc_out.reshape((num_points, 3))
 
-    classes = opc[:,:, 3].reshape((num_points, ))
+    classes = opc[:, :, 3].reshape((num_points, ))
     cmap = tab40()
     pcd_out = create_open_3d_pcd(opc_out_flat, classes, cmap)
 
-
     return opc_out, pcd_out
 
-def create_mesh_from_organized_point_cloud_with_o3d(pcd:np.ndarray, rows=500, cols=500, stride=2):
+
+def create_mesh_from_organized_point_cloud_with_o3d(pcd: np.ndarray, rows=500, cols=500, stride=2):
     pcd_ = pcd
     if pcd.ndim == 3:
         rows = pcd.shape[0]
         cols = pcd.shape[1]
         stride = 1
-        pcd_ = pcd.reshape((rows*cols, 3))
+        pcd_ = pcd.reshape((rows * cols, 3))
 
     pcd_mat = MatrixDouble(pcd_)
     pcd_mat_np = np.asarray(pcd_mat)
@@ -212,17 +252,19 @@ def create_mesh_from_organized_point_cloud_with_o3d(pcd:np.ndarray, rows=500, co
     tri_mesh_o3d = create_open_3d_mesh(np.asarray(tri_mesh.triangles), pcd_)
 
     return tri_mesh, tri_mesh_o3d
-    
-    
+
+
 def create_mesh_from_organized_point_cloud(pcd, rows=500, cols=500, stride=2):
     pcd_mat = MatrixDouble(pcd)
     pcd_mat_np = np.asarray(pcd_mat)
     tri_mesh = extract_tri_mesh_from_organized_point_cloud(pcd_mat, rows, cols, stride)
     return tri_mesh
 
+
 def get_np_buffer_ptr(a):
     pointer, read_only_flag = a.__array_interface__['data']
     return hex(pointer)
+
 
 def load_pcd_file(fpath, stride=2):
     pc = pypcd.PointCloud.from_path(fpath)
@@ -245,7 +287,7 @@ def load_pcd_file(fpath, stride=2):
         pc_np_image = pc_np_image[::stride, ::stride, :]
         total_points_ds = pc_np_image.shape[0] * pc_np_image.shape[1]
         pc_np = np.reshape(pc_np_image, (total_points_ds, 4))
-    
+
     pc_np = pc_np.astype(np.float64)
     pc_np_image = pc_np_image.astype(np.float64)
 

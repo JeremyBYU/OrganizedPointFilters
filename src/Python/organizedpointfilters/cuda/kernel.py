@@ -4,7 +4,10 @@ import os
 
 import cupy as cp
 import numpy as np
+import math
 import time
+
+# np.set_printoptions(suppress=True, precision=2, linewidth=180)
 
 path_to_kernel_laplacian = os.path.join(os.path.dirname(__file__), "laplacian.cu")
 with open(path_to_kernel_laplacian, 'r') as file:
@@ -174,14 +177,17 @@ def bilateral_K3_cuda(normals, centroids, loops=5, sigma_length=0.1, sigma_angle
 
     centroids_float_gpu_a = cp.asarray(centroids)  # move the data to the current device.
 
-    rows = opc_float.shape[0]
-    cols = opc_float.shape[1]
+    rows = normals.shape[0]
+    cols = normals.shape[1]
 
     num_points = rows * cols
 
     block_size = (block_size_single, block_size_single)
-    grid_size = (int((cols - 1) / (block_size_single - kernel_size + 1)),
-                 int((rows - 1) / (block_size_single - kernel_size + 1)))
+    grid_size = (math.ceil((cols - 1) / block_size_single),
+                 math.ceil((rows - 1) / block_size_single))
+
+    # print("Grid Size: ", grid_size)
+    # print("Block Size: ", block_size)
 
     use_b = True
     for i in range(loops):
@@ -196,6 +202,9 @@ def bilateral_K3_cuda(normals, centroids, loops=5, sigma_length=0.1, sigma_angle
 
     normals_float_out = cp.asnumpy(normals_float_gpu_b) if use_b else cp.asnumpy(normals_float_gpu_a)
     t2 = time.perf_counter()
+    # block_num = 0
+    # print(normals[block_size_single*block_num-1:block_size_single*(block_num + 1)+1, block_size_single*block_num-1:block_size_single*(block_num + 1)+1, 0, :]) 
+    # import ipdb; ipdb.set_trace()
 
     # print((t2-t1) * 1000)
     cp.cuda.Stream.null.synchronize()
