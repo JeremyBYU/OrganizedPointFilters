@@ -513,7 +513,7 @@ __global__ void SmoothPointK5(float* SHM_POINTS, const float* opc, float* opc_ou
 
 __global__ void LaplacianLoopK5(float* opc, float* opc_out, int rows, int cols, float lambda)
 {
-    __shared__ float SHM_POINTS[SHM_SIZE_K5 * 3 * SHM_SIZE_K5 * 3]; // block of 3D Points in shared memory
+    __shared__ float SHM_POINTS[SHM_SIZE_K5 * 3 * SHM_SIZE_K5]; // block of 3D Points in shared memory
 
     int shmRow_y = threadIdx.y + HALF_RADIUS_K5;    // row of shared memory, interior
     int shmCol_x = threadIdx.x + HALF_RADIUS_K5;    // col of shared memory, interior

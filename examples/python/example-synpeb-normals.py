@@ -16,7 +16,7 @@ from .utility.o3d_util import create_open_3d_pcd, plot_meshes, get_arrow, create
 def main():
     kwargs = dict(loops=5, stride=2, _lambda=1.0)
     pc, pc_image, pcd_o3d, tri_mesh, tri_mesh_o3d = load_pcd_and_meshes(
-        '/home/jeremy/Documents/UMICH/Research/polylidar-plane-benchmark/data/synpeb/train/var2/pc_01.pcd', **kwargs)
+        '/home/jeremy/Documents/UMICH/Research/polylidar-plane-benchmark/data/synpeb/train/var4/pc_01.pcd', **kwargs)
 
     del kwargs['stride']
 
@@ -31,7 +31,7 @@ def main():
     # normals_opc = compute_normals_opc(opc_smooth)
     # print("Before: ")
     # print(normals_opc[1, 1, :, :])
-    opc_normals_smooth = smooth_normals_opc(opc_smooth, loops=5)
+    opc_normals_smooth = smooth_normals_opc(opc_smooth, loops=10)
     # print("After: ")
     # print(opc_normals_smooth [1, 1, :, :])
     # import ipdb; ipdb.set_trace()

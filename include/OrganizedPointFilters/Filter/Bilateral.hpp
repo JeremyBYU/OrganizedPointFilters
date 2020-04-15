@@ -10,6 +10,8 @@
 
 #define OPF_BILATERAL_DEFAULT_ITER 1
 #define OPF_BILATERAL_DEFAULT_SIGMA_LENGTH 0.1f  // 10 centimeters
+// Technically a default should be scaling by distance of unit normals, but angle (rad) and dist are similar for <90 degrees
+// Not: user can pass in parameter that is a better scaling parameter for Gaussian Weight
 #define OPF_BILATERAL_DEFAULT_SIGMA_ANGLE 0.261f // 15 degrees
 #define OPF_BILATERAL_OMP_MAX_THREAD 16
 
@@ -24,7 +26,7 @@ namespace BilateralCore {
 
 inline float GaussianWeight(float value, float sigma_squared)
 {
-    return fastexp::exp<float, fastexp::Product, 10>(-value / sigma_squared);
+    return fastexp::exp<float, fastexp::Product, 10>(-(value * value) / sigma_squared);
 }
 
 inline void IntegrateTriangle(Eigen::Block<EigenDoubleVector3f, 1, 3>& normal,
