@@ -12,7 +12,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("PPB")
 logger.setLevel(logging.INFO)
 
-from .utility.helper import load_pcd_file, DEFAULT_PPB_FILE, load_pcd_and_meshes, laplacian_opc, create_mesh_from_organized_point_cloud_with_o3d, laplacian_opc_cuda, laplacian_then_bilateral_opc
+from .utility.helper import (load_pcd_file, DEFAULT_PPB_FILE, load_pcd_and_meshes, laplacian_opc, laplacian_then_bilateral_opc_cuda,
+                             create_mesh_from_organized_point_cloud_with_o3d, laplacian_opc_cuda, laplacian_then_bilateral_opc)
 from .utility.o3d_util import create_open_3d_pcd, plot_meshes, get_arrow, create_open_3d_mesh, flatten
 
 
@@ -42,7 +43,10 @@ def main():
         else:
             # opc_smooth, pcd_smooth = laplacian_opc_cuda(pc_image, loops=main.lap_loops, _lambda=main._lambda, max_dist=0.25)
             # opc_smooth, pcd_smooth = laplacian_opc(pc_image, loops=main.lap_loops, _lambda=main._lambda, max_dist=0.25, kernel_size=main.kernel_size)
-            opc_smooth, opc_normals_smooth, pcd_smooth = laplacian_then_bilateral_opc(
+            # opc_smooth, opc_normals_smooth = laplacian_then_bilateral_opc(
+            #     pc_image, loops_laplacian=main.lap_loops, _lambda=main._lambda, max_dist=0.25, kernel_size=main.kernel_size,
+            #     loops_bilateral=main.bl_loops, sigma_angle=main.bl_sigma_angle)
+            opc_smooth, opc_normals_smooth = laplacian_then_bilateral_opc_cuda(
                 pc_image, loops_laplacian=main.lap_loops, _lambda=main._lambda, max_dist=0.25, kernel_size=main.kernel_size,
                 loops_bilateral=main.bl_loops, sigma_angle=main.bl_sigma_angle)
             tri_mesh_opc, tri_mesh_o3d_temp = create_mesh_from_organized_point_cloud_with_o3d(opc_smooth)
@@ -96,7 +100,7 @@ def main():
 
     def increase_loops_bl(vis):
         main.bl_loops += 1
-        main.bl_loops = min(main.bl_loops, 20)
+        main.bl_loops = min(main.bl_loops, 40)
         smooth_mesh(vis)
         return False
 

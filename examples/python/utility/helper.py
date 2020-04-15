@@ -136,14 +136,7 @@ def laplacian_then_bilateral_opc(opc, loops_laplacian=5, _lambda=0.5, kernel_siz
 
     opc_out = opc_float_out.astype(np.float64)
 
-    num_points = opc_out.shape[0] * opc_out.shape[1]
-    opc_out_flat = opc_out.reshape((num_points, 3))
-
-    classes = opc[:, :, 3].reshape((num_points, ))
-    cmap = tab40()
-    pcd_out = create_open_3d_pcd(opc_out_flat, classes, cmap)
-
-    return opc_out, opc_normals_out, pcd_out
+    return opc_out, opc_normals_out
 
 
 def compute_normals_opc(opc, **kwargs):
@@ -194,7 +187,58 @@ def bilateral_opc(opc, loops=5, sigma_length=0.1, sigma_angle=0.261, **kwargs):
     return normals_out
 
 
+def laplacian_then_bilateral_opc_cuda(opc, loops_laplacian=5, _lambda=0.5, kernel_size=3, loops_bilateral=0, sigma_length=0.1, sigma_angle=0.261, **kwargs):
+    """Performs Laplacian Smoothign on Point Cloud and then performs Bilateral normal smoothing
+    
+    Arguments:
+        opc {ndarray} -- Organized Point Cloud (MXNX3)
+    
+    Keyword Arguments:
+        loops_laplacian {int} -- How many iterations of laplacian smoothing (default: {5})
+        _lambda {float} -- Weigting factor for laplacian  (default: {0.5})
+        kernel_size {int} -- Kernel Size for Laplacian (default: {3})
+        loops_bilateral {int} -- How many iterations of bilateral smoothing (default: {0})
+        sigma_length {float} -- Scaling factor for length bilateral (default: {0.1})
+        sigma_angle {float} -- Scaling factor for angle bilateral (default: {0.261})
+    
+    Returns:
+        tuple(ndarray, ndarray) -- Smoothed OPC, Smoothed Normals
+    """
+
+    opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
+
+    t1 = time.perf_counter()
+    if kernel_size == 3:
+        opc_float_out = opf_cuda.kernel.laplacian_K3_cuda(opc_float, loops=loops_laplacian, _lambda=_lambda)
+    else:
+        opc_float_out = opf_cuda.kernel.laplacian_K5_cuda(opc_float, loops=loops_laplacian, _lambda=_lambda)
+    t2 = time.perf_counter()
+
+    opc_normals = bilateral_opc_cuda(opc_float_out, loops=loops_bilateral, sigma_length=sigma_length, sigma_angle=sigma_angle)
+    t3 = time.perf_counter()
+
+    total_triangles = int(opc_normals.size / 3)
+    opc_normals = opc_normals.reshape((total_triangles, 3))
+
+    opc_out = opc_float_out.astype(np.float64)
+   
+    return opc_out, opc_normals
+
+
 def bilateral_opc_cuda(opc, loops=5, sigma_length=0.1, sigma_angle=0.261, **kwargs):
+    """Peforms bilateral normal smoothing on a mesh implicit from an organized point
+    
+    Arguments:
+        opc {ndarray} -- Organized Point Cloud MXNX3, Assumed Float 64
+    
+    Keyword Arguments:
+        loops {int} -- How many iterations of smoothing (default: {5})
+        sigma_length {float} -- Saling factor for length (default: {0.1})
+        sigma_angle {float} -- Scaling factor for angle (default: {0.261})
+    
+    Returns:
+        ndarray -- MX3 Triangle Normal Array, Float 64
+    """
 
     normals_opc, centroids_opc = compute_normals_and_centroids_opc(opc, convert_f64=False)
     assert normals_opc.dtype == np.float32
@@ -202,7 +246,7 @@ def bilateral_opc_cuda(opc, loops=5, sigma_length=0.1, sigma_angle=0.261, **kwar
 
     t1 = time.perf_counter()
     normals_float_out = opf_cuda.kernel.bilateral_K3_cuda(
-        normals_opc, centroids_opc, loops=loops, sigma_length=sigma_length, sigma_angle=sigma_angle, **kwargs)
+        normals_opc, centroids_opc, loops=loops, sigma_length=sigma_length, sigma_angle=sigma_angle)
     t2 = time.perf_counter()
 
     normals_out = normals_float_out.astype(np.float64)
