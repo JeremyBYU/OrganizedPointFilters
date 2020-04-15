@@ -9,7 +9,7 @@ logger = logging.getLogger("PPB")
 logger.setLevel(logging.INFO)
 
 from .utility.helper import (load_pcd_file, DEFAULT_PPB_FILE, load_pcd_and_meshes, laplacian_opc, bilateral_opc, bilateral_opc_cuda,
-                             create_mesh_from_organized_point_cloud_with_o3d, laplacian_opc_cuda, compute_normals_opc,
+                             create_mesh_from_organized_point_cloud_with_o3d, compute_normals_opc,
                              compute_normals_and_centroids_opc)
 from .utility.o3d_util import create_open_3d_pcd, plot_meshes, get_arrow, create_open_3d_mesh, flatten
 
@@ -26,7 +26,7 @@ def main():
         np.ascontiguousarray(pc[:, :3]))
 
     # Smooth VERTICES of Mesh
-    opc_smooth, pcd_smooth = laplacian_opc(pc_image, **kwargs, max_dist=0.25, kernel_size=3)
+    opc_smooth = laplacian_opc(pc_image, **kwargs, max_dist=0.25, kernel_size=3)
     tri_mesh_opc, tri_mesh_opc_o3d = create_mesh_from_organized_point_cloud_with_o3d(opc_smooth)
 
 

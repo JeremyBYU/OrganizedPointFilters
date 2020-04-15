@@ -82,6 +82,19 @@ def create_meshes(pc_points, stride=2, loops=5, _lambda=0.5, **kwargs):
 
 
 def laplacian_opc(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
+    """Performs Laplacian Smoothing on an organized point cloud
+
+    Arguments:
+        opc {ndarray} -- Organized Point Cloud MXNX3, Assumed F64
+
+    Keyword Arguments:
+        loops {int} -- How many iterations of smoothing (default: {5})
+        _lambda {float} -- Weight factor for update (default: {0.5})
+        kernel_size {int} -- Kernel Size (How many neighbors to intregrate) (default: {3})
+
+    Returns:
+        ndarray -- Smoothed Point Cloud, MXNX3, F64
+    """
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
     a_ref = Matrix3fRef(opc_float)
@@ -95,20 +108,28 @@ def laplacian_opc(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
     logger.info("OPC Mesh Smoothing Took (ms): %.2f", (t2 - t1) * 1000)
 
     opc_float_out = np.asarray(b_cp)
-
     opc_out = opc_float_out.astype(np.float64)
 
-    num_points = opc_out.shape[0] * opc_out.shape[1]
-    opc_out_flat = opc_out.reshape((num_points, 3))
-
-    classes = opc[:, :, 3].reshape((num_points, ))
-    cmap = tab40()
-    pcd_out = create_open_3d_pcd(opc_out_flat, classes, cmap)
-
-    return opc_out, pcd_out
+    return opc_out
 
 
 def laplacian_then_bilateral_opc(opc, loops_laplacian=5, _lambda=0.5, kernel_size=3, loops_bilateral=0, sigma_length=0.1, sigma_angle=0.261, **kwargs):
+    """Performs Laplacian Smoothing on Point Cloud and then performs Bilateral normal smoothing
+
+    Arguments:
+        opc {ndarray} -- Organized Point Cloud (MXNX3)
+
+    Keyword Arguments:
+        loops_laplacian {int} -- How many iterations of laplacian smoothing (default: {5})
+        _lambda {float} -- Weigh factor for laplacian  (default: {0.5})
+        kernel_size {int} -- Kernel Size for Laplacian (default: {3})
+        loops_bilateral {int} -- How many iterations of bilateral smoothing (default: {0})
+        sigma_length {float} -- Scaling factor for length bilateral (default: {0.1})
+        sigma_angle {float} -- Scaling factor for angle bilateral (default: {0.261})
+
+    Returns:
+        tuple(ndarray, ndarray) -- Smoothed OPC M*NX3, Smoothed Normals M*NX3, the arrays are flattened
+    """
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
     a_ref = Matrix3fRef(opc_float)
@@ -135,6 +156,8 @@ def laplacian_then_bilateral_opc(opc, loops_laplacian=5, _lambda=0.5, kernel_siz
     opc_normals_out = opc_normals_float_out.reshape((total_triangles, 3))
 
     opc_out = opc_float_out.astype(np.float64)
+    total_points = int(opc_out.size / 3)
+    opc_out = opc_out.reshape((total_points, 3))
 
     return opc_out, opc_normals_out
 
@@ -155,6 +178,17 @@ def compute_normals_opc(opc, **kwargs):
 
 
 def compute_normals_and_centroids_opc(opc, convert_f64=True, **kwargs):
+    """Computes the Normals and Centroid of Implicit Triangle Mesh in the Organized Point Cloud
+    
+    Arguments:
+        opc {ndarray} -- MXNX3
+    
+    Keyword Arguments:
+        convert_f64 {bool} -- Return F64? (default: {True})
+    
+    Returns:
+        ndarray -- Numpy array
+    """
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
     a_ref = Matrix3fRef(opc_float)
@@ -173,6 +207,19 @@ def compute_normals_and_centroids_opc(opc, convert_f64=True, **kwargs):
 
 
 def bilateral_opc(opc, loops=5, sigma_length=0.1, sigma_angle=0.261, **kwargs):
+    """Performs bilateral normal smoothing on a mesh implicit from an organized point
+
+    Arguments:
+        opc {ndarray} -- Organized Point Cloud MXNX3, Assumed Float 64
+
+    Keyword Arguments:
+        loops {int} -- How many iterations of smoothing (default: {5})
+        sigma_length {float} -- Saling factor for length (default: {0.1})
+        sigma_angle {float} -- Scaling factor for angle (default: {0.261})
+
+    Returns:
+        ndarray -- MX3 Triangle Normal Array, Float 64
+    """
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
     a_ref = Matrix3fRef(opc_float)
@@ -188,21 +235,21 @@ def bilateral_opc(opc, loops=5, sigma_length=0.1, sigma_angle=0.261, **kwargs):
 
 
 def laplacian_then_bilateral_opc_cuda(opc, loops_laplacian=5, _lambda=0.5, kernel_size=3, loops_bilateral=0, sigma_length=0.1, sigma_angle=0.261, **kwargs):
-    """Performs Laplacian Smoothign on Point Cloud and then performs Bilateral normal smoothing
-    
+    """Performs Laplacian Smoothing on Point Cloud and then performs Bilateral normal smoothing
+
     Arguments:
         opc {ndarray} -- Organized Point Cloud (MXNX3)
-    
+
     Keyword Arguments:
         loops_laplacian {int} -- How many iterations of laplacian smoothing (default: {5})
-        _lambda {float} -- Weigting factor for laplacian  (default: {0.5})
+        _lambda {float} -- Weigh factor for laplacian  (default: {0.5})
         kernel_size {int} -- Kernel Size for Laplacian (default: {3})
         loops_bilateral {int} -- How many iterations of bilateral smoothing (default: {0})
         sigma_length {float} -- Scaling factor for length bilateral (default: {0.1})
         sigma_angle {float} -- Scaling factor for angle bilateral (default: {0.261})
-    
+
     Returns:
-        tuple(ndarray, ndarray) -- Smoothed OPC, Smoothed Normals
+        tuple(ndarray, ndarray) -- Smoothed OPC M*NX3, Smoothed Normals M*NX3, the arrays are flattened
     """
 
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
@@ -214,28 +261,31 @@ def laplacian_then_bilateral_opc_cuda(opc, loops_laplacian=5, _lambda=0.5, kerne
         opc_float_out = opf_cuda.kernel.laplacian_K5_cuda(opc_float, loops=loops_laplacian, _lambda=_lambda)
     t2 = time.perf_counter()
 
-    opc_normals = bilateral_opc_cuda(opc_float_out, loops=loops_bilateral, sigma_length=sigma_length, sigma_angle=sigma_angle)
+    opc_normals = bilateral_opc_cuda(opc_float_out, loops=loops_bilateral,
+                                     sigma_length=sigma_length, sigma_angle=sigma_angle)
     t3 = time.perf_counter()
+
+    opc_out = opc_float_out.astype(np.float64)
+    total_points = int(opc_out.size / 3)
+    opc_out = opc_out.reshape((total_points, 3))
 
     total_triangles = int(opc_normals.size / 3)
     opc_normals = opc_normals.reshape((total_triangles, 3))
 
-    opc_out = opc_float_out.astype(np.float64)
-   
     return opc_out, opc_normals
 
 
 def bilateral_opc_cuda(opc, loops=5, sigma_length=0.1, sigma_angle=0.261, **kwargs):
-    """Peforms bilateral normal smoothing on a mesh implicit from an organized point
-    
+    """Performs bilateral normal smoothing on a mesh implicit from an organized point
+
     Arguments:
         opc {ndarray} -- Organized Point Cloud MXNX3, Assumed Float 64
-    
+
     Keyword Arguments:
         loops {int} -- How many iterations of smoothing (default: {5})
         sigma_length {float} -- Saling factor for length (default: {0.1})
         sigma_angle {float} -- Scaling factor for angle (default: {0.261})
-    
+
     Returns:
         ndarray -- MX3 Triangle Normal Array, Float 64
     """
@@ -257,6 +307,19 @@ def bilateral_opc_cuda(opc, loops=5, sigma_length=0.1, sigma_angle=0.261, **kwar
 
 
 def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
+    """Performs Laplacian Smoothing on an organized point cloud
+
+    Arguments:
+        opc {ndarray} -- Organized Point Cloud MXNX3, Assumed F64
+
+    Keyword Arguments:
+        loops {int} -- How many iterations of smoothing (default: {5})
+        _lambda {float} -- Weight factor for update (default: {0.5})
+        kernel_size {int} -- Kernel Size (How many neighbors to intregrate) (default: {3})
+
+    Returns:
+        ndarray -- Smoothed Point Cloud, MXNX3
+    """
 
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
@@ -271,17 +334,26 @@ def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
 
     # only for visualization purposes here
     opc_out = opc_float_out.astype(np.float64)
-    num_points = opc_out.shape[0] * opc_out.shape[1]
-    opc_out_flat = opc_out.reshape((num_points, 3))
 
-    classes = opc[:, :, 3].reshape((num_points, ))
-    cmap = tab40()
-    pcd_out = create_open_3d_pcd(opc_out_flat, classes, cmap)
-
-    return opc_out, pcd_out
+    return opc_out
 
 
 def create_mesh_from_organized_point_cloud_with_o3d(pcd: np.ndarray, rows=500, cols=500, stride=2):
+    """Create Mesh from organized point cloud
+    If an MXNX3 Point Cloud is passed, rows and cols is ignored (we know the row/col from shape)
+    If an KX3 Point Cloud is passed, you must pass the row, cols, and stride that correspond to the point cloud
+
+    Arguments:
+        pcd {ndarray} -- Numpy array. Either a K X 3 (flattened) or MXNX3
+
+    Keyword Arguments:
+        rows {int} -- Number of rows (default: {500})
+        cols {int} -- Number of columns (default: {500})
+        stride {int} -- Stride used in creating point cloud (default: {2})
+
+    Returns:
+        tuple -- Polylidar Tri Mesh and O3D mesh
+    """
     pcd_ = pcd
     if pcd.ndim == 3:
         rows = pcd.shape[0]
@@ -290,7 +362,6 @@ def create_mesh_from_organized_point_cloud_with_o3d(pcd: np.ndarray, rows=500, c
         pcd_ = pcd.reshape((rows * cols, 3))
 
     pcd_mat = MatrixDouble(pcd_)
-    pcd_mat_np = np.asarray(pcd_mat)
     tri_mesh = extract_tri_mesh_from_organized_point_cloud(pcd_mat, rows, cols, stride)
 
     tri_mesh_o3d = create_open_3d_mesh(np.asarray(tri_mesh.triangles), pcd_)
@@ -299,8 +370,29 @@ def create_mesh_from_organized_point_cloud_with_o3d(pcd: np.ndarray, rows=500, c
 
 
 def create_mesh_from_organized_point_cloud(pcd, rows=500, cols=500, stride=2):
-    pcd_mat = MatrixDouble(pcd)
-    pcd_mat_np = np.asarray(pcd_mat)
+    """Create Mesh from organized point cloud
+    If an MXNX3 Point Cloud is passed, rows and cols is ignored (we know the row/col from shape)
+    If an KX3 Point Cloud is passed, you must pass the row, cols, and stride that correspond to the point cloud
+
+    Arguments:
+        pcd {ndarray} -- Numpy array. Either a K X 3 (flattened) or MXNX3
+
+    Keyword Arguments:
+        rows {int} -- Number of rows (default: {500})
+        cols {int} -- Number of columns (default: {500})
+        stride {int} -- Stride used in creating point cloud (default: {2})
+
+    Returns:
+        tuple -- Polylidar Tri Mesh and O3D mesh
+    """
+    pcd_ = pcd
+    if pcd.ndim == 3:
+        rows = pcd.shape[0]
+        cols = pcd.shape[1]
+        stride = 1
+        pcd_ = pcd.reshape((rows * cols, 3))
+
+    pcd_mat = MatrixDouble(pcd_)
     tri_mesh = extract_tri_mesh_from_organized_point_cloud(pcd_mat, rows, cols, stride)
     return tri_mesh
 
