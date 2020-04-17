@@ -20,7 +20,6 @@ def main():
         '/home/jeremy/Documents/UMICH/Research/polylidar-plane-benchmark/data/synpeb/train/var4/pc_01.pcd', **kwargs)
 
     del kwargs['stride']
-
     # Not Smooth Mesh
     tri_mesh_noisy, tri_mesh_noisy_o3d = create_mesh_from_organized_point_cloud_with_o3d(
         np.ascontiguousarray(pc[:, :3]))
