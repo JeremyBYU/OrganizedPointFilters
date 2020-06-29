@@ -15,24 +15,6 @@ from organizedpointfilters import Matrix3f, Matrix3fRef
 
 from .o3d_util import create_open_3d_pcd, plot_meshes, get_arrow, create_open_3d_mesh, open_3d_mesh_to_tri_mesh, assign_vertex_colors, get_colors
 
-TEST_FIXTURES_DIR = Path('../polylidar-plane-benchmark/data').resolve()
-SYNPEB_DIR = TEST_FIXTURES_DIR / "synpeb"
-SYNPEB_MESHES_DIR = TEST_FIXTURES_DIR / "synpeb_meshes"
-SYNPEB_DIR_TEST = SYNPEB_DIR / "test"
-SYNPEB_DIR_TRAIN = SYNPEB_DIR / "train"
-
-SYNPEB_DIR_TEST_GT = SYNPEB_DIR_TEST / "gt"
-SYNPEB_DIR_TRAIN_GT = SYNPEB_DIR_TRAIN / "gt"
-
-SYNPEB_DIR_TEST_ALL = [SYNPEB_DIR_TEST / "var{}".format(i) for i in range(1, 5)]
-SYNPEB_DIR_TRAIN_ALL = [SYNPEB_DIR_TRAIN / "var{}".format(i) for i in range(1, 5)]
-
-DEFAULT_PPB_FILE = SYNPEB_DIR_TRAIN_ALL[0] / "pc_01.pcd"
-DEFAULT_PPB_FILE_SECONDARY = SYNPEB_DIR_TRAIN_ALL[0] / "pc_02.pcd"
-
-
-SYNPEB_ALL_FNAMES = ["pc_{:02}.pcd".format(i) for i in range(1, 31)]
-
 
 logger = logging.getLogger("PPB")
 
@@ -62,7 +44,7 @@ def load_pcd_and_meshes(input_file, stride=2, loops=5, _lambda=0.5, **kwargs):
 
 
 def create_meshes(pc_points, stride=2, loops=5, _lambda=0.5, **kwargs):
-    tri_mesh = create_mesh_from_organized_point_cloud(pc_points, stride=stride)
+    tri_mesh, tri_map = create_mesh_from_organized_point_cloud(pc_points, stride=stride)
     tri_mesh_o3d = create_open_3d_mesh(np.asarray(tri_mesh.triangles), pc_points)
 
     # Perform Smoothing
@@ -362,8 +344,7 @@ def create_mesh_from_organized_point_cloud_with_o3d(pcd: np.ndarray, rows=500, c
         pcd_ = pcd.reshape((rows * cols, 3))
 
     pcd_mat = MatrixDouble(pcd_)
-    tri_mesh = extract_tri_mesh_from_organized_point_cloud(pcd_mat, rows, cols, stride)
-
+    tri_mesh, tri_map = extract_tri_mesh_from_organized_point_cloud(pcd_mat, rows, cols, stride)
     tri_mesh_o3d = create_open_3d_mesh(np.asarray(tri_mesh.triangles), pcd_)
 
     return tri_mesh, tri_mesh_o3d

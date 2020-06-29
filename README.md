@@ -1,17 +1,22 @@
 # Organized Point Filters
 
-For organized point clouds as well as images (depth images).
+This module is a collection of filters for using in **organized** point clouds (OPC).  It's very alpha-quality and should not really be used in production.  The filters:
 
-## Benchmarks
+* Laplacian Mesh Smoothing applied to an implicit fully connected right cut triangular mesh of an OPC.
+    * Single threaded, CPU Multi-threaded, and GPU accelerated.
+* Bilateral Mesh Normal Smoothing applied to an implicit fully connected right cut triangular mesh of an OPC.
+    * Single threaded, CPU Multi-threaded, and GPU accelerated.
+* Intel RealSense Bilateral Spatial and Disparity Transform filters used on depth images.
+    * I thought it would be useful to pull this code out of the Intel SDK such that it can be used by others who are not using realsense cameras. Apache 2.0 License.
 
-### C++
 
-Benchmarks C++ Code. RealSense Image Filters, OPC filters, etc.
 
-1. `./cmake-build/bin/run-bench --benchmark_filter=Laplacian --benchmark_repetitions=3 --benchmark_report_aggregates_only=true` 
 
-### Python
+## Documentation
 
-Benchmarks CUDA Kernels
+Please see [documentation website](https://jeremybyu.github.io/OrganizedPointFilters/) for more details.
 
-1. `pytest bench/Python/test_cuda.py --benchmark-sort=name`
+
+
+
+

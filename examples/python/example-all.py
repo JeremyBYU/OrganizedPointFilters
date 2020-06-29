@@ -1,5 +1,9 @@
+"""
+Realtime Mesh Smoothing using Laplacian and Bilateral
+"""
 import logging
 import copy
+from os import path
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,21 +16,22 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("PPB")
 logger.setLevel(logging.INFO)
 
-from .utility.helper import (load_pcd_file, DEFAULT_PPB_FILE, load_pcd_and_meshes, laplacian_opc, laplacian_then_bilateral_opc_cuda,
+from .utility.helper import (load_pcd_file, load_pcd_and_meshes, laplacian_opc, laplacian_then_bilateral_opc_cuda,
                              create_mesh_from_organized_point_cloud_with_o3d, laplacian_opc_cuda, laplacian_then_bilateral_opc)
-from .utility.o3d_util import create_open_3d_pcd, plot_meshes, get_arrow, create_open_3d_mesh, flatten
-
+from .utility.o3d_util import plot_meshes
 
 def main():
+    THIS_DIR = path.dirname(path.realpath(__file__))
+    PCD_DIR = path.join(THIS_DIR, '..', '..', 'fixtures', 'pcd')
+    mesh_file = path.join(PCD_DIR, 'pc_02.pcd')
+    pc, pc_image = load_pcd_file(
+        mesh_file, stride=2)
     kwargs = dict(loops=0, stride=2, _lambda=1.0, kernel_size=3)
-    pc, pc_image, pcd_o3d, tri_mesh, tri_mesh_o3d = load_pcd_and_meshes(
-        '/home/jeremy/Documents/UMICH/Research/polylidar-plane-benchmark/data/synpeb/train/var4/pc_02.pcd', **kwargs)
+    pc, pc_image, pcd_o3d, tri_mesh, tri_mesh_o3d = load_pcd_and_meshes(mesh_file, **kwargs)
 
     tri_mesh_o3d: o3d.geometry.TriangleMesh
     tri_mesh_o3d.compute_triangle_normals()
 
-    # opc_smooth, pcd_smooth = laplacian_opc(pc_image, **kwargs, max_dist=0.25)
-    # tri_mesh_opc, tri_mesh_opc_o3d = create_mesh_from_organized_point_cloud_with_o3d(opc_smooth)
     tri_mesh_o3d_copy = copy.deepcopy(tri_mesh_o3d)
 
     main._lambda = 1.0
@@ -41,14 +46,18 @@ def main():
         if main.lap_loops == 0:
             tri_mesh_o3d_temp = tri_mesh_o3d
         else:
-            # opc_smooth, pcd_smooth = laplacian_opc_cuda(pc_image, loops=main.lap_loops, _lambda=main._lambda, max_dist=0.25)
-            # opc_smooth, pcd_smooth = laplacian_opc(pc_image, loops=main.lap_loops, _lambda=main._lambda, max_dist=0.25, kernel_size=main.kernel_size)
+
+            # If you don't have CUDA then uncomment the next three lines and remove CUDA
+            # CPU Smoothing
             # opc_smooth, opc_normals_smooth = laplacian_then_bilateral_opc(
             #     pc_image, loops_laplacian=main.lap_loops, _lambda=main._lambda, max_dist=0.25, kernel_size=main.kernel_size,
             #     loops_bilateral=main.bl_loops, sigma_angle=main.bl_sigma_angle)
+
+            # CUDA Smoothing
             opc_smooth, opc_normals_smooth = laplacian_then_bilateral_opc_cuda(
                 pc_image, loops_laplacian=main.lap_loops, _lambda=main._lambda, max_dist=0.25, kernel_size=main.kernel_size,
                 loops_bilateral=main.bl_loops, sigma_angle=main.bl_sigma_angle)
+        
             tri_mesh_opc, tri_mesh_o3d_temp = create_mesh_from_organized_point_cloud_with_o3d(opc_smooth)
 
             # tri_mesh_o3d_temp = tri_mesh_o3d.filter_smooth_laplacian(main.lap_loops, main._lambda)
@@ -61,6 +70,10 @@ def main():
 
         vis.update_geometry(tri_mesh_o3d_copy)
         # vis.update_renderer()
+
+    def print_help():
+        print("E/D = Laplacian Loops; R/F = Bilateral Loops; T/G = Laplacian Kernel Size")
+        print("U/J = Laplacian Lambda; Y/H = Bilateral Sigma Angle")
 
     def increase_lambda(vis):
         main._lambda += .1
@@ -138,10 +151,7 @@ def main():
     key_to_callback[ord("T")] = increase_kernel
     key_to_callback[ord("G")] = decrease_kernel
 
-    # main.vis = o3d.visualization.Visualizer()
-    # vis = main.vis
-    # vis.create_window()
-    # vis.add_geometry(tri_mesh_o3d_copy)
+    print_help()
 
     o3d.visualization.draw_geometries_with_key_callbacks([tri_mesh_o3d_copy], key_to_callback)
 

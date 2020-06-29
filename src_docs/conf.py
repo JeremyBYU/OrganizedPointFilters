@@ -52,7 +52,7 @@ sys.path.insert(
 # ones.
 extensions = [
     'sphinx.ext.mathjax', 'sphinx.ext.autodoc', 'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon', 'breathe', 'exhale'
+    'sphinx.ext.napoleon', 'breathe', 'exhale', 'm2r', 'nbsphinx', 'nbsphinx_link'
 ]
 
 # Setup the breathe extension
@@ -65,16 +65,16 @@ breathe_default_project = "OrganizedPointFilters_CPP"
 # Setup the exhale extension
 exhale_args = {
     # These arguments are required
-    "containmentFolder":     "./cpp_api",
-    "rootFileName":          "cpp_library_root.rst",
-    "rootFileTitle":         "C++ Library API",
-    "doxygenStripFromPath":  "..",
+    "containmentFolder": "./cpp_api",
+    "rootFileName": "cpp_library_root.rst",
+    "rootFileTitle": "C++ Library API",
+    "doxygenStripFromPath": "..",
     # Suggested optional arguments
-    "createTreeView":        True,
+    "createTreeView": True,
     # TIP: if using the sphinx-bootstrap-theme, you need
     # "treeViewIsBootstrap": True,
     "exhaleExecutesDoxygen": True,
-    "exhaleDoxygenStdin":    "INPUT = ../include"
+    "exhaleDoxygenStdin": "INPUT = ../include"
 }
 
 # Add any paths that contain templates here, relative to this directory.
@@ -91,8 +91,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'OrganizedPointFilters'
-copyright = u'2020, Author'
-author = u'Author'
+copyright = u'2020, Jeremy Castagno'
+author = u'Jeremy'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

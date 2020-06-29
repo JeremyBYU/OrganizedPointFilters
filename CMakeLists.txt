@@ -36,7 +36,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
 # Options for OPF
 option(OPF_BUILD_PYMODULE "OPF -Build Python Module" ON)
 option(OPF_BUILD_TESTS "OPF - Build Tests" ON)
-option(OPF_BUILD_BENCHMARKS "OPF - Build Benchmarks" ON)
+option(OPF_BUILD_BENCHMARKS "OPF - Build Benchmarks" OFF)
 option(OPF_BUILD_EXAMPLES "OPF - Build Examples" ON)
 option(OPF_WITH_OPENMP "OPF - Build with OpenMP Support" ON)
 option(OPF_BUILD_WERROR "OPF - Add Werror flag to build (turns warnings into errors)" OFF)
