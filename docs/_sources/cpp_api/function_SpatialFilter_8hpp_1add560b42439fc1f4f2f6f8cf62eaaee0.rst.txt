@@ -1,0 +1,13 @@
+.. _exhale_function_SpatialFilter_8hpp_1add560b42439fc1f4f2f6f8cf62eaaee0:
+
+Template Function OrganizedPointFilters::RS::prepare_target_frame
+=================================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_RS_SpatialFilter.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::RS::prepare_target_frame(std::vector<T>&, ImgDetails&)

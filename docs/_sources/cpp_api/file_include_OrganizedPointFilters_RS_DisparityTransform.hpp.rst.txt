@@ -1,0 +1,61 @@
+
+.. _file_include_OrganizedPointFilters_RS_DisparityTransform.hpp:
+
+File DisparityTransform.hpp
+===========================
+
+|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters_RS>` (``include/OrganizedPointFilters/RS``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``include/OrganizedPointFilters/RS/DisparityTransform.hpp``)
+------------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_include_OrganizedPointFilters_RS_DisparityTransform.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``OrganizedPointFilters/Types.hpp`` (:ref:`file_include_OrganizedPointFilters_Types.hpp`)
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_include_OrganizedPointFilters_RS_RS.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_OrganizedPointFilters`
+
+- :ref:`namespace_OrganizedPointFilters__RS`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_DisparityTransform_8hpp_1a01c39d60fc61b493a8bf34610b445d58`
+
+- :ref:`exhale_function_DisparityTransform_8hpp_1a9d62212595787b4b065399749b0cf17b`
+

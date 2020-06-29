@@ -1,0 +1,38 @@
+
+.. _namespace_OrganizedPointFilters__RS:
+
+Namespace OrganizedPointFilters::RS
+===================================
+
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+
+
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_DisparityTransform_8hpp_1a01c39d60fc61b493a8bf34610b445d58`
+
+- :ref:`exhale_function_DisparityTransform_8hpp_1a9d62212595787b4b065399749b0cf17b`
+
+- :ref:`exhale_function_SpatialFilter_8hpp_1ac6fbfc0c0639e8d955ef84e181d2ca22`
+
+- :ref:`exhale_function_SpatialFilter_8hpp_1ae198a98150340eb97097b737d6912e6a`
+
+- :ref:`exhale_function_SpatialFilter_8hpp_1add560b42439fc1f4f2f6f8cf62eaaee0`
+
+- :ref:`exhale_function_SpatialFilter_8hpp_1ac6da5b3d50089bc68f7fe12efd6ec06b`
+
+- :ref:`exhale_function_SpatialFilter_8hpp_1aa6cd66e0f7ef6f67534e89724fd7ddc1`
+
+- :ref:`exhale_function_SpatialFilter_8hpp_1a57b29c5736a78fd052397fd464fb458d`
+
+- :ref:`exhale_function_SpatialFilter_8hpp_1a16dcc8463147aec614d9d49831c8f540`
+
+- :ref:`exhale_function_SpatialFilter_8hpp_1acc27846a5fff6964c91f6ae7f3476ebd`

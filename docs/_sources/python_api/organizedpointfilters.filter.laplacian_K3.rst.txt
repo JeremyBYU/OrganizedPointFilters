@@ -1,0 +1,6 @@
+organizedpointfilters.filter.laplacian_K3
+-----------------------------------------
+
+.. currentmodule:: organizedpointfilters.filter
+
+.. autofunction:: laplacian_K3

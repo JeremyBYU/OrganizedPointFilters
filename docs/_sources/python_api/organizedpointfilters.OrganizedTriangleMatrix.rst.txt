@@ -1,0 +1,9 @@
+organizedpointfilters.OrganizedTriangleMatrix
+---------------------------------------------
+
+.. currentmodule:: organizedpointfilters
+
+.. autoclass:: OrganizedTriangleMatrix
+    :members:
+    :undoc-members:
+    :inherited-members:

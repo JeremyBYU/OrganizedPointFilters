@@ -1,0 +1,6 @@
+organizedpointfilters.cuda.kernel.laplacian_K5_cuda
+---------------------------------------------------
+
+.. currentmodule:: organizedpointfilters.cuda.kernel
+
+.. autofunction:: laplacian_K5_cuda

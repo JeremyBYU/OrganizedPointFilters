@@ -1,0 +1,13 @@
+.. _exhale_function_Helper_8hpp_1a617e680649ef08b6c5b8fbdd3ba48aab:
+
+Function OrganizedPointFilters::Helper::get_depth_image
+=======================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Helper.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::Helper::get_depth_image(std::string, int, int)

@@ -1,0 +1,13 @@
+.. _exhale_function_Normal_8hpp_1a4d2c31f73ae23a2eb5b95f4dd304b177:
+
+Function OrganizedPointFilters::Filter::ComputeNormalsAndCentroids
+==================================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Filter_Normal.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::Filter::ComputeNormalsAndCentroids(Eigen::Ref<RowMatrixXVec3f>)

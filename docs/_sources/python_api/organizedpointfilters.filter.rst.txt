@@ -1,0 +1,24 @@
+organizedpointfilters.filter
+----------------------------
+
+.. currentmodule:: organizedpointfilters.filter
+
+**Functions**
+
+.. autosummary::
+
+    bilateral_K3
+    compute_normals
+    compute_normals_and_centroids
+    laplacian_K3
+    laplacian_K5
+
+
+.. toctree::
+    :hidden:
+
+    bilateral_K3 <organizedpointfilters.filter.bilateral_K3>
+    compute_normals <organizedpointfilters.filter.compute_normals>
+    compute_normals_and_centroids <organizedpointfilters.filter.compute_normals_and_centroids>
+    laplacian_K3 <organizedpointfilters.filter.laplacian_K3>
+    laplacian_K5 <organizedpointfilters.filter.laplacian_K5>

@@ -1,0 +1,6 @@
+organizedpointfilters.cuda.kernel.bilateral_K3_cuda
+---------------------------------------------------
+
+.. currentmodule:: organizedpointfilters.cuda.kernel
+
+.. autofunction:: bilateral_K3_cuda

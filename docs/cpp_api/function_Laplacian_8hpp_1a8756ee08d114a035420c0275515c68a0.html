@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Template Function OrganizedPointFilters::Filter::LaplacianT &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Function OrganizedPointFilters::Filter::NormalCore::ComputeCentroid" href="function_Normal_8hpp_1a72b53dfe036e14ab7302c38dc5f99f36.html" />
+    <link rel="prev" title="Function OrganizedPointFilters::Filter::LaplacianCore::OppositePointK3" href="function_Laplacian_8hpp_1a30f2e951c0a46a8a3d7ee5cb70e97a96.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> OrganizedPointFilters
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.html">organizedpointfilters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+</ul>
+<p class="caption"><span class="caption-text">C++ API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cpp_library_root.html">C++ Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OrganizedPointFilters</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="cpp_library_root.html">C++ Library API</a> &raquo;</li>
+        
+      <li>Template Function OrganizedPointFilters::Filter::LaplacianT</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="template-function-organizedpointfilters-filter-laplaciant">
+<span id="exhale-function-laplacian-8hpp-1a8756ee08d114a035420c0275515c68a0"></span><h1>Template Function OrganizedPointFilters::Filter::LaplacianT<a class="headerlink" href="#template-function-organizedpointfilters-filter-laplaciant" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Laplacian.hpp.html#file-include-organizedpointfilters-filter-laplacian-hpp"><span class="std std-ref">File Laplacian.hpp</span></a></p></li>
+</ul>
+<div class="section" id="function-documentation">
+<h2>Function Documentation<a class="headerlink" href="#function-documentation" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="_CPPv4I_iEN21OrganizedPointFilters6Filter10LaplacianTE15RowMatrixXVec3fN5Eigen3RefI15RowMatrixXVec3fEEfif">
+<span class="target" id="Laplacian_8hpp_1a8756ee08d114a035420c0275515c68a0"></span>template&lt;int <code class="sig-name descname">kernel_size</code> = 3&gt;<br /><a class="reference internal" href="typedef_Types_8hpp_1a4760c968d5de72692091f0853b0221f9.html#_CPPv4N21OrganizedPointFilters15RowMatrixXVec3fE" title="OrganizedPointFilters::RowMatrixXVec3f">RowMatrixXVec3f</a> <code class="sig-prename descclassname">OrganizedPointFilters::Filter<code class="sig-prename descclassname">::</code></code><code class="sig-name descname">LaplacianT</code><span class="sig-paren">(</span>Eigen::Ref&lt;<a class="reference internal" href="typedef_Types_8hpp_1a4760c968d5de72692091f0853b0221f9.html#_CPPv4N21OrganizedPointFilters15RowMatrixXVec3fE" title="OrganizedPointFilters::RowMatrixXVec3f">RowMatrixXVec3f</a>&gt; <em>opc</em>, float <em>lambda</em> = 0.5f, int <em>iterations</em> = 1, float <em>max_dist</em> = 1000000.0<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_iEN21OrganizedPointFilters6Filter10LaplacianTE15RowMatrixXVec3fN5Eigen3RefI15RowMatrixXVec3fEEfif" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Laplacian filtering to an organized point cloud (OPC). An implicit mesh is defined by OPC wherein each 2X2 quad of the OPC creates two right-cut triangles. Will perform laplacain filtering for an organized point cloud and return <em>smoothed</em> triangle <strong>vertices</strong>. </p>
+<p>O = Point <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>             <span class="n">O</span><span class="o">----------------------</span><span class="n">O</span>
+             <span class="o">|</span>                    <span class="n">XX</span><span class="o">|</span>
+             <span class="o">|</span>  <span class="n">TRI</span> <span class="mi">0</span>          <span class="n">XXX</span>  <span class="o">|</span>
+             <span class="o">|</span>              <span class="n">XXXX</span>    <span class="o">|</span>
+             <span class="o">|</span>            <span class="n">XXX</span>       <span class="o">|</span>
+             <span class="o">|</span>         <span class="n">XXX</span>          <span class="o">|</span>
+             <span class="o">|</span>       <span class="n">XXX</span>            <span class="o">|</span>
+             <span class="o">|</span>     <span class="n">XXX</span>       <span class="n">TRI</span> <span class="mi">1</span>  <span class="o">|</span>
+             <span class="o">|</span>   <span class="n">XXX</span>                <span class="o">|</span>
+             <span class="o">|</span><span class="n">XXX</span>                   <span class="o">|</span>
+             <span class="n">OX</span><span class="o">---------------------</span><span class="n">O</span>
+</pre></div>
+</div>
+</p>
+<p><dl class="simple">
+<dt><strong>Return</strong></dt><dd><p>RowMatrixXVec3f M X N X 3. Smoothed vertices. </p>
+</dd>
+<dt><strong>Template Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">3</span></code>: Kernel size. Increasing the kernel size will make smoother but have higher computation costs. </p></li>
+</ul>
+</dd>
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">opc</span></code>: Organized Point Cloud. M X N X 3 Eigen Matrix </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lambda</span></code>: Weighting for each iteration update </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iterations</span></code>: Number of iterations </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_dist</span></code>: Maximum distance a neighbor can be to be interagrated for smoothing. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="function_Normal_8hpp_1a72b53dfe036e14ab7302c38dc5f99f36.html" class="btn btn-neutral float-right" title="Function OrganizedPointFilters::Filter::NormalCore::ComputeCentroid" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="function_Laplacian_8hpp_1a30f2e951c0a46a8a3d7ee5cb70e97a96.html" class="btn btn-neutral float-left" title="Function OrganizedPointFilters::Filter::LaplacianCore::OppositePointK3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jeremy Castagno
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

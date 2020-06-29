@@ -1,0 +1,20 @@
+organizedpointfilters
+---------------------
+
+.. currentmodule:: organizedpointfilters
+
+**Classes**
+
+.. autosummary::
+
+    Matrix3f
+    Matrix3fRef
+    OrganizedTriangleMatrix
+
+
+.. toctree::
+    :hidden:
+
+    Matrix3f <organizedpointfilters.Matrix3f>
+    Matrix3fRef <organizedpointfilters.Matrix3fRef>
+    OrganizedTriangleMatrix <organizedpointfilters.OrganizedTriangleMatrix>

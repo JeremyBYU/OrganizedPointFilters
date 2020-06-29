@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Namespace OrganizedPointFilters::RS &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Struct DepthInfo" href="structOrganizedPointFilters_1_1DepthInfo.html" />
+    <link rel="prev" title="Namespace OrganizedPointFilters::Helper" href="namespace_OrganizedPointFilters__Helper.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> OrganizedPointFilters
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.html">organizedpointfilters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+</ul>
+<p class="caption"><span class="caption-text">C++ API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cpp_library_root.html">C++ Library API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">OrganizedPointFilters</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="cpp_library_root.html">C++ Library API</a> &raquo;</li>
+        
+      <li>Namespace OrganizedPointFilters::RS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="namespace-organizedpointfilters-rs">
+<span id="id1"></span><h1>Namespace OrganizedPointFilters::RS<a class="headerlink" href="#namespace-organizedpointfilters-rs" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#functions" id="id2">Functions</a></p></li>
+</ul>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="function_DisparityTransform_8hpp_1a01c39d60fc61b493a8bf34610b445d58.html#exhale-function-disparitytransform-8hpp-1a01c39d60fc61b493a8bf34610b445d58"><span class="std std-ref">Template Function OrganizedPointFilters::RS::disparity_convert</span></a></p></li>
+<li><p><a class="reference internal" href="function_DisparityTransform_8hpp_1a9d62212595787b4b065399749b0cf17b.html#exhale-function-disparitytransform-8hpp-1a9d62212595787b4b065399749b0cf17b"><span class="std std-ref">Template Function OrganizedPointFilters::RS::disparity_transform</span></a></p></li>
+<li><p><a class="reference internal" href="function_SpatialFilter_8hpp_1ac6fbfc0c0639e8d955ef84e181d2ca22.html#exhale-function-spatialfilter-8hpp-1ac6fbfc0c0639e8d955ef84e181d2ca22"><span class="std std-ref">Template Function OrganizedPointFilters::RS::dxf_smooth</span></a></p></li>
+<li><p><a class="reference internal" href="function_SpatialFilter_8hpp_1ae198a98150340eb97097b737d6912e6a.html#exhale-function-spatialfilter-8hpp-1ae198a98150340eb97097b737d6912e6a"><span class="std std-ref">Template Function OrganizedPointFilters::RS::intertial_holes_fill</span></a></p></li>
+<li><p><a class="reference internal" href="function_SpatialFilter_8hpp_1add560b42439fc1f4f2f6f8cf62eaaee0.html#exhale-function-spatialfilter-8hpp-1add560b42439fc1f4f2f6f8cf62eaaee0"><span class="std std-ref">Template Function OrganizedPointFilters::RS::prepare_target_frame</span></a></p></li>
+<li><p><a class="reference internal" href="function_SpatialFilter_8hpp_1ac6da5b3d50089bc68f7fe12efd6ec06b.html#exhale-function-spatialfilter-8hpp-1ac6da5b3d50089bc68f7fe12efd6ec06b"><span class="std std-ref">Template Function OrganizedPointFilters::RS::recursive_filter_horizontal</span></a></p></li>
+<li><p><a class="reference internal" href="function_SpatialFilter_8hpp_1aa6cd66e0f7ef6f67534e89724fd7ddc1.html#exhale-function-spatialfilter-8hpp-1aa6cd66e0f7ef6f67534e89724fd7ddc1"><span class="std std-ref">Function OrganizedPointFilters::RS::recursive_filter_horizontal_fp</span></a></p></li>
+<li><p><a class="reference internal" href="function_SpatialFilter_8hpp_1a57b29c5736a78fd052397fd464fb458d.html#exhale-function-spatialfilter-8hpp-1a57b29c5736a78fd052397fd464fb458d"><span class="std std-ref">Template Function OrganizedPointFilters::RS::recursive_filter_vertical</span></a></p></li>
+<li><p><a class="reference internal" href="function_SpatialFilter_8hpp_1a16dcc8463147aec614d9d49831c8f540.html#exhale-function-spatialfilter-8hpp-1a16dcc8463147aec614d9d49831c8f540"><span class="std std-ref">Function OrganizedPointFilters::RS::recursive_filter_vertical_fp</span></a></p></li>
+<li><p><a class="reference internal" href="function_SpatialFilter_8hpp_1acc27846a5fff6964c91f6ae7f3476ebd.html#exhale-function-spatialfilter-8hpp-1acc27846a5fff6964c91f6ae7f3476ebd"><span class="std std-ref">Template Function OrganizedPointFilters::RS::spatial_filter</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="structOrganizedPointFilters_1_1DepthInfo.html" class="btn btn-neutral float-right" title="Struct DepthInfo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="namespace_OrganizedPointFilters__Helper.html" class="btn btn-neutral float-left" title="Namespace OrganizedPointFilters::Helper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jeremy Castagno
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

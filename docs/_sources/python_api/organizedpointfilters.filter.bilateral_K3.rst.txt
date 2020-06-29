@@ -1,0 +1,6 @@
+organizedpointfilters.filter.bilateral_K3
+-----------------------------------------
+
+.. currentmodule:: organizedpointfilters.filter
+
+.. autofunction:: bilateral_K3

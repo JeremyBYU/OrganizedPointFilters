@@ -1,0 +1,13 @@
+.. _exhale_function_SpatialFilter_8hpp_1ac6fbfc0c0639e8d955ef84e181d2ca22:
+
+Template Function OrganizedPointFilters::RS::dxf_smooth
+=======================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_RS_SpatialFilter.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::RS::dxf_smooth(void *, float, float, int, uint8_t, uint8_t, ImgDetails&)

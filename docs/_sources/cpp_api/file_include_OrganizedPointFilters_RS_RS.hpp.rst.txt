@@ -1,0 +1,39 @@
+
+.. _file_include_OrganizedPointFilters_RS_RS.hpp:
+
+File RS.hpp
+===========
+
+|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters_RS>` (``include/OrganizedPointFilters/RS``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``include/OrganizedPointFilters/RS/RS.hpp``)
+--------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_include_OrganizedPointFilters_RS_RS.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``OrganizedPointFilters/RS/DisparityTransform.hpp`` (:ref:`file_include_OrganizedPointFilters_RS_DisparityTransform.hpp`)
+
+- ``OrganizedPointFilters/RS/SpatialFilter.hpp`` (:ref:`file_include_OrganizedPointFilters_RS_SpatialFilter.hpp`)
+
+
+
+
+

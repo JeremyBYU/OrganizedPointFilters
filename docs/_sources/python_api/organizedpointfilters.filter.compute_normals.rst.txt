@@ -1,0 +1,6 @@
+organizedpointfilters.filter.compute_normals
+--------------------------------------------
+
+.. currentmodule:: organizedpointfilters.filter
+
+.. autofunction:: compute_normals

@@ -1,0 +1,20 @@
+organizedpointfilters.cuda.kernel
+---------------------------------
+
+.. currentmodule:: organizedpointfilters.cuda.kernel
+
+**Functions**
+
+.. autosummary::
+
+    bilateral_K3_cuda
+    laplacian_K3_cuda
+    laplacian_K5_cuda
+
+
+.. toctree::
+    :hidden:
+
+    bilateral_K3_cuda <organizedpointfilters.cuda.kernel.bilateral_K3_cuda>
+    laplacian_K3_cuda <organizedpointfilters.cuda.kernel.laplacian_K3_cuda>
+    laplacian_K5_cuda <organizedpointfilters.cuda.kernel.laplacian_K5_cuda>

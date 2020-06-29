@@ -1,0 +1,82 @@
+
+.. _file_include_OrganizedPointFilters_Filter_Bilateral.hpp:
+
+File Bilateral.hpp
+==================
+
+|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters_Filter>` (``include/OrganizedPointFilters/Filter``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``include/OrganizedPointFilters/Filter/Bilateral.hpp``)
+-------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_include_OrganizedPointFilters_Filter_Bilateral.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``FastExp/fastexp.h``
+
+- ``OrganizedPointFilters/Filter/Normal.hpp`` (:ref:`file_include_OrganizedPointFilters_Filter_Normal.hpp`)
+
+- ``OrganizedPointFilters/Types.hpp`` (:ref:`file_include_OrganizedPointFilters_Types.hpp`)
+
+- ``iostream``
+
+
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_OrganizedPointFilters`
+
+- :ref:`namespace_OrganizedPointFilters__Filter`
+
+- :ref:`namespace_OrganizedPointFilters__Filter__BilateralCore`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_Bilateral_8hpp_1ad992f303d13bbeecd96bf00f7db19931`
+
+- :ref:`exhale_function_Bilateral_8hpp_1ac5a7bf4be9797f1a5115abbc2a34278e`
+
+- :ref:`exhale_function_Bilateral_8hpp_1aa3603b284ff516d98cd88665581aef99`
+
+- :ref:`exhale_function_Bilateral_8hpp_1a93411964854e32a1b5e0a328c72c8ad9`
+
+- :ref:`exhale_function_Bilateral_8hpp_1a82795c0fa06b290a089b7df9c9a1049b`
+
+
+Defines
+-------
+
+
+- :ref:`exhale_define_Bilateral_8hpp_1a71cc5540066e0ef3b77e305ef5259efd`
+
+- :ref:`exhale_define_Bilateral_8hpp_1a6ff7aef607123c6dc41484ba289fe21e`
+
+- :ref:`exhale_define_Bilateral_8hpp_1a773172382e2484dfa21a020c5a98daa3`
+
+- :ref:`exhale_define_Bilateral_8hpp_1ac4c017f33d802b4f4f2863f69b838c22`
+

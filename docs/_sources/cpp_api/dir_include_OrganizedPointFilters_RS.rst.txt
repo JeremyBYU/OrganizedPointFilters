@@ -1,0 +1,22 @@
+.. _dir_include_OrganizedPointFilters_RS:
+
+
+Directory RS
+============
+
+
+|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters>` (``include/OrganizedPointFilters``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+*Directory path:* ``include/OrganizedPointFilters/RS``
+
+
+Files
+-----
+
+- :ref:`file_include_OrganizedPointFilters_RS_DisparityTransform.hpp`
+- :ref:`file_include_OrganizedPointFilters_RS_RS.hpp`
+- :ref:`file_include_OrganizedPointFilters_RS_SpatialFilter.hpp`
+
+

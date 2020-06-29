@@ -1,0 +1,9 @@
+organizedpointfilters.Matrix3fRef
+---------------------------------
+
+.. currentmodule:: organizedpointfilters
+
+.. autoclass:: Matrix3fRef
+    :members:
+    :undoc-members:
+    :inherited-members:

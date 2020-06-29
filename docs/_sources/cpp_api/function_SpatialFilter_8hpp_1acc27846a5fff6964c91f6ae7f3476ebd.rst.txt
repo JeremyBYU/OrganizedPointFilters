@@ -1,0 +1,13 @@
+.. _exhale_function_SpatialFilter_8hpp_1acc27846a5fff6964c91f6ae7f3476ebd:
+
+Template Function OrganizedPointFilters::RS::spatial_filter
+===========================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_RS_SpatialFilter.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::RS::spatial_filter(std::vector<T>&, ImgDetails&, float, float, int, uint8_t)

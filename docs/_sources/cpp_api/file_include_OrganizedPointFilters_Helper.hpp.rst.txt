@@ -1,0 +1,70 @@
+
+.. _file_include_OrganizedPointFilters_Helper.hpp:
+
+File Helper.hpp
+===============
+
+|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters>` (``include/OrganizedPointFilters``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``include/OrganizedPointFilters/Helper.hpp``)
+---------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_include_OrganizedPointFilters_Helper.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``OrganizedPointFilters/Types.hpp`` (:ref:`file_include_OrganizedPointFilters_Types.hpp`)
+
+- ``chrono``
+
+
+
+Included By
+-----------
+
+
+- :ref:`file_include_OrganizedPointFilters_OrganizedPointFilters.hpp`
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_OrganizedPointFilters`
+
+- :ref:`namespace_OrganizedPointFilters__Helper`
+
+
+Classes
+-------
+
+
+- :ref:`exhale_class_classOrganizedPointFilters_1_1Helper_1_1Timer`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function_Helper_8hpp_1a617e680649ef08b6c5b8fbdd3ba48aab`
+
+- :ref:`exhale_function_Helper_8hpp_1a76d4d986abf42e204fb3b70d2c1ed24d`
+

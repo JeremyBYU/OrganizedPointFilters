@@ -1,0 +1,13 @@
+.. _exhale_function_Laplacian_8hpp_1a30f2e951c0a46a8a3d7ee5cb70e97a96:
+
+Function OrganizedPointFilters::Filter::LaplacianCore::OppositePointK3
+======================================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Filter_Laplacian.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::Filter::LaplacianCore::OppositePointK3(const int&, const int&, int&, int&)
