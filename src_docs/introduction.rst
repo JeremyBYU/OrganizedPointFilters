@@ -1,13 +1,8 @@
 .. _introduction:
 
-About OrganizedPointFilters
-############################
+Introducing Organized Point Filters
+###################################
 
-OrganizedPointFilters is ...
 
-Core features
-======================
-
-* One
-* Two
+.. mdinclude:: ../README.md
 
