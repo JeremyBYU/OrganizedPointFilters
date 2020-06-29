@@ -14,9 +14,6 @@ PYBIND11_MODULE(organizedpointfilters, m)
     // Will bind eigen matrix data types
     pybind_matrix_types(m);
 
-    m.def("hello", &OrganizedPointFilters::Hello, "name"_a, "Says hello to name");
-    docstring::FunctionDocInject(m, "hello", {{"name", "The name to say hello with"}});
-
     // Submodules
     pybind_filter(m);
 }

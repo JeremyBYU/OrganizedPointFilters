@@ -1,3 +1,8 @@
+/** These are NAIVE CUDA kerenels for laplacian smoothing of organized point clouds
+ *  There are probably a few bugs in here. I am not as familiar with GPU programming but tried my best.
+ *  I had a hard time debugging GPU programs so I kept everything as simple and verbose as possible. 
+*/
+
 extern "C" {
 
 #define EPS 1e-12f
@@ -75,7 +80,7 @@ __device__ void IntegeratePoint(int& nbr_shmIdx, float* SHM_POINTS, float* point
 #define HALF_RADIUS_K3 KERNEL_SIZE_K3 / 2
 
 
-//////////////////// K3 FUnctions /////////////////////////
+//////////////////// K3 Functions /////////////////////////
 __device__ void ReadBlockAndHaloK3(float* SHM_POINTS, const float* opc, const int& shmRow_y, const int& shmCol_x,
                                    const int& srcRow_y, const int& srcCol_x, const int& cols)
 {

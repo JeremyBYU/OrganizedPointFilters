@@ -1,3 +1,8 @@
+/** These are NAIVE CUDA kerenels for bilateral smoothing of organized point clouds
+ *  There are probably a few bugs in here. I am not as familiar with GPU programming but tried my best.
+ *  I had a hard time debugging GPU programs so I kept everything as simple and verbose as possible. 
+*/
+
 extern "C" {
 
 #define EPS 1e-12f

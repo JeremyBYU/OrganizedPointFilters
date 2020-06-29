@@ -59,7 +59,8 @@ RowMatrixXVec3X<T> py_array_to_matrix_copy(py::array_t<T, py::array::c_style | p
     return new_matrix;
 }
 
-OrganizedTriangleMatrix py_array_to_triangle_matrix_copy(py::array_t<float, py::array::c_style | py::array::forcecast> array)
+OrganizedTriangleMatrix
+py_array_to_triangle_matrix_copy(py::array_t<float, py::array::c_style | py::array::forcecast> array)
 {
     // return std::vector<std::array<T, dim>>();
     // std::cout << "Calling py_array_to_matrix" << std::endl;
@@ -81,12 +82,12 @@ OrganizedTriangleMatrix py_array_to_triangle_matrix_copy(py::array_t<float, py::
     return new_matrix;
 }
 
-
-
 void pybind_matrix_types(py::module& m)
 {
 
-    py::class_<Eigen::Ref<RowMatrixXVec3X<float>>>(m, "Matrix3fRef", py::buffer_protocol())
+    py::class_<Eigen::Ref<RowMatrixXVec3X<float>>>(
+        m, "Matrix3fRef", py::buffer_protocol(),
+        "Eigen Matrix Reference to MXNX3 structure. Use np.asarray() to get to get numpy array.")
         .def(py::init<>(&py_array_to_matrix<float>), "points"_a)
         .def_buffer([](Eigen::Ref<RowMatrixXVec3X<float>>& m) -> py::buffer_info {
             size_t rows = m.rows();
@@ -101,7 +102,8 @@ void pybind_matrix_types(py::module& m)
                                     sizeof(float) * channels, sizeof(float)});
         });
 
-    py::class_<RowMatrixXVec3X<float>>(m, "Matrix3f", py::buffer_protocol())
+    py::class_<RowMatrixXVec3X<float>>(m, "Matrix3f", py::buffer_protocol(),
+                                       "Eigen Matrix to MXNX3 structure. Use np.asarray() to get to get numpy array.")
         .def(py::init<>(&py_array_to_matrix_copy<float>), "points"_a)
         .def_buffer([](RowMatrixXVec3X<float>& m) -> py::buffer_info {
             size_t rows = m.rows();
@@ -116,21 +118,22 @@ void pybind_matrix_types(py::module& m)
                                     sizeof(float) * channels, sizeof(float)});
         });
 
-    py::class_<OrganizedTriangleMatrix>(m, "OrganizedTriangleMatrix", py::buffer_protocol())
+    py::class_<OrganizedTriangleMatrix>(
+        m, "OrganizedTriangleMatrix", py::buffer_protocol(),
+        "Eigen Matrix to M X N X 2 X 3 structure. Use np.asarray() to get to get numpy array.")
         .def(py::init<>(&py_array_to_triangle_matrix_copy), "triangle_matrix"_a)
         .def_buffer([](OrganizedTriangleMatrix& m) -> py::buffer_info {
             size_t rows = m.rows();
             size_t cols = m.cols();
             size_t tris_per_cell = 2UL;
             size_t channels = 3UL;
-            return py::buffer_info(m.data(),                               /* Pointer to buffer */
-                                   sizeof(float),                          /* Size of one scalar */
-                                   py::format_descriptor<float>::format(), /* Python struct-style format descriptor */
-                                   4UL,                                    /* Number of dimensions */
-                                   {rows, cols, tris_per_cell, channels},                 /* Buffer dimensions */
-                                   {sizeof(float) * cols * channels * tris_per_cell,       /* Strides (in bytes) for each index */
-                                   sizeof(float) * channels * tris_per_cell, 
-                                    sizeof(float) * channels, sizeof(float)});
+            return py::buffer_info(
+                m.data(),                                         /* Pointer to buffer */
+                sizeof(float),                                    /* Size of one scalar */
+                py::format_descriptor<float>::format(),           /* Python struct-style format descriptor */
+                4UL,                                              /* Number of dimensions */
+                {rows, cols, tris_per_cell, channels},            /* Buffer dimensions */
+                {sizeof(float) * cols * channels * tris_per_cell, /* Strides (in bytes) for each index */
+                 sizeof(float) * channels * tris_per_cell, sizeof(float) * channels, sizeof(float)});
         });
-
 }

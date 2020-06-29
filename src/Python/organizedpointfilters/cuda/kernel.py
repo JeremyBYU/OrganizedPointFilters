@@ -40,7 +40,7 @@ def laplacian_K3_cuda(opc_float, loops=5, _lambda=0.5, **kwargs):
     """Perform laplacian smoothing on point cloud using CUDA
 
     Arguments:
-        opc_float {ndarray} -- Numpy array of size MXNX3 dtype==np.float32
+        opc_float {ndarray} -- Organized Point Cloud, numpy array of size M X N X 3 dtype==np.float32
 
     Keyword Arguments:
         loops {int} -- Number of loop interations of smoothing (default: {5})
@@ -93,7 +93,7 @@ def laplacian_K5_cuda(opc_float, loops=5, _lambda=0.5, **kwargs):
     """Perform laplacian smoothing on point cloud using CUDA
 
     Arguments:
-        opc_float {ndarray} -- Numpy array of size MXNX3 dtype==np.float32
+        opc_float {ndarray} -- Organized Point Cloud, numpy array of size M X N X 3 dtype==np.float32
 
     Keyword Arguments:
         loops {int} -- Number of loop interations of smoothing (default: {5})
@@ -142,7 +142,7 @@ def laplacian_K5_cuda(opc_float, loops=5, _lambda=0.5, **kwargs):
 
 
 def bilateral_K3_cuda(normals, centroids, loops=5, sigma_length=0.1, sigma_angle=0.261, **kwargs):
-    """Performs bilateral filtering on an organized point cloud
+    """Performs bilateral filtering on an organized point cloud using CUDA
 
     Arguments:
         normals {ndarray} -- Numpy array of MXNX2X3

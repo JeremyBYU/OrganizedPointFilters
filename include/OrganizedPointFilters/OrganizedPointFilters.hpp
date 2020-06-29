@@ -34,13 +34,6 @@
 #include "OrganizedPointFilters/Filter/Normal.hpp"
 
 namespace OrganizedPointFilters {
-/**
- * \brief Says hello with a name
- * 
- * \param name 
- * \return std::string 
- */
-std::string Hello(std::string& name);
 
 
 } // namespace OrganizedPointFilters

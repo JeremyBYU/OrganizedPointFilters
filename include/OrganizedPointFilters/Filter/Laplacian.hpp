@@ -16,70 +16,6 @@ namespace OrganizedPointFilters {
 
 namespace Filter {
 
-// inline void smooth_point(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixXVec3f>& opc_out, const int i,
-//                          const int j, const float lambda = OPF_KERNEL_DEFAULT_LAMBDA, const int kernel_size = 3)
-// {
-//     const int shift = static_cast<const int>(kernel_size / 2);
-//     float total_weight = 0.0;
-//     auto& point = opc(i, j);
-//     Eigen::Vector3f sum_vertex(0, 0, 0);
-//     for (auto row = i - shift; row <= i + shift; ++row)
-//     {
-//         for (auto col = j - shift; col <= j + shift; ++col)
-//         {
-//             if (i == row && j == col) continue;
-//             float dist = (point - opc(row, col)).norm();
-//             float weight = 1.0f / (dist + eps);
-//             total_weight += weight;
-//             sum_vertex += weight * opc(row, col);
-//         }
-//     }
-//     opc_out(i, j) = point + lambda * (sum_vertex / total_weight - point);
-// }
-
-// // template<typename kernel_size>
-// inline void LaplacianLoop(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<RowMatrixXVec3f> opc_out,
-//                           const float lambda = OPF_KERNEL_DEFAULT_LAMBDA, const int kernel_size = 3)
-// {
-//     auto rows = opc.rows();
-//     auto cols = opc.cols();
-//     const int shift = static_cast<int>(kernel_size / 2);
-
-//     for (auto row = shift; row < rows - shift; ++row)
-//     {
-//         for (auto col = shift; col < cols - shift; ++col)
-//         {
-//             smooth_point(opc, opc_out, row, col, lambda, kernel_size);
-//         }
-//     }
-// }
-
-// inline RowMatrixXVec3f Laplacian(Eigen::Ref<RowMatrixXVec3f> opc, float lambda = OPF_KERNEL_DEFAULT_LAMBDA,
-//                                  int iterations = OPF_KERNEL_DEFAULT_ITER, int kernel_size = 3)
-// {
-//     // TODO - Only really need to copy the ghost/halo cells on border
-//     RowMatrixXVec3f opc_out(opc);
-//     bool need_copy = false;
-//     for (int i = 0; i < iterations; ++i)
-//     {
-//         if (i % 2 == 0)
-//         {
-//             LaplacianLoop(opc, opc_out, lambda, kernel_size);
-//             need_copy = false;
-//         }
-//         else
-//         {
-//             LaplacianLoop(opc_out, opc, lambda, kernel_size);
-//             need_copy = true;
-//         }
-//     }
-//     if (need_copy)
-//     {
-//         opc_out = opc;
-//     }
-//     return opc_out;
-// }
-
 namespace LaplacianCore
 
 {
@@ -190,6 +126,32 @@ inline void LaplacianLoopT(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<RowMatrix
 
 } // namespace LaplacianCore
 
+/**
+ * @brief Laplacian filtering to an organized point cloud (OPC).
+ * An implicit mesh is defined by OPC wherein each 2X2 quad of the OPC creates two right-cut triangles.
+ * Will perform laplacain filtering for an organized point cloud and return *smoothed* triangle **vertices**.
+ * 
+ * O = Point
+ *
+ *                  O----------------------O
+ *                  |                    XX|
+ *                  |  TRI 0          XXX  |
+ *                  |              XXXX    |
+ *                  |            XXX       |
+ *                  |         XXX          |
+ *                  |       XXX            |
+ *                  |     XXX       TRI 1  |
+ *                  |   XXX                |
+ *                  |XXX                   |
+ *                  OX---------------------O
+ * 
+ * @tparam 3                    Kernel size. Increasing the kernel size will make smoother but have higher computation costs.
+ * @param opc                   Organized Point Cloud. M X N X 3 Eigen Matrix
+ * @param lambda                Weighting for each iteration update    
+ * @param iterations            Number of iterations
+ * @param max_dist              Maximum distance a neighbor can be to be interagrated for smoothing.
+ * @return RowMatrixXVec3f      M X N X 3. Smoothed vertices.    
+ */
 template <int kernel_size = 3>
 RowMatrixXVec3f LaplacianT(Eigen::Ref<RowMatrixXVec3f> opc, float lambda = OPF_KERNEL_DEFAULT_LAMBDA,
                                   int iterations = OPF_KERNEL_DEFAULT_ITER, float max_dist = OPF_KERNEL_MAX_FLOAT);

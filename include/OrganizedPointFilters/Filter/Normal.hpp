@@ -60,10 +60,43 @@ inline void ComputeCentroid(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<Organize
 
 } // namespace NormalCore
 
+/**
+ * @brief Will compute the normals of each implicit triangle in this organized point cloud
+ * 
+ * 
+ *  O = Point
+ *
+ *                  O----------------------O
+ *                  |                    XX|
+ *                  |  TRI 0          XXX  |
+ *                  |              XXXX    |
+ *                  |            XXX       |
+ *                  |         XXX          |
+ *                  |       XXX            |
+ *                  |     XXX       TRI 1  |
+ *                  |   XXX                |
+ *                  |XXX                   |
+ *                  O----------------------O
+ * 
+ * @param opc                           Organized Point Cloud. M X N X 3 Eigen Matrix
+ * @return OrganizedTriangleMatrix      M X N X 2 X 3. Any invalid triangle will have NaN for normals! Must filter out.
+ */
 OrganizedTriangleMatrix ComputeNormals(Eigen::Ref<RowMatrixXVec3f> opc);
 
+/**
+ * @brief Will compute the centroid for each implicit triangle in this organized point cloud
+ * 
+ * @param opc                           Organized Point Cloud. M X N X 3 Eigen Matrix
+ * @return OrganizedTriangleMatrix      M X N X 2 X 3. Any invalid triangle will have NaN for centroid! Must filter out.
+ */
 OrganizedTriangleMatrix ComputeCentroids(Eigen::Ref<RowMatrixXVec3f> opc);
 
+/**
+ * @brief Computed Normals and Centroid of an organized point cloud
+ * 
+ * @param opc                           Organized Point Cloud. M X N X 3 Eigen Matrix
+ * @return std::tuple<OrganizedTriangleMatrix, OrganizedTriangleMatrix>     Tuple of both M X N X 2 X 3.
+ */
 std::tuple<OrganizedTriangleMatrix, OrganizedTriangleMatrix> ComputeNormalsAndCentroids(Eigen::Ref<RowMatrixXVec3f> opc);
 
 } // namespace Filter

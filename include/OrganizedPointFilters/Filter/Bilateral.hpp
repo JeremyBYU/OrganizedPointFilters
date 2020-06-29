@@ -139,6 +139,36 @@ inline void BilateralNormalLoop(Eigen::Ref<OrganizedTriangleMatrix> normals_in,
 
 } // namespace BilateralCore
 
+/**
+ * @brief Bilateral filtering to an organized point cloud (OPC).
+ * An implicit mesh is defined by OPC wherein each 2X2 quad of the OPC creates two right-cut triangles.
+ * Will perform bilateral filtering for an organized point cloud and return *smoothed* triangle **normals**.
+ * 
+ * O = Point
+ *
+ *                  O----------------------O
+ *                  |                    XX|
+ *                  |  TRI 0          XXX  |
+ *                  |              XXXX    |
+ *                  |            XXX       |
+ *                  |         XXX          |
+ *                  |       XXX            |
+ *                  |     XXX       TRI 1  |
+ *                  |   XXX                |
+ *                  |XXX                   |
+ *                  O----------------------O
+ *
+ * 
+ * 
+ * @tparam 3                    Kernel size. Increasing the kernel size will make smoother but have higher computation costs.
+ * @param opc                   Organized Point Cloud. M X N X 3 Eigen Matrix
+ * @param iterations            How many iterations of bilateral smoothing
+ * @param sigma_length          The standard deviation for exponential decay based on centroid difference between
+ *                              neighboring triangles
+ * @param sigma_angle           The standard deviation for exponential decay based on surface normal difference between
+ *                              neighboring triangles.
+ * @return OrganizedTriangleMatrix  M X N X 2 X 3. Any invalid triangle will have NaN for normals! Must filter out
+ */
 template <int kernel_size = 3>
 OrganizedTriangleMatrix BilateralFilterNormals(Eigen::Ref<RowMatrixXVec3f> opc,
                                                int iterations = OPF_BILATERAL_DEFAULT_ITER,
