@@ -10,14 +10,18 @@
 
 -----------
 
-OrganizedPointFilters: A Great OrganizedPointFilters
-=======================================================
+OrganizedPointFilters: Fast Filtering for Organized Point Clouds
+===================================================================
 
 .. only: not latex
 
     Contents:
 
+.. _getting_started_index:
+
 .. toctree::
+    :maxdepth: 1
+    :caption: Getting Started
 
     introduction
     builddocs
@@ -40,6 +44,14 @@ OrganizedPointFilters: A Great OrganizedPointFilters
 
     python_api/organizedpointfilters
     python_api/organizedpointfilters.filter
+    python_api/organizedpointfilters.cuda.kernel
+    
+..
+    Please put the module and meta data you want here!
+    MAKE_DOCS/python_api/organizedpointfilters
+    MAKE_DOCS/python_api/organizedpointfilters.filter
+    MAKE_DOCS/python_api/organizedpointfilters.cuda.kernel     python_only
+
 
 .. _cpp_api_index:
 
