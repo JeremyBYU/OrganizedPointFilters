@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. image:: _static/OrganizedPointFilters.png
-    :alt: OrganizedPointFilters Logo
+.. image:: _static/opf_logo.png
+    :alt: Organized Point Filters Logo
     :width: 320px
     :align: center
 

@@ -133,6 +133,7 @@ todo_include_todos = False
 #                           "open3d_sphinx_theme")
 html_theme = "sphinx_rtd_theme"
 # html_theme_path = [theme_path]
+html_logo = '_static/opf_logo.png'
 html_favicon = ""
 
 # Theme options are theme-specific and customize the look and feel of a theme

@@ -11,7 +11,7 @@ This module is a collection of filters for use on **organized** point clouds (OP
 
 Here is an example GIF of Laplacian and Bilateral Filtering of a noisy organized pont cloud of stairs. The colors indicate the triangle normals of the mesh. The more uniform the colors, the smoother the surface
 
-![Smoothing of OPC](https://raw.githubusercontent.com/JeremyBYU/OrganizedPointFilters/master/src_docs/_static/smoothing_example.gif)
+![Smoothing of OPC](https://jeremybyu.github.io/OrganizedPointFilters/_static/smoothing_example.gif)
 
 
 ## Documentation
