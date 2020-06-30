@@ -7,11 +7,11 @@
 #include "OrganizedPointFilters/Types.hpp"
 #include "OrganizedPointFilters/RS/RS.hpp"
 
-const std::string DEFAULT_DEPTH_IMAGE_SMALL = "./fixtures/realsense/001_small_depth.raw";
-const std::string DEFAULT_DEPTH_IMAGE_SMALL_MD = "./fixtures/realsense/001_small_depth_metadata.csv";
+const std::string DEFAULT_DEPTH_IMAGE_SMALL = "./fixtures/realsense_depth/001_small_depth.raw";
+const std::string DEFAULT_DEPTH_IMAGE_SMALL_MD = "./fixtures/realsense_depth/001_small_depth_metadata.csv";
 
-const std::string DEFAULT_DEPTH_IMAGE_LARGE = "./fixtures/realsense/001_big_depth.raw";
-const std::string DEFAULT_DEPTH_IMAGE_LARGE_MD = "./fixtures/realsense/001_big_depth_metadata.csv";
+const std::string DEFAULT_DEPTH_IMAGE_LARGE = "./fixtures/realsense_depth/001_big_depth.raw";
+const std::string DEFAULT_DEPTH_IMAGE_LARGE_MD = "./fixtures/realsense_depth/001_big_depth_metadata.csv";
 
 using namespace OrganizedPointFilters;
 
