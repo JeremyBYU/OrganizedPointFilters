@@ -200,7 +200,7 @@ def bilateral_opc(opc, loops=5, sigma_length=0.1, sigma_angle=0.261, **kwargs):
         sigma_angle {float} -- Scaling factor for angle (default: {0.261})
 
     Returns:
-        ndarray -- MX3 Triangle Normal Array, Float 64
+        ndarray -- MXNX2X3 Triangle Normal Array, Float 64
     """
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
