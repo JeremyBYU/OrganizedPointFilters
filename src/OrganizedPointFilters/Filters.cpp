@@ -1,6 +1,7 @@
 #include "OrganizedPointFilters/Filter/Laplacian.hpp"
 #include "OrganizedPointFilters/Filter/Bilateral.hpp"
 #include "OrganizedPointFilters/Filter/Normal.hpp"
+#include "OrganizedPointFilters/Helper.hpp"
 
 using namespace OrganizedPointFilters;
 
@@ -10,7 +11,7 @@ RowMatrixXVec3f Filter::LaplacianT(Eigen::Ref<RowMatrixXVec3f> opc, float lambda
     // TODO - Only really need to copy the ghost/halo cells on border
     RowMatrixXVec3f opc_out(opc);
     bool need_copy = false;
-    // Timer timer(true);  
+    // OrganizedPointFilters::Helper::Timer timer(false);  
     for (int i = 0; i < iterations; ++i)
     {
         if (i % 2 == 0)

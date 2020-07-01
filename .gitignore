@@ -3,7 +3,7 @@ src_docs/_build
 src_docs/_out
 src_docs/cpp_api
 src_docs/python_api
-
+test.ply
 
 scratch
 cmake-build

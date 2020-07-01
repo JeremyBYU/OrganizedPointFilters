@@ -36,8 +36,7 @@ inline void OppositePointK3(const int& row, const int& col, int& new_row, int& n
     }
 }
 
-template <int kernel_size = 3>
-__attribute__((optimize("unroll-loops"))) inline void
+template <int kernel_size = 3> inline void
 SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixXVec3f>& opc_out, const int i, const int j,
              const float lambda = OPF_KERNEL_DEFAULT_LAMBDA, float max_dist = OPF_KERNEL_MAX_FLOAT)
 {
@@ -60,7 +59,7 @@ SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixXVec3f>& opc_
             int col_ = j - shift + col;
             if (i == row_ && j == col_) continue;
 
-            auto nbr_point = opc(row_, col_);
+            auto &nbr_point = opc(row_, col_);
             float dist = (point - nbr_point).norm();
 
             // if dist> max_dist this indicantes this neighbor is very far away and should not be included in vertex sum
@@ -87,7 +86,7 @@ SmoothPointT(Eigen::Ref<RowMatrixXVec3f>& opc, Eigen::Ref<RowMatrixXVec3f>& opc_
             // }
 
             // this is faster than above but leads to really small triangles near edges of surfaces
-            if (dist > max_dist || std::isnan(dist)) continue;
+            if (std::isnan(dist)) continue;
             weight = 1.0f / (dist + eps);
 
             total_weight += weight;
@@ -149,7 +148,7 @@ inline void LaplacianLoopT(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<RowMatrix
  * @param opc                   Organized Point Cloud. M X N X 3 Eigen Matrix
  * @param lambda                Weighting for each iteration update    
  * @param iterations            Number of iterations
- * @param max_dist              Maximum distance a neighbor can be to be interagrated for smoothing.
+ * @param max_dist              Maximum distance a neighbor can be to be integrated for smoothing. Currently disabled.
  * @return RowMatrixXVec3f      M X N X 3. Smoothed vertices.    
  */
 template <int kernel_size = 3>
