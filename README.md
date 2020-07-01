@@ -1,4 +1,6 @@
 # Organized Point Filters
+[![Docs](https://raw.githubusercontent.com/JeremyBYU/OrganizedPointFilters/master/src_docs/_static/api-doc.svg)](https://jeremybyu.github.io/OrganizedPointFilters/)
+[![Cite](https://img.shields.io/badge/cite-%2010.1109--LRA.2020.3002212-red)](https://ieeexplore.ieee.org/document/9117017)
 
 This module is a collection of filters for use on **organized** point clouds (OPC).  It's very alpha-quality and should not really be used in production.  The filters:
 
@@ -37,6 +39,14 @@ If you want to run the examples then you need to install the following (from mai
 ## Documentation
 
 Please see [documentation website](https://jeremybyu.github.io/OrganizedPointFilters/) for more details.
+
+## Citation
+
+If you are using this repository please support our work by citing:
+
+```
+TBA
+```
 
 
 
