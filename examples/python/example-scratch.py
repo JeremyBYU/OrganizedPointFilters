@@ -4,12 +4,22 @@ This is scratch. You can ignore this file
 from os import path
 import open3d as o3d
 import numpy as np
+import sys
 import time
 # from examples.python.utility.helper import (load_pcd_file, load_pcd_and_meshes, create_mesh_from_organized_point_cloud, create_open_3d_mesh)
-from examples.python.utility.o3d_util import plot_meshes
+from examples.python.utility.o3d_util import plot_meshes, create_open_3d_mesh_from_tri_mesh
+from examples.python.utility.helper import (load_pcd_file, load_pcd_and_meshes, create_mesh_from_organized_point_cloud)
 
-# THIS_DIR = path.dirname(path.realpath(__file__))
-# PCD_DIR = path.join(THIS_DIR, '..', '..', 'fixtures', 'pcd')
+THIS_DIR = path.dirname(path.realpath(__file__))
+PCD_DIR = path.join(THIS_DIR, '..', '..', 'fixtures', 'pcd')
+
+
+a =  np.load(path.join(PCD_DIR, 'rgbd_opc.npy'))
+tri_mesh, tri_map = create_mesh_from_organized_point_cloud(a, stride=1)
+tri_mesh_o3d = create_open_3d_mesh_from_tri_mesh(tri_mesh)
+
+print(a.shape)
+print(np.asarray(tri_mesh_o3d.triangles).shape)
 
 # pc_raw, pc_image, pcd_o3d, tri_mesh, tri_mesh_o3d = load_pcd_and_meshes(path.join(PCD_DIR, 'pc_01.pcd'), stride=1)
 
