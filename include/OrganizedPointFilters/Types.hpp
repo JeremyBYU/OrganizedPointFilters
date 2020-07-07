@@ -7,7 +7,7 @@
 #include <limits>
 
 // #define EIGEN_RUNTIME_NO_MALLOC // Define this symbol to enable runtime tests for allocations
-#include "eigen3/Eigen/Dense"
+#include "Eigen/Dense"
 
 
 namespace OrganizedPointFilters {

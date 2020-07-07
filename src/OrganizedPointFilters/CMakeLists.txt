@@ -20,7 +20,7 @@ ${DESIRED_WARNINGS}>
 $<$<CXX_COMPILER_ID:MSVC>:
 /W4>)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE eigen)
+target_link_libraries_system_public(${PROJECT_NAME} eigen)
 
 # Fast Exponential
 set(FASTEXP_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/thirdparty")

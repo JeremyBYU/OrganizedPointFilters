@@ -2,7 +2,7 @@
 [![Docs](https://img.shields.io/badge/API-docs-blue)](https://jeremybyu.github.io/OrganizedPointFilters/)
 [![Cite](https://img.shields.io/badge/cite-%2010.1109--LRA.2020.3002212-red)](https://ieeexplore.ieee.org/document/9117017)
 
-This module is a collection of filters for use on **organized** point clouds (OPC).  It's very alpha-quality and should not really be used in production.  The filters:
+This module is a collection of filters for use on **organized** point clouds (OPC).  It's beta-quality and should not really be used in production.  The filters:
 
 * Laplacian Mesh Smoothing applied to an implicit fully connected right cut triangular mesh of an OPC.
     * Single threaded, CPU Multi-threaded, and GPU accelerated.
@@ -23,7 +23,7 @@ Installation is entirely through CMake now. You must have CMake 3.14 or higher i
 ### Build Project Library
 
 1. `mkdir cmake-build && cd cmake-build`. - create build folder directory 
-2. `cmake ../ -DCMAKE_BUILD_TYPE=Release -DWERROR=0` . For windows also add `-DCMAKE_GENERATOR_PLATFORM=x64` 
+2. `cmake ../ -DCMAKE_BUILD_TYPE=Release` . For windows also add `-DCMAKE_GENERATOR_PLATFORM=x64` 
 3. `cmake --build . -j$(nproc)`  - Build OPF
 
 ### Build and Install Python Extension
@@ -34,7 +34,7 @@ Installation is entirely through CMake now. You must have CMake 3.14 or higher i
 
 If you want to run the examples then you need to install the following (from main directory):
 
-1. `pip install -r requirements-dev.txt` 
+1. `pip install -r dev-requirements.txt` 
 
 ## Documentation
 
