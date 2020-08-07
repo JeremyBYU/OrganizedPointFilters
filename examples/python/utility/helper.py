@@ -398,7 +398,7 @@ def load_pcd_file(fpath, stride=2):
     # Image Point Cloud (organized)
     pc_np_image = np.reshape(pc_np, (width, height, 4))
     # I'm expecting the "image" to have the rows/y-axis going down
-    pc_np_image = np.ascontiguousarray(np.flip(pc_np_image, 0))
+    pc_np_image = np.ascontiguousarray(np.flip(pc_np_image, 1))
 
     if stride is not None:
         pc_np_image = pc_np_image[::stride, ::stride, :]

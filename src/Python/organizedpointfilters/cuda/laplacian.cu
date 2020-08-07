@@ -7,6 +7,7 @@ extern "C" {
 
 #define EPS 1e-12f
 #define BLOCK_WIDTH 32
+#define MAX_DIST_DEFAULT 1000.0
 
 //////// Start Helper Functions /////////
 __device__ void LoadPoint(float* out, const float* in, int outIdx, int inIdx)
@@ -61,7 +62,7 @@ __device__ void Print2DPointArray(float* point, int rows, int cols)
 }
 
 __device__ void IntegeratePoint(int& nbr_shmIdx, float* SHM_POINTS, float* point_temp, float* point,
-                                float& total_weight, float* sum_point, float max_dist = 0.25)
+                                float& total_weight, float* sum_point, float max_dist = MAX_DIST_DEFAULT)
 {
     LoadPoint(point_temp, SHM_POINTS, 0, nbr_shmIdx);
     float dist = PointDistance(point, point_temp);
@@ -207,7 +208,7 @@ __global__ void SmoothPointK3(float* SHM_POINTS, const float* opc, float* opc_ou
     /// This is a very convoluted way of doing this -> opc_out(i, j) = point + lambda * (sum_point / total_weight -
     /// point);
     // if total_weight == 0.0 we have no updates
-    if (total_weight == 0.0) return;
+    if (total_weight <= 0.0) return;
 
     float new_scale = 1.0f / total_weight;
     ScalePointInPlace(sum_point, new_scale);
