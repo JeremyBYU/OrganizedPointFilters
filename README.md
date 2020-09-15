@@ -36,6 +36,11 @@ If you want to run the examples then you need to install the following (from mai
 
 1. `pip install -r dev-requirements.txt` 
 
+You also need `cupy` to be installed with cuda device drivers if you want GPU acceleration. I cant vouch that this will always work:
+
+1. `conda install cudatoolkit=10.1`
+2. `pip install cupy-cuda101`
+
 ## Documentation
 
 Please see [documentation website](https://jeremybyu.github.io/OrganizedPointFilters/) for more details.
