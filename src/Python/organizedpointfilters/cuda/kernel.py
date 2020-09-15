@@ -60,13 +60,13 @@ def laplacian_K3_cuda(opc_float, loops=5, _lambda=0.5, **kwargs):
     # make copy for the data (really only needed for ghost cells on second iter)
     opc_float_gpu_b = cp.copy(opc_float_gpu_a)
 
-    opc_width = opc_float.shape[0]
-    opc_height = opc_float.shape[1]
+    opc_height = opc_float.shape[0]
+    opc_width = opc_float.shape[1]
 
     num_points = opc_width * opc_height
     block_size = (BLOCK_SIZE_LAPLACIAN, BLOCK_SIZE_LAPLACIAN)
-    grid_size = (int((opc_width - 1) / (BLOCK_SIZE_LAPLACIAN - kernel_size + 1)),
-                 int((opc_height - 1) / (BLOCK_SIZE_LAPLACIAN - kernel_size + 1)))
+    grid_size = (math.ceil((opc_width) / (BLOCK_SIZE_LAPLACIAN)),
+                 math.ceil((opc_height) / (BLOCK_SIZE_LAPLACIAN)))
 
     # One iteration takes about 0.18 ms, 5 iterations takes 0.21 ms, must be start up cost?
     use_b = True
@@ -113,13 +113,13 @@ def laplacian_K5_cuda(opc_float, loops=5, _lambda=0.5, **kwargs):
     # make copy for the data (really only needed for ghost cells on second iter)
     opc_float_gpu_b = cp.copy(opc_float_gpu_a)
 
-    opc_width = opc_float.shape[0]
-    opc_height = opc_float.shape[1]
+    opc_height = opc_float.shape[0]
+    opc_width = opc_float.shape[1]
 
     num_points = opc_width * opc_height
     block_size = (BLOCK_SIZE_LAPLACIAN, BLOCK_SIZE_LAPLACIAN)
-    grid_size = (int((opc_width - 1) / (BLOCK_SIZE_LAPLACIAN - kernel_size + 1)),
-                 int((opc_height - 1) / (BLOCK_SIZE_LAPLACIAN - kernel_size + 1)))
+    grid_size = (math.ceil((opc_width) / (BLOCK_SIZE_LAPLACIAN)),
+                 math.ceil((opc_height) / (BLOCK_SIZE_LAPLACIAN)))
 
     # One iteration takes about 0.18 ms, 5 iterations takes 0.21 ms, must be start up cost?
     use_b = True
