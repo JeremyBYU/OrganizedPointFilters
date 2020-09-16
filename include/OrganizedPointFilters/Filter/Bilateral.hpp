@@ -37,6 +37,11 @@ inline void IntegrateTriangle(Eigen::Block<EigenDoubleVector3f, 1, 3>& normal,
 {
     auto normal_dist = (nbr_normal - normal).norm();
     auto centroid_dist = (nbr_centroid - centroid).norm();
+    // branch divergence ---   : (
+    if (std::isnan(centroid_dist) || std::isnan(normal_dist)) 
+    {
+        return;
+    }
 
     auto weight = GaussianWeight(normal_dist, sas) * GaussianWeight(centroid_dist, sls);
     total_weight += weight;
@@ -107,8 +112,14 @@ inline void SmoothNormal(Eigen::Ref<OrganizedTriangleMatrix> normals_in, Eigen::
     auto first_normal_out = both_normals_out.block<1, 3>(0, 0);
     auto second_normal_out = both_normals_out.block<1, 3>(1, 0);
 
-    first_normal_out = first_sum_normal / first_total_weight;
-    second_normal_out = second_sum_normal / second_total_weight;
+    if (first_total_weight > 0.0)
+    {
+        first_normal_out = first_sum_normal / first_total_weight;
+    }
+    if (second_total_weight > 0.0)
+    {
+        second_normal_out = second_sum_normal / second_total_weight;
+    }
 }
 
 template <int kernel_size = 3>
