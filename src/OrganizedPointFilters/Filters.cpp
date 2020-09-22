@@ -1,9 +1,26 @@
 #include "OrganizedPointFilters/Filter/Laplacian.hpp"
 #include "OrganizedPointFilters/Filter/Bilateral.hpp"
 #include "OrganizedPointFilters/Filter/Normal.hpp"
+#include "OrganizedPointFilters/Filter/Decimate.hpp"
 #include "OrganizedPointFilters/Helper.hpp"
 
 using namespace OrganizedPointFilters;
+
+
+template <int kernel_size = 2>
+RowMatrixXVec3f Filter::DecimateColumnT(Eigen::Ref<RowMatrixXVec3f> opc, int num_threads)
+{
+    const int rows = static_cast<int>(opc.rows());
+    const int cols = static_cast<int>(opc.cols());
+    const int real_height = rows;
+    const int real_width = cols / kernel_size;
+    // std::cout << "Real height and width " << real_height << ", " << real_width << std::endl; 
+    RowMatrixXVec3f opc_out(real_height, real_width);
+
+    Filter::DecimateCore::DecimateColumnTLoop<kernel_size>(opc, opc_out, num_threads);
+    return opc_out;
+
+}
 
 template <int kernel_size = 3>
 RowMatrixXVec3f Filter::LaplacianT(Eigen::Ref<RowMatrixXVec3f> opc, float lambda, int iterations, float max_dist)
@@ -166,3 +183,9 @@ template RowMatrixXVec3f Filter::LaplacianT<3>(Eigen::Ref<RowMatrixXVec3f> opc, 
 
 template RowMatrixXVec3f Filter::LaplacianT<5>(Eigen::Ref<RowMatrixXVec3f> opc, float lambda, int iterations,
                                                float max_dist);
+
+
+template RowMatrixXVec3f Filter::DecimateColumnT<2>(Eigen::Ref<RowMatrixXVec3f> opc, int num_threads);
+template RowMatrixXVec3f Filter::DecimateColumnT<3>(Eigen::Ref<RowMatrixXVec3f> opc, int num_threads);
+template RowMatrixXVec3f Filter::DecimateColumnT<4>(Eigen::Ref<RowMatrixXVec3f> opc, int num_threads);
+template RowMatrixXVec3f Filter::DecimateColumnT<5>(Eigen::Ref<RowMatrixXVec3f> opc, int num_threads);

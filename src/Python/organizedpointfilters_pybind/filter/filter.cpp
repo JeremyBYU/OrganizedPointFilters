@@ -1,4 +1,5 @@
 #include "OrganizedPointFilters/Filter/Laplacian.hpp"
+#include "OrganizedPointFilters/Filter/Decimate.hpp"
 #include "OrganizedPointFilters/Filter/Normal.hpp"
 #include "OrganizedPointFilters/Filter/Bilateral.hpp"
 
@@ -21,6 +22,17 @@ void pybind_filter(py::module& m)
     //                 "opc"_a, "_lambda"_a = OPF_KERNEL_DEFAULT_LAMBDA, "iterations"_a = OPF_KERNEL_DEFAULT_ITER,
     //                 "kernel_size"_a = OPF_KERNEL_DEFAULT_KERNEL_SIZE,
     //                 "Performs Laplacian Smoothing on Organized Point Cloud");
+
+    // Templated (Faster) Laplacian
+    m_submodule.def("decimate_column_K2", &Filter::DecimateColumnT<2>, "opc"_a, "num_threads"_a = 1,
+                    "Decimates an organized point cloud column wise");
+
+    m_submodule.def("decimate_column_K3", &Filter::DecimateColumnT<3>, "opc"_a, "num_threads"_a = 1,
+                    "Decimates an organized point cloud column wise");
+
+    m_submodule.def("decimate_column_K4", &Filter::DecimateColumnT<4>, "opc"_a, "num_threads"_a = 1,
+                    "Decimates an organized point cloud column wise");
+
 
     // Templated (Faster) Laplacian
     m_submodule.def("laplacian_K3", &Filter::LaplacianT<3>, "opc"_a, "_lambda"_a = OPF_KERNEL_DEFAULT_LAMBDA,
