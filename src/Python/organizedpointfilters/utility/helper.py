@@ -62,6 +62,35 @@ def create_meshes(pc_points, stride=2, loops=5, _lambda=0.5, **kwargs):
 
     return tri_mesh, tri_mesh_o3d
 
+def pick_valid_normals(opc_normals):
+    # I think that we need this with open3d 0.10.0
+    mask = ~np.isnan(opc_normals).any(axis=1)
+    tri_norms = np.ascontiguousarray(opc_normals[mask, :])
+    return tri_norms
+
+def create_meshes_cuda(opc, **kwargs):
+    """Creates a mesh from a noisy organized point cloud
+
+    Arguments:
+        opc {ndarray} -- Must be MXNX3
+
+    Keyword Arguments:
+        loops {int} -- How many loop iterations (default: {5})
+        _lambda {float} -- weighted iteration movement (default: {0.5})
+
+    Returns:
+        [tuple(mesh, timings)] -- polylidar mesh and timings
+    """
+    smooth_opc, opc_normals = laplacian_then_bilateral_opc_cuda(
+        opc, **kwargs)
+    tri_mesh, tri_map = create_mesh_from_organized_point_cloud(
+        smooth_opc, calc_normals=False)
+    tri_norms = pick_valid_normals(opc_normals)
+    opc_normals_cp = MatrixDouble(tri_norms, copy=True)  # copy here!!!!!
+    # plot_triangle_normals(np.asarray(tri_mesh.triangle_normals), opc_normals)
+    tri_mesh.set_triangle_normals(opc_normals_cp)  # copy again here....sad
+    return tri_mesh
+
 
 def laplacian_opc(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
     """Performs Laplacian Smoothing on an organized point cloud
@@ -248,8 +277,8 @@ def laplacian_then_bilateral_opc_cuda(opc, loops_laplacian=5, _lambda=1.0, kerne
     t3 = time.perf_counter()
 
     opc_out = opc_float_out.astype(np.float64)
-    total_points = int(opc_out.size / 3)
-    opc_out = opc_out.reshape((total_points, 3))
+    # total_points = int(opc_out.size / 3)
+    # opc_out = opc_out.reshape((total_points, 3))
 
     total_triangles = int(opc_normals.size / 3)
     opc_normals = opc_normals.reshape((total_triangles, 3))
@@ -350,7 +379,7 @@ def create_mesh_from_organized_point_cloud_with_o3d(pcd: np.ndarray, rows=500, c
     return tri_mesh, tri_mesh_o3d
 
 
-def create_mesh_from_organized_point_cloud(pcd, rows=500, cols=500, stride=2):
+def create_mesh_from_organized_point_cloud(pcd, rows=500, cols=500, stride=2, calc_normals=True):
     """Create Mesh from organized point cloud
     If an MXNX3 Point Cloud is passed, rows and cols is ignored (we know the row/col from shape)
     If an KX3 Point Cloud is passed, you must pass the row, cols, and stride that correspond to the point cloud
@@ -373,9 +402,13 @@ def create_mesh_from_organized_point_cloud(pcd, rows=500, cols=500, stride=2):
         stride = 1
         pcd_ = pcd.reshape((rows * cols, 3))
 
-    pcd_mat = MatrixDouble(pcd_)
-    tri_mesh = extract_tri_mesh_from_organized_point_cloud(pcd_mat, rows, cols, stride)
-    return tri_mesh
+    pcd_mat = MatrixDouble(pcd_, copy=True)
+    t1 = time.perf_counter()
+    tri_mesh, tri_map = extract_tri_mesh_from_organized_point_cloud(
+        pcd_mat, rows, cols, stride, calc_normals=calc_normals)
+    t2 = time.perf_counter()
+    time_elapsed = (t2 - t1) * 1000
+    return tri_mesh, tri_map
 
 
 def get_np_buffer_ptr(a):
