@@ -10,7 +10,6 @@ import open3d as o3d
 
 from polylidar import extract_point_cloud_from_float_depth, extract_tri_mesh_from_organized_point_cloud, MatrixDouble
 import organizedpointfilters as opf
-import organizedpointfilters.cuda as opf_cuda
 from organizedpointfilters import Matrix3f, Matrix3fRef
 
 from .o3d_util import create_open_3d_pcd, plot_meshes, get_arrow, create_open_3d_mesh, open_3d_mesh_to_tri_mesh, assign_vertex_colors, get_colors
@@ -233,7 +232,7 @@ def laplacian_then_bilateral_opc_cuda(opc, loops_laplacian=5, _lambda=0.5, kerne
     Returns:
         tuple(ndarray, ndarray) -- Smoothed OPC M*NX3, Smoothed Normals M*NX3, the arrays are flattened
     """
-
+    import organizedpointfilters.cuda as opf_cuda
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
     t1 = time.perf_counter()
@@ -271,7 +270,7 @@ def bilateral_opc_cuda(opc, loops=5, sigma_length=0.1, sigma_angle=0.261, **kwar
     Returns:
         ndarray -- MX3 Triangle Normal Array, Float 64
     """
-
+    import organizedpointfilters.cuda as opf_cuda
     normals_opc, centroids_opc = compute_normals_and_centroids_opc(opc, convert_f64=False)
     assert normals_opc.dtype == np.float32
     assert centroids_opc.dtype == np.float32
@@ -302,7 +301,7 @@ def laplacian_opc_cuda(opc, loops=5, _lambda=0.5, kernel_size=3, **kwargs):
     Returns:
         ndarray -- Smoothed Point Cloud, MXNX3
     """
-
+    import organizedpointfilters.cuda as opf_cuda
     opc_float = (np.ascontiguousarray(opc[:, :, :3])).astype(np.float32)
 
     t1 = time.perf_counter()
