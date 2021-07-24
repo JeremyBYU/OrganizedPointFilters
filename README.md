@@ -2,7 +2,7 @@
 [![Docs](https://img.shields.io/badge/API-docs-blue)](https://jeremybyu.github.io/OrganizedPointFilters/)
 <!-- [![Cite](https://img.shields.io/badge/cite-%2010.1109--LRA.2020.3002212-red)](https://ieeexplore.ieee.org/document/9117017) -->
 
-This module is a collection of filters for use on **organized** point clouds (OPC).  It's beta-quality and should not really be used in production.  The filters:
+This module is a collection of filters for use on **organized** point clouds (OPC).  Note that this software has not been as extensively tested as my other work. The filters:
 
 * Laplacian Mesh Smoothing applied to an implicit fully connected right cut triangular mesh of an OPC.
     * Single threaded, CPU Multi-threaded, and GPU accelerated.
@@ -47,10 +47,20 @@ Please see [documentation website](https://jeremybyu.github.io/OrganizedPointFil
 
 ## Citation
 
-If you are using this repository please support our work by citing:
+To support our work please cite:
 
 ```
-TBA
+@article{s20174819,
+author = {Castagno, Jeremy and Atkins, Ella},
+title = {Polylidar3D - Fast Polygon Extraction from 3D Data},
+journal = {Sensors},
+volume = {20},
+year = {2020},
+number = {17},
+article-number = {4819},
+url = {https://www.mdpi.com/1424-8220/20/17/4819},
+issn = {1424-8220}
+}
 ```
 
 
