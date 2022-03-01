@@ -7,7 +7,7 @@
 using namespace OrganizedPointFilters;
 
 
-template <int kernel_size = 2>
+template <int kernel_size>
 RowMatrixXVec3f Filter::DecimateColumnT(Eigen::Ref<RowMatrixXVec3f> opc, int num_threads)
 {
     const int rows = static_cast<int>(opc.rows());
@@ -22,7 +22,7 @@ RowMatrixXVec3f Filter::DecimateColumnT(Eigen::Ref<RowMatrixXVec3f> opc, int num
 
 }
 
-template <int kernel_size = 3>
+template <int kernel_size>
 RowMatrixXVec3f Filter::LaplacianT(Eigen::Ref<RowMatrixXVec3f> opc, float lambda, int iterations, float max_dist)
 {
     // TODO - Only really need to copy the ghost/halo cells on border
@@ -50,7 +50,7 @@ RowMatrixXVec3f Filter::LaplacianT(Eigen::Ref<RowMatrixXVec3f> opc, float lambda
     return opc_out;
 }
 
-template <int kernel_size = 3>
+template <int kernel_size>
 OrganizedTriangleMatrix Filter::BilateralFilterNormals(Eigen::Ref<RowMatrixXVec3f> opc, int iterations,
                                                        float sigma_length, float sigma_angle)
 

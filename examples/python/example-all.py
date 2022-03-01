@@ -54,7 +54,7 @@ def main():
             #     loops_bilateral=main.bl_loops, sigma_angle=main.bl_sigma_angle)
 
             # CUDA Smoothing
-            opc_smooth, opc_normals_smooth = laplacian_then_bilateral_opc_cuda(
+            opc_smooth, opc_normals_smooth = laplacian_then_bilateral_opc(
                 pc_image, loops_laplacian=main.lap_loops, _lambda=main._lambda, max_dist=0.25, kernel_size=main.kernel_size,
                 loops_bilateral=main.bl_loops, sigma_angle=main.bl_sigma_angle)
         

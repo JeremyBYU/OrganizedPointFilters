@@ -24,7 +24,7 @@ inline void DecimateColumnPointT(Eigen::Ref<RowMatrixXVec3f> opc, Eigen::Ref<Row
         sum_point += nbr_point;
     }
     auto& out_point = opc_out(out_row, out_col);
-    out_point = sum_point / (float) kernel_size;
+    out_point = sum_point / static_cast<float>(kernel_size);
 }
 
 template <int kernel_size = 2>
