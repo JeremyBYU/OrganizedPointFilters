@@ -24,7 +24,7 @@ Installation is entirely through CMake now. You must have CMake 3.14 or higher i
 
 1. `mkdir cmake-build && cd cmake-build`. - create build folder directory 
 2. `cmake ../ -DCMAKE_BUILD_TYPE=Release` . For windows also add `-DCMAKE_GENERATOR_PLATFORM=x64` 
-3. `cmake --build . -j$(nproc)`  - Build OPF
+3. `cmake --build . -j$(nproc) --config Release`  - Build OPF
 
 ### Build and Install Python Extension
 

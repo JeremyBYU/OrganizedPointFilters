@@ -44,13 +44,13 @@ OrganizedPointFilters: Fast Filtering for Organized Point Clouds
 
     python_api/organizedpointfilters
     python_api/organizedpointfilters.filter
-    python_api/organizedpointfilters.cuda.kernel
     
 ..
     Please put the module and meta data you want here!
     MAKE_DOCS/python_api/organizedpointfilters
     MAKE_DOCS/python_api/organizedpointfilters.filter
     MAKE_DOCS/python_api/organizedpointfilters.cuda.kernel     python_only
+    MAKE_DOCS/python_api/organizedpointfilters.utility     python_only
 
 
 .. _cpp_api_index:

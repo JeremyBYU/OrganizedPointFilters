@@ -128,19 +128,19 @@ class CMakeBuild(build_ext):
 
 
 setup(
-    name="opf",
+    name="organizedpointfilters",
     version=version,
     author="Jeremy Castagno",
     author_email="jeremybyu@gmail.com",
-    description="Test OrganizedPointFilters integration",
+    description="A collection of fitlers for organized point clouds. Laplacian, bilateral, and other filters.",
     url='https://github.com/JeremyBYU/OrganizedPointFilters',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     license="MIT",
     include_package_data=True,
-    packages=['opf'],
+    packages=['organizedpointfilters', 'organizedpointfilters.cuda', 'organizedpointfilters.utility'],
     package_dir={'':'src/Python'},
-    ext_modules=[CMakeExtension("opf_pybind")],
+    ext_modules=[CMakeExtension("organizedpointfilters_pybind")],
     install_requires=install_requires,
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,

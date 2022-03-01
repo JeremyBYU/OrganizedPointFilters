@@ -1,17 +1,49 @@
+# Configure Header File
+configure_file("OPFConfig.hpp.in" "OPFConfig.hpp" @ONLY)
+
 # Set the Source, Header Files
 set(ORGANIZEDPOINTFILTERS_SRC "${CMAKE_CURRENT_SOURCE_DIR}")
 set(INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
 set(ORGANIZEDPOINTFILTERS_INCLUDE_DIR "${INCLUDE_DIR}/OrganizedPointFilters")
-set(ORGANIZEDPOINTFILTERS_SOURCE_FILES ${ORGANIZEDPOINTFILTERS_SRC}/OrganizedPointFilters.cpp ${ORGANIZEDPOINTFILTERS_SRC}/SpatialFilter.cpp
+set(ORGANIZEDPOINTFILTERS_SOURCE_FILES ${ORGANIZEDPOINTFILTERS_SRC}/OrganizedPointFilters.cpp ${ORGANIZEDPOINTFILTERS_SRC}/OPFConfig.cpp ${ORGANIZEDPOINTFILTERS_SRC}/SpatialFilter.cpp
                                         ${ORGANIZEDPOINTFILTERS_SRC}/Helper.cpp ${ORGANIZEDPOINTFILTERS_SRC}/Filters.cpp )
 set(ORGANIZEDPOINTFILTERS_HEADER_FILES ${ORGANIZEDPOINTFILTERS_INCLUDE_DIR}/OrganizedPointFilters.hpp ${ORGANIZEDPOINTFILTERS_INCLUDE_DIR}/Helper.hpp
                                         ${ORGANIZEDPOINTFILTERS_INCLUDE_DIR}/Types.hpp ${ORGANIZEDPOINTFILTERS_INCLUDE_DIR}/RS/SpatialFilter.hpp
                                         ${ORGANIZEDPOINTFILTERS_INCLUDE_DIR}/RS/DisparityTransform.hpp)
-
 # Create the CPP Library
 set(LIB_TYPE STATIC)
 add_library(${PROJECT_NAME} ${LIB_TYPE} ${ORGANIZEDPOINTFILTERS_SOURCE_FILES})
 add_library(OrganizedPointFilters::OPF ALIAS ${PROJECT_NAME})
+
+############# Start Build Options ###################
+
+# Configure optimization
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(OPTIMIZATION_FLAGS "-O0 -DDEBUG")
+    message("-- Configuring debug build")
+else()
+    set(OPTIMIZATION_FLAGS "-O3 -DNDEBUG")
+    message("-- Configuring release build")
+endif()
+
+# Enable warnings, will set to compile with src/CMakeLists.txt
+set(DESIRED_WARNINGS "-Wall -Wextra -Wconversion -Wunreachable-code -Wuninitialized -pedantic-errors -Wold-style-cast -Wno-error=unused-variable -Wshadow -Wfloat-equal -Weffc++")
+set(MINIMAL_DESIRED_WARNINGS "-Wall -Wextra -pedantic-errors")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set(DESIRED_WARNINGS "${DESIRED_WARNINGS} -Wmost")
+endif()
+separate_arguments(DESIRED_WARNINGS)
+separate_arguments(MINIMAL_DESIRED_WARNINGS)
+
+if (OPF_BUILD_WERROR)
+    set(DESIRED_WARNINGS "${DESIRED_WARNINGS} -Werror")
+    set(MINIMAL_DESIRED_WARNINGS "${MINIMAL_DESIRED_WARNINGS} -Werror")
+endif()
+
+# Set GLOBAL CMAKE_CXX_FLAGS
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OPTIMIZATION_FLAGS}")
+
+############# End Build Options #####################
 
 # Set Compile Options for ONLY this target.
 target_compile_options(${PROJECT_NAME}  PRIVATE
@@ -20,6 +52,10 @@ ${DESIRED_WARNINGS}>
 $<$<CXX_COMPILER_ID:MSVC>:
 /W4>)
 
+
+# To include the OPFConfig.hpp file
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+
 target_link_libraries_system_public(${PROJECT_NAME} eigen)
 
 # Fast Exponential
@@ -27,7 +63,7 @@ set(FASTEXP_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/thirdparty")
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${FASTEXP_INCLUDE_DIR})
 
 # OPTION Build with OpenMP Support
-if (OPF_WITH_OPENMP)
+if (OPF_WITH_OPENMP AND NOT APPLE)
   find_package(OpenMP)
   target_link_libraries(${PROJECT_NAME} PUBLIC OpenMP::OpenMP_CXX)
 endif()

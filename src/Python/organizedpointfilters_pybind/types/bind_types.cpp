@@ -82,7 +82,7 @@ py_array_to_triangle_matrix_copy(py::array_t<float, py::array::c_style | py::arr
     return new_matrix;
 }
 
-void pybind_matrix_types(py::module& m)
+void pybind_matrix_types(py::module_& m)
 {
 
     py::class_<Eigen::Ref<RowMatrixXVec3X<float>>>(

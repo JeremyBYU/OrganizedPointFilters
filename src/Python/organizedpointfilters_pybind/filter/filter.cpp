@@ -10,7 +10,7 @@ using namespace OrganizedPointFilters;
 
 void pybind_filter(py::module& m)
 {
-    py::module m_submodule = m.def_submodule("filter");
+    py::module_ m_submodule = m.def_submodule("filter");
 
     // m_submodule.def("laplacian", &Filter::Laplacian, "opc"_a, "_lambda"_a = OPF_KERNEL_DEFAULT_LAMBDA,
     //                 "iterations"_a = OPF_KERNEL_DEFAULT_ITER, "kernel_size"_a = OPF_KERNEL_DEFAULT_KERNEL_SIZE,

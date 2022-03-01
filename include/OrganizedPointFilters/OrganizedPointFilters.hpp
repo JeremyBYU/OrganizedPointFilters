@@ -35,6 +35,12 @@
 
 namespace OrganizedPointFilters {
 
+/**
+ * \brief Get version of OPF library
+ * 
+ * \return std::string 
+ */
+std::string GetOrganizedPointFiltersVersion();
 
 } // namespace OrganizedPointFilters
 

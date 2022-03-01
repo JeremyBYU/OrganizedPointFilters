@@ -7,7 +7,7 @@
 using namespace OrganizedPointFilters;
 
 
-PYBIND11_MODULE(organizedpointfilters, m)
+PYBIND11_MODULE(organizedpointfilters_pybind, m)
 {
     m.doc() = "Python binding of OrganizedPointFilters";
 
@@ -16,4 +16,6 @@ PYBIND11_MODULE(organizedpointfilters, m)
 
     // Submodules
     pybind_filter(m);
+
+    m.def("get_opf_version", &GetOrganizedPointFiltersVersion, "Get OrganizedPointFilters Version");
 }
