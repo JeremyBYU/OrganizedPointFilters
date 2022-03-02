@@ -1,5 +1,6 @@
 open3d
 pytest
+pytest-benchmark
 pypcd@https://api.github.com/repos/jeremybyu/pypcd/tarball/
 
 

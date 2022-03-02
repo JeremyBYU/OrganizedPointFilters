@@ -1,13 +1,15 @@
 from os import path
 import pytest
 import numpy as np
+import sys
+sys.path.insert(0, path.dirname(path.dirname(path.abspath(__file__))))
 
 from examples.python.utility.helper import (load_pcd_file, load_pcd_and_meshes)
 from examples.python.utility.o3d_util import create_open_3d_mesh_from_tri_mesh
 from organizedpointfilters.utility.helper import create_mesh_from_organized_point_cloud
 
 THIS_DIR = path.dirname(path.realpath(__file__))
-PCD_DIR = path.join(THIS_DIR, 'fixtures', 'pcd')
+PCD_DIR = path.join(THIS_DIR, '../', 'fixtures', 'pcd')
 
 @pytest.fixture
 def pcd1():
