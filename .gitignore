@@ -10,6 +10,7 @@ cmake-build
 cmake-build-linux
 assets/scratch
 
+
 # Python gitignore
 .vscode
 .nox
@@ -27,6 +28,7 @@ solns
 *.lib
 *.obj
 .vscode/ipch
+wheelhouse
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

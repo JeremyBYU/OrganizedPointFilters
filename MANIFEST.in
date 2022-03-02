@@ -17,6 +17,16 @@ recursive-include src *.md
 recursive-include src *.py
 recursive-include src *.txt
 recursive-include src *.cu
+recursive-include thirdparty *.cmake
+recursive-include thirdparty *.cpp
+recursive-include thirdparty *.hpp
+recursive-include thirdparty *.h
+recursive-include thirdparty *.in
+recursive-include thirdparty *.md
+recursive-include thirdparty *.py
+recursive-include thirdparty *.txt
+recursive-include thirdparty *.cu
+recursive-include thirdparty *LICENSE
 recursive-include tests *.cpp
 recursive-include tests *.txt
 recursive-include thirdparty *.txt
