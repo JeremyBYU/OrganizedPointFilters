@@ -10,6 +10,9 @@ organizedpointfilters.filter
     bilateral_K3
     compute_normals
     compute_normals_and_centroids
+    decimate_column_K2
+    decimate_column_K3
+    decimate_column_K4
     laplacian_K3
     laplacian_K5
 
@@ -20,5 +23,8 @@ organizedpointfilters.filter
     bilateral_K3 <organizedpointfilters.filter.bilateral_K3>
     compute_normals <organizedpointfilters.filter.compute_normals>
     compute_normals_and_centroids <organizedpointfilters.filter.compute_normals_and_centroids>
+    decimate_column_K2 <organizedpointfilters.filter.decimate_column_K2>
+    decimate_column_K3 <organizedpointfilters.filter.decimate_column_K3>
+    decimate_column_K4 <organizedpointfilters.filter.decimate_column_K4>
     laplacian_K3 <organizedpointfilters.filter.laplacian_K3>
     laplacian_K5 <organizedpointfilters.filter.laplacian_K5>

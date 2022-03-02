@@ -1,0 +1,13 @@
+.. _exhale_function__disparity_transform_8hpp_1a01c39d60fc61b493a8bf34610b445d58:
+
+Template Function OrganizedPointFilters::RS::disparity_convert
+==============================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_RS_DisparityTransform.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::RS::disparity_convert(void *, void *, int, int, float)

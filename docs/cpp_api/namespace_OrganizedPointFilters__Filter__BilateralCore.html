@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Namespace OrganizedPointFilters::Filter::BilateralCore &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>Namespace OrganizedPointFilters::Filter::BilateralCore &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
-        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -39,7 +40,7 @@
   <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Namespace OrganizedPointFilters::Filter::LaplacianCore" href="namespace_OrganizedPointFilters__Filter__LaplacianCore.html" />
+    <link rel="next" title="Namespace OrganizedPointFilters::Filter::DecimateCore" href="namespace_OrganizedPointFilters__Filter__DecimateCore.html" />
     <link rel="prev" title="Namespace OrganizedPointFilters::Filter" href="namespace_OrganizedPointFilters__Filter.html" /> 
 </head>
 
@@ -67,7 +68,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -91,23 +92,24 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -198,24 +200,24 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="namespace-organizedpointfilters-filter-bilateralcore">
-<span id="id1"></span><h1>Namespace OrganizedPointFilters::Filter::BilateralCore<a class="headerlink" href="#namespace-organizedpointfilters-filter-bilateralcore" title="Permalink to this headline">¶</a></h1>
-<div class="contents local topic" id="contents">
+<section id="namespace-organizedpointfilters-filter-bilateralcore-1">
+<span id="namespace-organizedpointfilters-filter-bilateralcore"></span><h1>Namespace OrganizedPointFilters::Filter::BilateralCore<a class="headerlink" href="#namespace-organizedpointfilters-filter-bilateralcore-1" title="Permalink to this headline">¶</a></h1>
+<nav class="contents local" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#functions" id="id2">Functions</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="toc-entry-1">Functions</a></p></li>
 </ul>
-</div>
-<div class="section" id="functions">
+</nav>
+<section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="function_Bilateral_8hpp_1ad992f303d13bbeecd96bf00f7db19931.html#exhale-function-bilateral-8hpp-1ad992f303d13bbeecd96bf00f7db19931"><span class="std std-ref">Template Function OrganizedPointFilters::Filter::BilateralCore::BilateralNormalLoop</span></a></p></li>
-<li><p><a class="reference internal" href="function_Bilateral_8hpp_1ac5a7bf4be9797f1a5115abbc2a34278e.html#exhale-function-bilateral-8hpp-1ac5a7bf4be9797f1a5115abbc2a34278e"><span class="std std-ref">Function OrganizedPointFilters::Filter::BilateralCore::GaussianWeight</span></a></p></li>
-<li><p><a class="reference internal" href="function_Bilateral_8hpp_1aa3603b284ff516d98cd88665581aef99.html#exhale-function-bilateral-8hpp-1aa3603b284ff516d98cd88665581aef99"><span class="std std-ref">Function OrganizedPointFilters::Filter::BilateralCore::IntegrateTriangle</span></a></p></li>
-<li><p><a class="reference internal" href="function_Bilateral_8hpp_1a93411964854e32a1b5e0a328c72c8ad9.html#exhale-function-bilateral-8hpp-1a93411964854e32a1b5e0a328c72c8ad9"><span class="std std-ref">Template Function OrganizedPointFilters::Filter::BilateralCore::SmoothNormal</span></a></p></li>
+<li><p><a class="reference internal" href="function__bilateral_8hpp_1ad992f303d13bbeecd96bf00f7db19931.html#exhale-function-bilateral-8hpp-1ad992f303d13bbeecd96bf00f7db19931"><span class="std std-ref">Template Function OrganizedPointFilters::Filter::BilateralCore::BilateralNormalLoop</span></a></p></li>
+<li><p><a class="reference internal" href="function__bilateral_8hpp_1ac5a7bf4be9797f1a5115abbc2a34278e.html#exhale-function-bilateral-8hpp-1ac5a7bf4be9797f1a5115abbc2a34278e"><span class="std std-ref">Function OrganizedPointFilters::Filter::BilateralCore::GaussianWeight</span></a></p></li>
+<li><p><a class="reference internal" href="function__bilateral_8hpp_1aa3603b284ff516d98cd88665581aef99.html#exhale-function-bilateral-8hpp-1aa3603b284ff516d98cd88665581aef99"><span class="std std-ref">Function OrganizedPointFilters::Filter::BilateralCore::IntegrateTriangle</span></a></p></li>
+<li><p><a class="reference internal" href="function__bilateral_8hpp_1a93411964854e32a1b5e0a328c72c8ad9.html#exhale-function-bilateral-8hpp-1a93411964854e32a1b5e0a328c72c8ad9"><span class="std std-ref">Template Function OrganizedPointFilters::Filter::BilateralCore::SmoothNormal</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -225,7 +227,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="namespace_OrganizedPointFilters__Filter__LaplacianCore.html" class="btn btn-neutral float-right" title="Namespace OrganizedPointFilters::Filter::LaplacianCore" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="namespace_OrganizedPointFilters__Filter__DecimateCore.html" class="btn btn-neutral float-right" title="Namespace OrganizedPointFilters::Filter::DecimateCore" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="namespace_OrganizedPointFilters__Filter.html" class="btn btn-neutral float-left" title="Namespace OrganizedPointFilters::Filter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

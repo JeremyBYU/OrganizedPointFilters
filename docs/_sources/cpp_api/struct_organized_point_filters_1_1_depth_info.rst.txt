@@ -1,0 +1,16 @@
+.. _exhale_struct_struct_organized_point_filters_1_1_depth_info:
+
+Struct DepthInfo
+================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Types.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: OrganizedPointFilters::DepthInfo
+   :members:
+   :protected-members:
+   :undoc-members:

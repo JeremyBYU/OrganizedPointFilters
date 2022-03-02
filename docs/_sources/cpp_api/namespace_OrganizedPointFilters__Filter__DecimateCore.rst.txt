@@ -1,0 +1,22 @@
+
+.. _namespace_OrganizedPointFilters__Filter__DecimateCore:
+
+Namespace OrganizedPointFilters::Filter::DecimateCore
+=====================================================
+
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+
+
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function__decimate_8hpp_1a45f8b88fdd1f859fe87b3cb8f20175bb`
+
+- :ref:`exhale_function__decimate_8hpp_1a3017de6b68cf44f45c3d94aca3d3ec2c`

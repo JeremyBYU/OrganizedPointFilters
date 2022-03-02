@@ -1,0 +1,13 @@
+.. _exhale_function__bilateral_8hpp_1ad992f303d13bbeecd96bf00f7db19931:
+
+Template Function OrganizedPointFilters::Filter::BilateralCore::BilateralNormalLoop
+===================================================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Filter_Bilateral.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::Filter::BilateralCore::BilateralNormalLoop(Eigen::Ref<OrganizedTriangleMatrix>, Eigen::Ref<OrganizedTriangleMatrix>, Eigen::Ref<OrganizedTriangleMatrix>, float, float)

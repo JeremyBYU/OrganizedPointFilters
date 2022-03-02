@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Program Listing for File DisparityTransform.hpp &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>Program Listing for File DisparityTransform.hpp &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
-        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -65,7 +66,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -89,23 +90,24 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -194,9 +196,9 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="program-listing-for-file-disparitytransform-hpp">
+<section id="program-listing-for-file-disparitytransform-hpp">
 <span id="program-listing-file-include-organizedpointfilters-rs-disparitytransform-hpp"></span><h1>Program Listing for File DisparityTransform.hpp<a class="headerlink" href="#program-listing-for-file-disparitytransform-hpp" title="Permalink to this headline">¶</a></h1>
-<p>↰ <a class="reference internal" href="file_include_OrganizedPointFilters_RS_DisparityTransform.hpp.html#file-include-organizedpointfilters-rs-disparitytransform-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/RS/DisparityTransform.hpp</span></code>)</p>
+<p>↰ <a class="reference internal" href="file_include_OrganizedPointFilters_RS_DisparityTransform.hpp.html#file-include-organizedpointfilters-rs-disparitytransform-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\RS\DisparityTransform.hpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Disparity transformation block is responsible to convert stereoscopic depth to disparity data</span>
 <span class="c1">// and vice versa</span>
 <span class="c1">// License: Apache 2.0. See LICENSE file in root directory.</span>
@@ -204,66 +206,66 @@
 
 <span class="cp">#pragma once</span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;OrganizedPointFilters/Types.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;OrganizedPointFilters/Types.hpp&quot;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">OrganizedPointFilters</span> <span class="p">{</span>
-<span class="k">namespace</span> <span class="n">RS</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">OrganizedPointFilters</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">RS</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Tin</span><span class="p">,</span> <span class="k">typename</span> <span class="n">Tout</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">disparity_convert</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">in_data</span><span class="p">,</span> <span class="kt">void</span><span class="o">*</span> <span class="n">out_data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">,</span> <span class="kt">float</span> <span class="n">d2d_convert_factor</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">static_assert</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">is_arithmetic</span><span class="o">&lt;</span><span class="n">Tin</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">),</span> <span class="s">&quot;disparity transform requires numeric type for input data&quot;</span><span class="p">);</span>
-    <span class="k">static_assert</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">is_arithmetic</span><span class="o">&lt;</span><span class="n">Tout</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">),</span> <span class="s">&quot;disparity transform requires numeric type for output data&quot;</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Tin</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Tout</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">disparity_convert</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">in_data</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">out_data</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">width</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">height</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">d2d_convert_factor</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">static_assert</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">is_arithmetic</span><span class="o">&lt;</span><span class="n">Tin</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;disparity transform requires numeric type for input data&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">static_assert</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">is_arithmetic</span><span class="o">&lt;</span><span class="n">Tout</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;disparity transform requires numeric type for output data&quot;</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">in</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Tin</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">in_data</span><span class="p">);</span>
-    <span class="k">auto</span> <span class="n">out</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">Tout</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">out_data</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">Tin</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">in_data</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">Tout</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">out_data</span><span class="p">);</span><span class="w"></span>
 
-    <span class="kt">bool</span> <span class="n">fp</span> <span class="o">=</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_floating_point</span><span class="o">&lt;</span><span class="n">Tin</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">);</span>
-    <span class="k">const</span> <span class="kt">float</span> <span class="n">round</span> <span class="o">=</span> <span class="n">fp</span> <span class="o">?</span> <span class="mf">0.5f</span> <span class="o">:</span> <span class="mf">0.f</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_floating_point</span><span class="o">&lt;</span><span class="n">Tin</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">round</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mf">0.5f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">0.f</span><span class="p">;</span><span class="w"></span>
 
-    <span class="kt">float</span> <span class="n">input</span><span class="p">{};</span>
-    <span class="c1">// TODO SSE optimize</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">height</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">width</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">input</span> <span class="o">=</span> <span class="o">*</span><span class="n">in</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">isnormal</span><span class="p">(</span><span class="n">input</span><span class="p">))</span>
-                <span class="o">*</span><span class="n">out</span><span class="o">++</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Tout</span><span class="o">&gt;</span><span class="p">((</span><span class="n">d2d_convert_factor</span> <span class="o">/</span> <span class="n">input</span><span class="p">)</span> <span class="o">+</span> <span class="n">round</span><span class="p">);</span>
-            <span class="k">else</span>
-                <span class="o">*</span><span class="n">out</span><span class="o">++</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="n">in</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">input</span><span class="p">{};</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// TODO SSE optimize</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">height</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">width</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">in</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">isnormal</span><span class="p">(</span><span class="n">input</span><span class="p">))</span><span class="w"></span>
+<span class="w">                </span><span class="o">*</span><span class="n">out</span><span class="o">++</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Tout</span><span class="o">&gt;</span><span class="p">((</span><span class="n">d2d_convert_factor</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">round</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="k">else</span><span class="w"></span>
+<span class="w">                </span><span class="o">*</span><span class="n">out</span><span class="o">++</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">in</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">Tin</span><span class="p">,</span> <span class="k">typename</span> <span class="n">Tout</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tout</span><span class="o">&gt;</span> <span class="n">disparity_transform</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tin</span><span class="o">&gt;&amp;</span> <span class="n">source</span><span class="p">,</span> <span class="n">ImgDetails</span><span class="o">&amp;</span> <span class="n">details</span><span class="p">,</span> <span class="n">DepthInfo</span><span class="o">&amp;</span> <span class="n">info</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">num_pixels</span> <span class="o">=</span> <span class="n">details</span><span class="p">.</span><span class="n">w</span> <span class="o">*</span> <span class="n">details</span><span class="p">.</span><span class="n">h</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">tgt</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tout</span><span class="o">&gt;</span><span class="p">(</span><span class="n">num_pixels</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Tin</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">Tout</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tout</span><span class="o">&gt;</span><span class="w"> </span><span class="n">disparity_transform</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tin</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">ImgDetails</span><span class="o">&amp;</span><span class="w"> </span><span class="n">details</span><span class="p">,</span><span class="w"> </span><span class="n">DepthInfo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">info</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">num_pixels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">details</span><span class="p">.</span><span class="n">w</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">details</span><span class="p">.</span><span class="n">h</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">tgt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Tout</span><span class="o">&gt;</span><span class="p">(</span><span class="n">num_pixels</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// Get conversion factor for disparity</span>
-    <span class="kt">float</span> <span class="n">stereo_baseline_meter</span> <span class="o">=</span> <span class="n">info</span><span class="p">.</span><span class="n">stereo_baseline_mm</span> <span class="o">*</span> <span class="mf">.001f</span><span class="p">;</span>
-    <span class="kt">float</span> <span class="n">focal_length_meter</span> <span class="o">=</span> <span class="n">info</span><span class="p">.</span><span class="n">focal_length_x_mm</span> <span class="o">*</span> <span class="mf">.001f</span><span class="p">;</span>
-    <span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">fractional_bits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-    <span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">fractions</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">fractional_bits</span><span class="p">;</span>
-    <span class="n">info</span><span class="p">.</span><span class="n">d2d_convert_factor</span> <span class="o">=</span> <span class="p">(</span><span class="n">stereo_baseline_meter</span> <span class="o">*</span> <span class="n">info</span><span class="p">.</span><span class="n">focal_length_x_mm</span> <span class="o">*</span> <span class="n">fractions</span><span class="p">)</span> <span class="o">/</span> <span class="n">info</span><span class="p">.</span><span class="n">depth_units_m</span><span class="p">;</span>
-    <span class="c1">// info.d2d_convert_factor = (stereo_baseline_meter * info.focal_length_x_mm) / info.depth_units_m;</span>
+<span class="w">    </span><span class="c1">// Get conversion factor for disparity</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">stereo_baseline_meter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">stereo_baseline_mm</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">.001f</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">focal_length_meter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">focal_length_x_mm</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">.001f</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">fractional_bits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">fractions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">fractional_bits</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">info</span><span class="p">.</span><span class="n">d2d_convert_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">stereo_baseline_meter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">focal_length_x_mm</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fractions</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">depth_units_m</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// info.d2d_convert_factor = (stereo_baseline_meter * info.focal_length_x_mm) / info.depth_units_m;</span>
 
-    <span class="c1">// update_transformation_profile(f);</span>
+<span class="w">    </span><span class="c1">// update_transformation_profile(f);</span>
 
-    <span class="kt">bool</span> <span class="n">fp</span> <span class="o">=</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_floating_point</span><span class="o">&lt;</span><span class="n">Tin</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_floating_point</span><span class="o">&lt;</span><span class="n">Tin</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">);</span><span class="w"></span>
 
-    <span class="n">disparity_convert</span><span class="o">&lt;</span><span class="n">Tin</span><span class="p">,</span> <span class="n">Tout</span><span class="o">&gt;</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">tgt</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span> <span class="n">details</span><span class="p">.</span><span class="n">w</span><span class="p">,</span>
-                                 <span class="n">details</span><span class="p">.</span><span class="n">h</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">d2d_convert_factor</span><span class="p">);</span>
+<span class="w">    </span><span class="n">disparity_convert</span><span class="o">&lt;</span><span class="n">Tin</span><span class="p">,</span><span class="w"> </span><span class="n">Tout</span><span class="o">&gt;</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">source</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">tgt</span><span class="p">.</span><span class="n">data</span><span class="p">()),</span><span class="w"> </span><span class="n">details</span><span class="p">.</span><span class="n">w</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                 </span><span class="n">details</span><span class="p">.</span><span class="n">h</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">d2d_convert_factor</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="n">tgt</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tgt</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span> <span class="c1">// namespace RS</span>
-<span class="p">}</span> <span class="c1">// namespace img_filters</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace RS</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace img_filters</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>

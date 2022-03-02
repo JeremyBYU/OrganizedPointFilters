@@ -1,0 +1,6 @@
+organizedpointfilters.utility.helper.pick_valid_normals
+-------------------------------------------------------
+
+.. currentmodule:: organizedpointfilters.utility.helper
+
+.. autofunction:: pick_valid_normals

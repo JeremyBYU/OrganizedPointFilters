@@ -1,0 +1,16 @@
+.. _exhale_struct_struct_organized_point_filters_1_1_img_details:
+
+Struct ImgDetails
+=================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Types.hpp`
+
+
+Struct Documentation
+--------------------
+
+
+.. doxygenstruct:: OrganizedPointFilters::ImgDetails
+   :members:
+   :protected-members:
+   :undoc-members:

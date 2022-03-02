@@ -1,0 +1,16 @@
+.. _exhale_class_class_organized_point_filters_1_1_helper_1_1_timer:
+
+Class Timer
+===========
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Helper.hpp`
+
+
+Class Documentation
+-------------------
+
+
+.. doxygenclass:: OrganizedPointFilters::Helper::Timer
+   :members:
+   :protected-members:
+   :undoc-members:

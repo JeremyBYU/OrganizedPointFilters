@@ -1,0 +1,13 @@
+.. _exhale_typedef__types_8hpp_1a55661bd6be4719cb4f129ce3ea26833c:
+
+Typedef OrganizedPointFilters::EigenDoubleVector3f
+==================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Types.hpp`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: OrganizedPointFilters::EigenDoubleVector3f

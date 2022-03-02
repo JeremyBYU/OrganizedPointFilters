@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Program Listing for File Laplacian.hpp &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>Program Listing for File Laplacian.hpp &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
-        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -65,7 +66,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -89,23 +90,24 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -194,14 +196,14 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="program-listing-for-file-laplacian-hpp">
+<section id="program-listing-for-file-laplacian-hpp">
 <span id="program-listing-file-include-organizedpointfilters-filter-laplacian-hpp"></span><h1>Program Listing for File Laplacian.hpp<a class="headerlink" href="#program-listing-for-file-laplacian-hpp" title="Permalink to this headline">¶</a></h1>
-<p>↰ <a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Laplacian.hpp.html#file-include-organizedpointfilters-filter-laplacian-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/Filter/Laplacian.hpp</span></code>)</p>
+<p>↰ <a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Laplacian.hpp.html#file-include-organizedpointfilters-filter-laplacian-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\Filter\Laplacian.hpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef ORGANIZEDPOINTFILTERS_KERNEL</span>
 <span class="cp">#define ORGANIZEDPOINTFILTERS_KERNEL</span>
-<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;OrganizedPointFilters/Types.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;OrganizedPointFilters/Types.hpp&quot;</span><span class="cp"></span>
 
 <span class="cp">#define eps 1e-12f</span>
 <span class="cp">#define OPF_KERNEL_DEFAULT_LAMBDA 0.5f</span>
@@ -210,131 +212,130 @@
 <span class="cp">#define OPF_KERNEL_OMP_MAX_THREAD 16</span>
 <span class="cp">#define OPF_KERNEL_MAX_FLOAT 1000000.0</span>
 
-<span class="k">namespace</span> <span class="n">OrganizedPointFilters</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">OrganizedPointFilters</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">namespace</span> <span class="n">Filter</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">Filter</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">namespace</span> <span class="n">LaplacianCore</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">LaplacianCore</span><span class="w"></span>
 
-<span class="p">{</span>
+<span class="p">{</span><span class="w"></span>
 
-<span class="kr">inline</span> <span class="kt">void</span> <span class="n">OppositePointK3</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">row</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">col</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">new_row</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">new_col</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">new_row</span> <span class="o">=</span> <span class="n">row</span><span class="p">;</span>
-    <span class="n">new_col</span> <span class="o">=</span> <span class="n">col</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">col</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">col</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">new_col</span> <span class="o">=</span> <span class="n">col</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">2</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="n">new_row</span> <span class="o">=</span> <span class="n">row</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">else</span>
-    <span class="p">{</span>
-        <span class="n">new_col</span> <span class="o">=</span> <span class="n">col</span><span class="p">;</span>
-        <span class="n">new_row</span> <span class="o">=</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">2</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">OppositePointK3</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">new_row</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="n">new_col</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">new_row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">new_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">col</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">col</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">new_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">new_row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">new_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">col</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">new_row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="kt">int</span> <span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">3</span><span class="o">&gt;</span>
-<span class="n">__attribute__</span><span class="p">((</span><span class="n">optimize</span><span class="p">(</span><span class="s">&quot;unroll-loops&quot;</span><span class="p">)))</span> <span class="kr">inline</span> <span class="kt">void</span>
-<span class="n">SmoothPointT</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">RowMatrixXVec3f</span><span class="o">&gt;&amp;</span> <span class="n">opc</span><span class="p">,</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">RowMatrixXVec3f</span><span class="o">&gt;&amp;</span> <span class="n">opc_out</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">j</span><span class="p">,</span>
-             <span class="k">const</span> <span class="kt">float</span> <span class="n">lambda</span> <span class="o">=</span> <span class="n">OPF_KERNEL_DEFAULT_LAMBDA</span><span class="p">,</span> <span class="kt">float</span> <span class="n">max_dist</span> <span class="o">=</span> <span class="n">OPF_KERNEL_MAX_FLOAT</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">shift</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">kernel_size</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">int</span><span class="w"> </span><span class="n">kernel_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"></span>
+<span class="n">SmoothPointT</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">RowMatrixXVec3f</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">opc</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">RowMatrixXVec3f</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">opc_out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"></span>
+<span class="w">             </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OPF_KERNEL_DEFAULT_LAMBDA</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">max_dist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OPF_KERNEL_MAX_FLOAT</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">kernel_size</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
 
-    <span class="kt">float</span> <span class="n">total_weight</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
-    <span class="k">auto</span><span class="o">&amp;</span> <span class="n">point</span> <span class="o">=</span> <span class="n">opc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
-    <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3f</span> <span class="n">sum_vertex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="kt">float</span> <span class="n">weight</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">total_weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opc</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3f</span><span class="w"> </span><span class="nf">sum_vertex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// int opp_row = 0;</span>
-    <span class="c1">// int opp_col = 0;</span>
-    <span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3f</span> <span class="n">synthetic_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// int opp_row = 0;</span>
+<span class="w">    </span><span class="c1">// int opp_col = 0;</span>
+<span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3f</span><span class="w"> </span><span class="nf">synthetic_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">kernel_size</span><span class="p">;</span> <span class="o">++</span><span class="n">row</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="kt">int</span> <span class="n">row_</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="n">shift</span> <span class="o">+</span> <span class="n">row</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">col</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">kernel_size</span><span class="p">;</span> <span class="o">++</span><span class="n">col</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="kt">int</span> <span class="n">col_</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="n">shift</span> <span class="o">+</span> <span class="n">col</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">row_</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">==</span> <span class="n">col_</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kernel_size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">row</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">row_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">row</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">kernel_size</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">col</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">col_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">col</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">row_</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">col_</span><span class="p">)</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w"></span>
 
-            <span class="k">auto</span> <span class="n">nbr_point</span> <span class="o">=</span> <span class="n">opc</span><span class="p">(</span><span class="n">row_</span><span class="p">,</span> <span class="n">col_</span><span class="p">);</span>
-            <span class="kt">float</span> <span class="n">dist</span> <span class="o">=</span> <span class="p">(</span><span class="n">point</span> <span class="o">-</span> <span class="n">nbr_point</span><span class="p">).</span><span class="n">norm</span><span class="p">();</span>
+<span class="w">            </span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">nbr_point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">opc</span><span class="p">(</span><span class="n">row_</span><span class="p">,</span><span class="w"> </span><span class="n">col_</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">dist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">point</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">nbr_point</span><span class="p">).</span><span class="n">norm</span><span class="p">();</span><span class="w"></span>
 
-            <span class="c1">// if dist&gt; max_dist this indicantes this neighbor is very far away and should not be included in vertex sum</span>
-            <span class="c1">// simply removing this neighbor leaves the smoothign &quot;unbalanced&quot;</span>
-            <span class="c1">// basically the center point (i,j) will be disprorionately dragged to one side</span>
-            <span class="c1">// a better strategy would be to try and find a &#39;good&#39; replacement synthetic point</span>
-            <span class="c1">// the below code just looks for an opposite nbr point e.g. (0,0) -&gt; (0, 2)</span>
-            <span class="c1">// a vector is constructed from the center point and added to the center point</span>
-            <span class="c1">// This makes the function about 20% slower then just simply not adding the nbr</span>
-            <span class="c1">// if (dist &gt; max_dist)</span>
-            <span class="c1">// {</span>
-            <span class="c1">//     OppositePointK3(row, col, opp_row, opp_col);</span>
-            <span class="c1">//     auto global_row = i - shift + opp_row;</span>
-            <span class="c1">//     auto global_col = j - shift + opp_col;</span>
-            <span class="c1">//     synthetic_point = opc(global_row, global_col);</span>
-            <span class="c1">//     dist = (point - synthetic_point).norm();</span>
-            <span class="c1">//     if (dist &gt; max_dist) continue;</span>
-            <span class="c1">//     weight = 1. / (2.0f * dist + eps);</span>
-            <span class="c1">//     nbr_point = (point - synthetic_point) + point;</span>
-            <span class="c1">// }</span>
-            <span class="c1">// else</span>
-            <span class="c1">// {</span>
-            <span class="c1">//     weight = 1. / (dist + eps);</span>
-            <span class="c1">// }</span>
+<span class="w">            </span><span class="c1">// if dist&gt; max_dist this indicantes this neighbor is very far away and should not be included in vertex sum</span>
+<span class="w">            </span><span class="c1">// simply removing this neighbor leaves the smoothign &quot;unbalanced&quot;</span>
+<span class="w">            </span><span class="c1">// basically the center point (i,j) will be disprorionately dragged to one side</span>
+<span class="w">            </span><span class="c1">// a better strategy would be to try and find a &#39;good&#39; replacement synthetic point</span>
+<span class="w">            </span><span class="c1">// the below code just looks for an opposite nbr point e.g. (0,0) -&gt; (0, 2)</span>
+<span class="w">            </span><span class="c1">// a vector is constructed from the center point and added to the center point</span>
+<span class="w">            </span><span class="c1">// This makes the function about 20% slower then just simply not adding the nbr</span>
+<span class="w">            </span><span class="c1">// if (dist &gt; max_dist)</span>
+<span class="w">            </span><span class="c1">// {</span>
+<span class="w">            </span><span class="c1">//     OppositePointK3(row, col, opp_row, opp_col);</span>
+<span class="w">            </span><span class="c1">//     auto global_row = i - shift + opp_row;</span>
+<span class="w">            </span><span class="c1">//     auto global_col = j - shift + opp_col;</span>
+<span class="w">            </span><span class="c1">//     synthetic_point = opc(global_row, global_col);</span>
+<span class="w">            </span><span class="c1">//     dist = (point - synthetic_point).norm();</span>
+<span class="w">            </span><span class="c1">//     if (dist &gt; max_dist) continue;</span>
+<span class="w">            </span><span class="c1">//     weight = 1. / (2.0f * dist + eps);</span>
+<span class="w">            </span><span class="c1">//     nbr_point = (point - synthetic_point) + point;</span>
+<span class="w">            </span><span class="c1">// }</span>
+<span class="w">            </span><span class="c1">// else</span>
+<span class="w">            </span><span class="c1">// {</span>
+<span class="w">            </span><span class="c1">//     weight = 1. / (dist + eps);</span>
+<span class="w">            </span><span class="c1">// }</span>
 
-            <span class="c1">// this is faster than above but leads to really small triangles near edges of surfaces</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">dist</span> <span class="o">&gt;</span> <span class="n">max_dist</span> <span class="o">||</span> <span class="n">std</span><span class="o">::</span><span class="n">isnan</span><span class="p">(</span><span class="n">dist</span><span class="p">))</span> <span class="k">continue</span><span class="p">;</span>
-            <span class="n">weight</span> <span class="o">=</span> <span class="mf">1.0f</span> <span class="o">/</span> <span class="p">(</span><span class="n">dist</span> <span class="o">+</span> <span class="n">eps</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">// this is faster than above but leads to really small triangles near edges of surfaces</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">isnan</span><span class="p">(</span><span class="n">dist</span><span class="p">))</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0f</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">dist</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eps</span><span class="p">);</span><span class="w"></span>
 
-            <span class="n">total_weight</span> <span class="o">+=</span> <span class="n">weight</span><span class="p">;</span>
-            <span class="n">sum_vertex</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">nbr_point</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">            </span><span class="n">total_weight</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">weight</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">sum_vertex</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nbr_point</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">total_weight</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">total_weight</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">opc_out</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="n">point</span> <span class="o">+</span> <span class="n">lambda</span> <span class="o">*</span> <span class="p">(</span><span class="n">sum_vertex</span> <span class="o">/</span> <span class="n">total_weight</span> <span class="o">-</span> <span class="n">point</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="n">opc_out</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">sum_vertex</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total_weight</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">point</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="kt">int</span> <span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">3</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="n">LaplacianLoopT</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">RowMatrixXVec3f</span><span class="o">&gt;</span> <span class="n">opc</span><span class="p">,</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">RowMatrixXVec3f</span><span class="o">&gt;</span> <span class="n">opc_out</span><span class="p">,</span>
-                           <span class="k">const</span> <span class="kt">float</span> <span class="n">lambda</span> <span class="o">=</span> <span class="n">OPF_KERNEL_DEFAULT_LAMBDA</span><span class="p">,</span> <span class="kt">float</span> <span class="n">max_dist</span> <span class="o">=</span> <span class="n">OPF_KERNEL_MAX_FLOAT</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">const</span> <span class="kt">int</span> <span class="n">rows</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">opc</span><span class="p">.</span><span class="n">rows</span><span class="p">());</span>
-    <span class="k">const</span> <span class="kt">int</span> <span class="n">cols</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">opc</span><span class="p">.</span><span class="n">cols</span><span class="p">());</span>
-    <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">shift</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">kernel_size</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
-    <span class="k">const</span> <span class="kt">int</span> <span class="n">rows_max</span> <span class="o">=</span> <span class="n">rows</span> <span class="o">-</span> <span class="n">shift</span><span class="p">;</span>
-    <span class="k">const</span> <span class="kt">int</span> <span class="n">cols_max</span> <span class="o">=</span> <span class="n">cols</span> <span class="o">-</span> <span class="n">shift</span><span class="p">;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">int</span><span class="w"> </span><span class="n">kernel_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">LaplacianLoopT</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">RowMatrixXVec3f</span><span class="o">&gt;</span><span class="w"> </span><span class="n">opc</span><span class="p">,</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">RowMatrixXVec3f</span><span class="o">&gt;</span><span class="w"> </span><span class="n">opc_out</span><span class="p">,</span><span class="w"></span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OPF_KERNEL_DEFAULT_LAMBDA</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">max_dist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OPF_KERNEL_MAX_FLOAT</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">opc</span><span class="p">.</span><span class="n">rows</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">opc</span><span class="p">.</span><span class="n">cols</span><span class="p">());</span><span class="w"></span>
+<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">shift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">kernel_size</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">rows_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">shift</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">cols_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">shift</span><span class="p">;</span><span class="w"></span>
 
 <span class="cp">#if defined(_OPENMP)</span>
-    <span class="kt">int</span> <span class="n">num_threads</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">omp_get_max_threads</span><span class="p">(),</span> <span class="n">OPF_KERNEL_OMP_MAX_THREAD</span><span class="p">);</span>
-    <span class="n">num_threads</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">num_threads</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">num_threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">omp_get_max_threads</span><span class="p">(),</span><span class="w"> </span><span class="n">OPF_KERNEL_OMP_MAX_THREAD</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">num_threads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">max</span><span class="p">(</span><span class="n">num_threads</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
 <span class="cp">#pragma omp parallel for schedule(guided) num_threads(num_threads)</span>
 <span class="cp">#endif</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">row</span> <span class="o">=</span> <span class="n">shift</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">rows_max</span><span class="p">;</span> <span class="o">++</span><span class="n">row</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">col</span> <span class="o">=</span> <span class="n">shift</span><span class="p">;</span> <span class="n">col</span> <span class="o">&lt;</span> <span class="n">cols_max</span><span class="p">;</span> <span class="o">++</span><span class="n">col</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">SmoothPointT</span><span class="o">&lt;</span><span class="n">kernel_size</span><span class="o">&gt;</span><span class="p">(</span><span class="n">opc</span><span class="p">,</span> <span class="n">opc_out</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">lambda</span><span class="p">,</span> <span class="n">max_dist</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shift</span><span class="p">;</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">rows_max</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">row</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shift</span><span class="p">;</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">cols_max</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">col</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">SmoothPointT</span><span class="o">&lt;</span><span class="n">kernel_size</span><span class="o">&gt;</span><span class="p">(</span><span class="n">opc</span><span class="p">,</span><span class="w"> </span><span class="n">opc_out</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">lambda</span><span class="p">,</span><span class="w"> </span><span class="n">max_dist</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="p">}</span> <span class="c1">// namespace LaplacianCore</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace LaplacianCore</span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="kt">int</span> <span class="n">kernel_size</span> <span class="o">=</span> <span class="mi">3</span><span class="o">&gt;</span>
-<span class="n">RowMatrixXVec3f</span> <span class="n">LaplacianT</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">RowMatrixXVec3f</span><span class="o">&gt;</span> <span class="n">opc</span><span class="p">,</span> <span class="kt">float</span> <span class="n">lambda</span> <span class="o">=</span> <span class="n">OPF_KERNEL_DEFAULT_LAMBDA</span><span class="p">,</span>
-                                  <span class="kt">int</span> <span class="n">iterations</span> <span class="o">=</span> <span class="n">OPF_KERNEL_DEFAULT_ITER</span><span class="p">,</span> <span class="kt">float</span> <span class="n">max_dist</span> <span class="o">=</span> <span class="n">OPF_KERNEL_MAX_FLOAT</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">int</span><span class="w"> </span><span class="n">kernel_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">RowMatrixXVec3f</span><span class="w"> </span><span class="n">LaplacianT</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="n">RowMatrixXVec3f</span><span class="o">&gt;</span><span class="w"> </span><span class="n">opc</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OPF_KERNEL_DEFAULT_LAMBDA</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                  </span><span class="kt">int</span><span class="w"> </span><span class="n">iterations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OPF_KERNEL_DEFAULT_ITER</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">max_dist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OPF_KERNEL_MAX_FLOAT</span><span class="p">);</span><span class="w"></span>
 
-<span class="p">}</span> <span class="c1">// namespace Filter</span>
-<span class="p">}</span> <span class="c1">// namespace OrganizedPointFilters</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace Filter</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace OrganizedPointFilters</span>
 
 <span class="cp">#endif</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>

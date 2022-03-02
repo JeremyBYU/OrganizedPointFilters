@@ -1,0 +1,9 @@
+organizedpointfilters.utility.helper.MatrixDouble
+-------------------------------------------------
+
+.. currentmodule:: organizedpointfilters.utility.helper
+
+.. autoclass:: MatrixDouble
+    :members:
+    :undoc-members:
+    :inherited-members:

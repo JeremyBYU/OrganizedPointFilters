@@ -1,0 +1,6 @@
+organizedpointfilters.utility.helper.load_pcd_file
+--------------------------------------------------
+
+.. currentmodule:: organizedpointfilters.utility.helper
+
+.. autofunction:: load_pcd_file

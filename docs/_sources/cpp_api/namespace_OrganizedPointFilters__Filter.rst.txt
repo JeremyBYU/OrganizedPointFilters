@@ -19,6 +19,8 @@ Namespaces
 
 - :ref:`namespace_OrganizedPointFilters__Filter__BilateralCore`
 
+- :ref:`namespace_OrganizedPointFilters__Filter__DecimateCore`
+
 - :ref:`namespace_OrganizedPointFilters__Filter__LaplacianCore`
 
 - :ref:`namespace_OrganizedPointFilters__Filter__NormalCore`
@@ -28,12 +30,14 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_Bilateral_8hpp_1a82795c0fa06b290a089b7df9c9a1049b`
+- :ref:`exhale_function__bilateral_8hpp_1a82795c0fa06b290a089b7df9c9a1049b`
 
-- :ref:`exhale_function_Normal_8hpp_1a8c01aca4351b8271d3426b3757bf5c1a`
+- :ref:`exhale_function__normal_8hpp_1a8c01aca4351b8271d3426b3757bf5c1a`
 
-- :ref:`exhale_function_Normal_8hpp_1acf94bceb0d0138b4415060331e3ac764`
+- :ref:`exhale_function__normal_8hpp_1acf94bceb0d0138b4415060331e3ac764`
 
-- :ref:`exhale_function_Normal_8hpp_1a4d2c31f73ae23a2eb5b95f4dd304b177`
+- :ref:`exhale_function__normal_8hpp_1a440ba5607c2407513ce2c819369599a9`
 
-- :ref:`exhale_function_Laplacian_8hpp_1a8756ee08d114a035420c0275515c68a0`
+- :ref:`exhale_function__decimate_8hpp_1a48b80c587325e24116d2280402205ba8`
+
+- :ref:`exhale_function__laplacian_8hpp_1a8756ee08d114a035420c0275515c68a0`

@@ -17,13 +17,13 @@ Classes
 -------
 
 
-- :ref:`exhale_class_classOrganizedPointFilters_1_1Helper_1_1Timer`
+- :ref:`exhale_class_class_organized_point_filters_1_1_helper_1_1_timer`
 
 
 Functions
 ---------
 
 
-- :ref:`exhale_function_Helper_8hpp_1a617e680649ef08b6c5b8fbdd3ba48aab`
+- :ref:`exhale_function__helper_8hpp_1a617e680649ef08b6c5b8fbdd3ba48aab`
 
-- :ref:`exhale_function_Helper_8hpp_1a76d4d986abf42e204fb3b70d2c1ed24d`
+- :ref:`exhale_function__helper_8hpp_1a39ffe616907e8c84f41f51a765214dcc`

@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>organizedpointfilters.cuda.kernel &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>organizedpointfilters.cuda.kernel &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
-        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -67,7 +68,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -91,17 +92,17 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
@@ -111,8 +112,9 @@
 <li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.cuda.kernel.laplacian_K5_cuda.html">laplacian_K5_cuda</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../cpp_api/cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -201,17 +203,13 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="organizedpointfilters-cuda-kernel">
+<section id="organizedpointfilters-cuda-kernel">
 <h1>organizedpointfilters.cuda.kernel<a class="headerlink" href="#organizedpointfilters-cuda-kernel" title="Permalink to this headline">¶</a></h1>
 <p><strong>Functions</strong></p>
 <table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="organizedpointfilters.cuda.kernel.bilateral_K3_cuda.html#organizedpointfilters.cuda.kernel.bilateral_K3_cuda" title="organizedpointfilters.cuda.kernel.bilateral_K3_cuda"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bilateral_K3_cuda</span></code></a>(normals, centroids[, …])</p></td>
-<td><p>Performs bilateral filtering on an organized point cloud</p></td>
+<td><p>Performs bilateral filtering on an organized point cloud using CUDA</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="organizedpointfilters.cuda.kernel.laplacian_K3_cuda.html#organizedpointfilters.cuda.kernel.laplacian_K3_cuda" title="organizedpointfilters.cuda.kernel.laplacian_K3_cuda"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplacian_K3_cuda</span></code></a>(opc_float[, loops, _lambda])</p></td>
 <td><p>Perform laplacian smoothing on point cloud using CUDA</p></td>
@@ -223,7 +221,7 @@
 </table>
 <div class="toctree-wrapper compound">
 </div>
-</div>
+</section>
 
 
            </div>

@@ -16,6 +16,7 @@ recursive-include src *.in
 recursive-include src *.md
 recursive-include src *.py
 recursive-include src *.txt
+recursive-include src *.cu
 recursive-include tests *.cpp
 recursive-include tests *.txt
 recursive-include thirdparty *.txt

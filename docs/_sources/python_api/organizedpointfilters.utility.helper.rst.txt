@@ -1,0 +1,62 @@
+organizedpointfilters.utility.helper
+------------------------------------
+
+.. currentmodule:: organizedpointfilters.utility.helper
+
+**Classes**
+
+.. autosummary::
+
+    Matrix3f
+    Matrix3fRef
+    MatrixDouble
+    Path
+
+
+**Functions**
+
+.. autosummary::
+
+    bilateral_opc
+    bilateral_opc_cuda
+    compute_normals_and_centroids_opc
+    compute_normals_opc
+    create_mesh_from_organized_point_cloud
+    create_mesh_from_organized_point_cloud_with_o3d
+    create_meshes
+    create_meshes_cuda
+    get_np_buffer_ptr
+    laplacian_opc
+    laplacian_opc_cuda
+    laplacian_then_bilateral_opc
+    laplacian_then_bilateral_opc_cuda
+    load_pcd_and_meshes
+    load_pcd_file
+    pick_valid_normals
+    tab40
+
+
+.. toctree::
+    :hidden:
+
+    Matrix3f <organizedpointfilters.utility.helper.Matrix3f>
+    Matrix3fRef <organizedpointfilters.utility.helper.Matrix3fRef>
+    MatrixDouble <organizedpointfilters.utility.helper.MatrixDouble>
+    Path <organizedpointfilters.utility.helper.Path>
+    bilateral_opc <organizedpointfilters.utility.helper.bilateral_opc>
+    bilateral_opc_cuda <organizedpointfilters.utility.helper.bilateral_opc_cuda>
+    compute_normals_and_centroids_opc <organizedpointfilters.utility.helper.compute_normals_and_centroids_opc>
+    compute_normals_opc <organizedpointfilters.utility.helper.compute_normals_opc>
+    create_mesh_from_organized_point_cloud <organizedpointfilters.utility.helper.create_mesh_from_organized_point_cloud>
+    create_mesh_from_organized_point_cloud_with_o3d <organizedpointfilters.utility.helper.create_mesh_from_organized_point_cloud_with_o3d>
+    create_meshes <organizedpointfilters.utility.helper.create_meshes>
+    create_meshes_cuda <organizedpointfilters.utility.helper.create_meshes_cuda>
+    get_np_buffer_ptr <organizedpointfilters.utility.helper.get_np_buffer_ptr>
+    laplacian_opc <organizedpointfilters.utility.helper.laplacian_opc>
+    laplacian_opc_cuda <organizedpointfilters.utility.helper.laplacian_opc_cuda>
+    laplacian_then_bilateral_opc <organizedpointfilters.utility.helper.laplacian_then_bilateral_opc>
+    laplacian_then_bilateral_opc_cuda <organizedpointfilters.utility.helper.laplacian_then_bilateral_opc_cuda>
+    load_pcd_and_meshes <organizedpointfilters.utility.helper.load_pcd_and_meshes>
+    load_pcd_file <organizedpointfilters.utility.helper.load_pcd_file>
+    pick_valid_normals <organizedpointfilters.utility.helper.pick_valid_normals>
+    tab40 <organizedpointfilters.utility.helper.tab40>

@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Full API &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>Full API &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
-        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -65,7 +66,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -89,23 +90,24 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -194,9 +196,9 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="full-api">
+<section id="full-api">
 <h1>Full API<a class="headerlink" href="#full-api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="directories">
+<section id="directories">
 <h2>Directories<a class="headerlink" href="#directories" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
@@ -231,13 +233,13 @@
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="files">
+</section>
+<section id="files">
 <h2>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Bilateral.hpp.html">File Bilateral.hpp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Bilateral.hpp.html#definition-include-organizedpointfilters-filter-bilateral-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/Filter/Bilateral.hpp</span></code>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Bilateral.hpp.html#definition-include-organizedpointfilters-filter-bilateral-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\Filter\Bilateral.hpp</span></code>)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_OrganizedPointFilters_Filter_Bilateral.hpp.html">Program Listing for File Bilateral.hpp</a></li>
 </ul>
 </li>
@@ -251,8 +253,22 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Decimate.hpp.html">File Decimate.hpp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Decimate.hpp.html#definition-include-organizedpointfilters-filter-decimate-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\Filter\Decimate.hpp</span></code>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_OrganizedPointFilters_Filter_Decimate.hpp.html">Program Listing for File Decimate.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Decimate.hpp.html#includes">Includes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Decimate.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Decimate.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="file_include_OrganizedPointFilters_RS_DisparityTransform.hpp.html">File DisparityTransform.hpp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_RS_DisparityTransform.hpp.html#definition-include-organizedpointfilters-rs-disparitytransform-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/RS/DisparityTransform.hpp</span></code>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_RS_DisparityTransform.hpp.html#definition-include-organizedpointfilters-rs-disparitytransform-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\RS\DisparityTransform.hpp</span></code>)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_OrganizedPointFilters_RS_DisparityTransform.hpp.html">Program Listing for File DisparityTransform.hpp</a></li>
 </ul>
 </li>
@@ -267,7 +283,7 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="file_include_OrganizedPointFilters_Helper.hpp.html">File Helper.hpp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Helper.hpp.html#definition-include-organizedpointfilters-helper-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/Helper.hpp</span></code>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Helper.hpp.html#definition-include-organizedpointfilters-helper-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\Helper.hpp</span></code>)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_OrganizedPointFilters_Helper.hpp.html">Program Listing for File Helper.hpp</a></li>
 </ul>
 </li>
@@ -283,7 +299,7 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Laplacian.hpp.html">File Laplacian.hpp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Laplacian.hpp.html#definition-include-organizedpointfilters-filter-laplacian-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/Filter/Laplacian.hpp</span></code>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Laplacian.hpp.html#definition-include-organizedpointfilters-filter-laplacian-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\Filter\Laplacian.hpp</span></code>)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_OrganizedPointFilters_Filter_Laplacian.hpp.html">Program Listing for File Laplacian.hpp</a></li>
 </ul>
 </li>
@@ -299,7 +315,7 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Normal.hpp.html">File Normal.hpp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Normal.hpp.html#definition-include-organizedpointfilters-filter-normal-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/Filter/Normal.hpp</span></code>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Filter_Normal.hpp.html#definition-include-organizedpointfilters-filter-normal-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\Filter\Normal.hpp</span></code>)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_OrganizedPointFilters_Filter_Normal.hpp.html">Program Listing for File Normal.hpp</a></li>
 </ul>
 </li>
@@ -315,12 +331,13 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="file_include_OrganizedPointFilters_OrganizedPointFilters.hpp.html">File OrganizedPointFilters.hpp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_OrganizedPointFilters.hpp.html#definition-include-organizedpointfilters-organizedpointfilters-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/OrganizedPointFilters.hpp</span></code>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_OrganizedPointFilters.hpp.html#definition-include-organizedpointfilters-organizedpointfilters-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\OrganizedPointFilters.hpp</span></code>)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_OrganizedPointFilters_OrganizedPointFilters.hpp.html">Program Listing for File OrganizedPointFilters.hpp</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_OrganizedPointFilters.hpp.html#includes">Includes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_OrganizedPointFilters.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_OrganizedPointFilters.hpp.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -328,7 +345,7 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="file_include_OrganizedPointFilters_RS_RS.hpp.html">File RS.hpp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_RS_RS.hpp.html#definition-include-organizedpointfilters-rs-rs-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/RS/RS.hpp</span></code>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_RS_RS.hpp.html#definition-include-organizedpointfilters-rs-rs-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\RS\RS.hpp</span></code>)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_OrganizedPointFilters_RS_RS.hpp.html">Program Listing for File RS.hpp</a></li>
 </ul>
 </li>
@@ -340,7 +357,7 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="file_include_OrganizedPointFilters_RS_SpatialFilter.hpp.html">File SpatialFilter.hpp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_RS_SpatialFilter.hpp.html#definition-include-organizedpointfilters-rs-spatialfilter-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/RS/SpatialFilter.hpp</span></code>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_RS_SpatialFilter.hpp.html#definition-include-organizedpointfilters-rs-spatialfilter-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\RS\SpatialFilter.hpp</span></code>)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_OrganizedPointFilters_RS_SpatialFilter.hpp.html">Program Listing for File SpatialFilter.hpp</a></li>
 </ul>
 </li>
@@ -355,7 +372,7 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="file_include_OrganizedPointFilters_Types.hpp.html">File Types.hpp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Types.hpp.html#definition-include-organizedpointfilters-types-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/Types.hpp</span></code>)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="file_include_OrganizedPointFilters_Types.hpp.html#definition-include-organizedpointfilters-types-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\Types.hpp</span></code>)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="program_listing_file_include_OrganizedPointFilters_Types.hpp.html">Program Listing for File Types.hpp</a></li>
 </ul>
 </li>
@@ -368,8 +385,8 @@
 </li>
 </ul>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

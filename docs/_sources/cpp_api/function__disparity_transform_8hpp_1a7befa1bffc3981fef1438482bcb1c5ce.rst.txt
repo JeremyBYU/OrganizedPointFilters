@@ -1,0 +1,13 @@
+.. _exhale_function__disparity_transform_8hpp_1a7befa1bffc3981fef1438482bcb1c5ce:
+
+Template Function OrganizedPointFilters::RS::disparity_transform
+================================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_RS_DisparityTransform.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::RS::disparity_transform(std::vector<Tin>&, ImgDetails&, DepthInfo&)

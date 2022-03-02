@@ -9,7 +9,7 @@ Directory OrganizedPointFilters
 
 .. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
 
-*Directory path:* ``include/OrganizedPointFilters``
+*Directory path:* ``include\OrganizedPointFilters``
 
 Subdirectories
 --------------

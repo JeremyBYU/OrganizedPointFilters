@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>organizedpointfilters.filter.laplacian_K5 &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>organizedpointfilters.filter.laplacian_K5 &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
-        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -67,7 +68,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -91,30 +92,34 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="organizedpointfilters.filter.html">organizedpointfilters.filter</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.bilateral_K3.html">bilateral_K3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.compute_normals.html">compute_normals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.compute_normals_and_centroids.html">compute_normals_and_centroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.decimate_column_K2.html">decimate_column_K2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.decimate_column_K3.html">decimate_column_K3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.decimate_column_K4.html">decimate_column_K4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.laplacian_K3.html">laplacian_K3</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">laplacian_K5</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../cpp_api/cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -205,28 +210,28 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="organizedpointfilters-filter-laplacian-k5">
+<section id="organizedpointfilters-filter-laplacian-k5">
 <h1>organizedpointfilters.filter.laplacian_K5<a class="headerlink" href="#organizedpointfilters-filter-laplacian-k5" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="organizedpointfilters.filter.laplacian_K5">
 <code class="sig-prename descclassname">organizedpointfilters.filter.</code><code class="sig-name descname">laplacian_K5</code><span class="sig-paren">(</span><em class="sig-param">opc</em>, <em class="sig-param">_lambda=0.5</em>, <em class="sig-param">iterations=1</em>, <em class="sig-param">max_dist=1000000.0</em><span class="sig-paren">)</span><a class="headerlink" href="#organizedpointfilters.filter.laplacian_K5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs Laplacian Smoothing w/ a Filter Size of 5 on an Organized Point Cloud</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>opc</strong> (<a class="reference internal" href="organizedpointfilters.Matrix3fRef.html#organizedpointfilters.Matrix3fRef" title="organizedpointfilters.Matrix3fRef"><em>organizedpointfilters.Matrix3fRef</em></a>) – Organized Point Cloud. M X N X 3 Eigen Matrix</p></li>
+<li><p><strong>opc</strong> (<em>organizedpointfilters_pybind.Matrix3fRef</em>) – Organized Point Cloud. M X N X 3 Eigen Matrix</p></li>
 <li><p><strong>_lambda</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default=0.5</em>) – Weighting for each iteration update</p></li>
 <li><p><strong>iterations</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=1</em>) – Number of iterations</p></li>
 <li><p><strong>max_dist</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default=1000000.0</em>) – Maximum distance a neighbor can be to be interagrated for smoothing.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>organizedpointfilters.Matrix3f</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>organizedpointfilters_pybind.Matrix3f</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>

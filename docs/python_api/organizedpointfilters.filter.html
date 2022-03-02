@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>organizedpointfilters.filter &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>organizedpointfilters.filter &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
-        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -40,7 +41,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="organizedpointfilters.filter.bilateral_K3" href="organizedpointfilters.filter.bilateral_K3.html" />
-    <link rel="prev" title="organizedpointfilters.OrganizedTriangleMatrix" href="organizedpointfilters.OrganizedTriangleMatrix.html" /> 
+    <link rel="prev" title="organizedpointfilters.get_opf_version" href="organizedpointfilters.get_opf_version.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -67,7 +68,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -91,30 +92,34 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">organizedpointfilters.filter</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.bilateral_K3.html">bilateral_K3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.compute_normals.html">compute_normals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.compute_normals_and_centroids.html">compute_normals_and_centroids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.decimate_column_K2.html">decimate_column_K2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.decimate_column_K3.html">decimate_column_K3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.decimate_column_K4.html">decimate_column_K4</a></li>
 <li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.laplacian_K3.html">laplacian_K3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="organizedpointfilters.filter.laplacian_K5.html">laplacian_K5</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../cpp_api/cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -203,14 +208,10 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="organizedpointfilters-filter">
+<section id="organizedpointfilters-filter">
 <h1>organizedpointfilters.filter<a class="headerlink" href="#organizedpointfilters-filter" title="Permalink to this headline">¶</a></h1>
 <p><strong>Functions</strong></p>
 <table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="organizedpointfilters.filter.bilateral_K3.html#organizedpointfilters.filter.bilateral_K3" title="organizedpointfilters.filter.bilateral_K3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bilateral_K3</span></code></a>(opc[, iterations, …])</p></td>
 <td><p>Performs Bilateral Smoothing w/ a Filter Size of 3 on an Organized Point Cloud Normals</p></td>
@@ -221,17 +222,26 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="organizedpointfilters.filter.compute_normals_and_centroids.html#organizedpointfilters.filter.compute_normals_and_centroids" title="organizedpointfilters.filter.compute_normals_and_centroids"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_normals_and_centroids</span></code></a>(opc)</p></td>
 <td><p>Computes Normals and Centroids for an Organized Point Cloud</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="organizedpointfilters.filter.laplacian_K3.html#organizedpointfilters.filter.laplacian_K3" title="organizedpointfilters.filter.laplacian_K3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplacian_K3</span></code></a>(opc[, _lambda, iterations, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="organizedpointfilters.filter.decimate_column_K2.html#organizedpointfilters.filter.decimate_column_K2" title="organizedpointfilters.filter.decimate_column_K2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decimate_column_K2</span></code></a>(opc, num_threads)</p></td>
+<td><p>Decimates an organized point cloud column wise</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="organizedpointfilters.filter.decimate_column_K3.html#organizedpointfilters.filter.decimate_column_K3" title="organizedpointfilters.filter.decimate_column_K3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decimate_column_K3</span></code></a>(opc, num_threads)</p></td>
+<td><p>Decimates an organized point cloud column wise</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="organizedpointfilters.filter.decimate_column_K4.html#organizedpointfilters.filter.decimate_column_K4" title="organizedpointfilters.filter.decimate_column_K4"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decimate_column_K4</span></code></a>(opc, num_threads)</p></td>
+<td><p>Decimates an organized point cloud column wise</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="organizedpointfilters.filter.laplacian_K3.html#organizedpointfilters.filter.laplacian_K3" title="organizedpointfilters.filter.laplacian_K3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplacian_K3</span></code></a>(opc[, _lambda, iterations, …])</p></td>
 <td><p>Performs Laplacian Smoothing w/ a Filter Size of 3 on an Organized Point Cloud</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="organizedpointfilters.filter.laplacian_K5.html#organizedpointfilters.filter.laplacian_K5" title="organizedpointfilters.filter.laplacian_K5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplacian_K5</span></code></a>(opc[, _lambda, iterations, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="organizedpointfilters.filter.laplacian_K5.html#organizedpointfilters.filter.laplacian_K5" title="organizedpointfilters.filter.laplacian_K5"><code class="xref py py-obj docutils literal notranslate"><span class="pre">laplacian_K5</span></code></a>(opc[, _lambda, iterations, …])</p></td>
 <td><p>Performs Laplacian Smoothing w/ a Filter Size of 5 on an Organized Point Cloud</p></td>
 </tr>
 </tbody>
 </table>
 <div class="toctree-wrapper compound">
 </div>
-</div>
+</section>
 
 
            </div>
@@ -244,7 +254,7 @@
         <a href="organizedpointfilters.filter.bilateral_K3.html" class="btn btn-neutral float-right" title="organizedpointfilters.filter.bilateral_K3" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="organizedpointfilters.OrganizedTriangleMatrix.html" class="btn btn-neutral float-left" title="organizedpointfilters.OrganizedTriangleMatrix" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="organizedpointfilters.get_opf_version.html" class="btn btn-neutral float-left" title="organizedpointfilters.get_opf_version" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

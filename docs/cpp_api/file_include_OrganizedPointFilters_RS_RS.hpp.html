@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>File RS.hpp &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>File RS.hpp &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
-        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -65,7 +66,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -89,23 +90,24 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -194,32 +196,32 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="file-rs-hpp">
+<section id="file-rs-hpp">
 <span id="file-include-organizedpointfilters-rs-rs-hpp"></span><h1>File RS.hpp<a class="headerlink" href="#file-rs-hpp" title="Permalink to this headline">¶</a></h1>
-<p>↰ <a class="reference internal" href="dir_include_OrganizedPointFilters_RS.html#dir-include-organizedpointfilters-rs"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/RS</span></code>)</p>
-<div class="contents local topic" id="contents">
+<p>↰ <a class="reference internal" href="dir_include_OrganizedPointFilters_RS.html#dir-include-organizedpointfilters-rs"><span class="std std-ref">Parent directory</span></a> (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\RS</span></code>)</p>
+<nav class="contents local" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#definition-include-organizedpointfilters-rs-rs-hpp" id="id1">Definition (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/RS/RS.hpp</span></code>)</a></p></li>
-<li><p><a class="reference internal" href="#includes" id="id2">Includes</a></p></li>
+<li><p><a class="reference internal" href="#definition-include-organizedpointfilters-rs-rs-hpp" id="toc-entry-1">Definition (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\RS\RS.hpp</span></code>)</a></p></li>
+<li><p><a class="reference internal" href="#includes" id="toc-entry-2">Includes</a></p></li>
 </ul>
-</div>
-<div class="section" id="definition-include-organizedpointfilters-rs-rs-hpp">
-<h2>Definition (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/RS/RS.hpp</span></code>)<a class="headerlink" href="#definition-include-organizedpointfilters-rs-rs-hpp" title="Permalink to this headline">¶</a></h2>
+</nav>
+<section id="definition-include-organizedpointfilters-rs-rs-hpp">
+<h2>Definition (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\RS\RS.hpp</span></code>)<a class="headerlink" href="#definition-include-organizedpointfilters-rs-rs-hpp" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="program_listing_file_include_OrganizedPointFilters_RS_RS.hpp.html">Program Listing for File RS.hpp</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="includes">
+</section>
+<section id="includes">
 <h2>Includes<a class="headerlink" href="#includes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">OrganizedPointFilters/RS/DisparityTransform.hpp</span></code> (<a class="reference internal" href="file_include_OrganizedPointFilters_RS_DisparityTransform.hpp.html#file-include-organizedpointfilters-rs-disparitytransform-hpp"><span class="std std-ref">File DisparityTransform.hpp</span></a>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">OrganizedPointFilters/RS/SpatialFilter.hpp</span></code> (<a class="reference internal" href="file_include_OrganizedPointFilters_RS_SpatialFilter.hpp.html#file-include-organizedpointfilters-rs-spatialfilter-hpp"><span class="std std-ref">File SpatialFilter.hpp</span></a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OrganizedPointFilters/RS/DisparityTransform.hpp</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OrganizedPointFilters/RS/SpatialFilter.hpp</span></code></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

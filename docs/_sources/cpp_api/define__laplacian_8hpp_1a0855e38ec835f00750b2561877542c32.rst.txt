@@ -1,0 +1,13 @@
+.. _exhale_define__laplacian_8hpp_1a0855e38ec835f00750b2561877542c32:
+
+Define OPF_KERNEL_MAX_FLOAT
+===========================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Filter_Laplacian.hpp`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: OPF_KERNEL_MAX_FLOAT

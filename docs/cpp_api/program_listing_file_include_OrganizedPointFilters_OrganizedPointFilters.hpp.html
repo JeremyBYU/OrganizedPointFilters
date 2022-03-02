@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Program Listing for File OrganizedPointFilters.hpp &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>Program Listing for File OrganizedPointFilters.hpp &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
-        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -65,7 +66,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -89,23 +90,24 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -194,9 +196,9 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="program-listing-for-file-organizedpointfilters-hpp">
+<section id="program-listing-for-file-organizedpointfilters-hpp">
 <span id="program-listing-file-include-organizedpointfilters-organizedpointfilters-hpp"></span><h1>Program Listing for File OrganizedPointFilters.hpp<a class="headerlink" href="#program-listing-for-file-organizedpointfilters-hpp" title="Permalink to this headline">¶</a></h1>
-<p>↰ <a class="reference internal" href="file_include_OrganizedPointFilters_OrganizedPointFilters.hpp.html#file-include-organizedpointfilters-organizedpointfilters-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/OrganizedPointFilters.hpp</span></code>)</p>
+<p>↰ <a class="reference internal" href="file_include_OrganizedPointFilters_OrganizedPointFilters.hpp.html#file-include-organizedpointfilters-organizedpointfilters-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\OrganizedPointFilters.hpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// MIT License</span>
 
 <span class="c1">// Copyright (c) 2020 Jeremy Castagno</span>
@@ -222,25 +224,26 @@
 <span class="cp">#ifndef ORGANIZEDPOINTFILTERS</span>
 <span class="cp">#define ORGANIZEDPOINTFILTERS</span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;OrganizedPointFilters/Types.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;OrganizedPointFilters/Helper.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;OrganizedPointFilters/RS/SpatialFilter.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;OrganizedPointFilters/Filter/Laplacian.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;OrganizedPointFilters/Filter/Normal.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;OrganizedPointFilters/Types.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;OrganizedPointFilters/Helper.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;OrganizedPointFilters/RS/SpatialFilter.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;OrganizedPointFilters/Filter/Laplacian.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;OrganizedPointFilters/Filter/Normal.hpp&quot;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">OrganizedPointFilters</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">OrganizedPointFilters</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
+<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="nf">GetOrganizedPointFiltersVersion</span><span class="p">();</span><span class="w"></span>
 
-<span class="p">}</span> <span class="c1">// namespace OrganizedPointFilters</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace OrganizedPointFilters</span>
 
 <span class="cp">#endif</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>

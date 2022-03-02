@@ -1,0 +1,6 @@
+organizedpointfilters.utility.helper.laplacian_opc_cuda
+-------------------------------------------------------
+
+.. currentmodule:: organizedpointfilters.utility.helper
+
+.. autofunction:: laplacian_opc_cuda

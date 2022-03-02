@@ -1,0 +1,13 @@
+.. _exhale_function__normal_8hpp_1a72b53dfe036e14ab7302c38dc5f99f36:
+
+Function OrganizedPointFilters::Filter::NormalCore::ComputeCentroid
+===================================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Filter_Normal.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::Filter::NormalCore::ComputeCentroid(Eigen::Ref<RowMatrixXVec3f>, Eigen::Ref<OrganizedTriangleMatrix>, const int, const int)

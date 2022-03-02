@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Program Listing for File SpatialFilter.hpp &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>Program Listing for File SpatialFilter.hpp &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
-        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -65,7 +66,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -89,23 +90,24 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -194,9 +196,9 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="program-listing-for-file-spatialfilter-hpp">
+<section id="program-listing-for-file-spatialfilter-hpp">
 <span id="program-listing-file-include-organizedpointfilters-rs-spatialfilter-hpp"></span><h1>Program Listing for File SpatialFilter.hpp<a class="headerlink" href="#program-listing-for-file-spatialfilter-hpp" title="Permalink to this headline">¶</a></h1>
-<p>↰ <a class="reference internal" href="file_include_OrganizedPointFilters_RS_SpatialFilter.hpp.html#file-include-organizedpointfilters-rs-spatialfilter-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include/OrganizedPointFilters/RS/SpatialFilter.hpp</span></code>)</p>
+<p>↰ <a class="reference internal" href="file_include_OrganizedPointFilters_RS_SpatialFilter.hpp.html#file-include-organizedpointfilters-rs-spatialfilter-hpp"><span class="std std-ref">Return to documentation for file</span></a> (<code class="docutils literal notranslate"><span class="pre">include\OrganizedPointFilters\RS\SpatialFilter.hpp</span></code>)</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// License: Apache 2.0. See LICENSE file in root directory.</span>
 <span class="c1">// Copyright(c) 2017 Intel Corporation. All Rights Reserved</span>
 <span class="c1">// http://inf.ufrgs.br/~eslgastal/DomainTransform/Gastal_Oliveira_SIGGRAPH2011_Domain_Transform.pdf</span>
@@ -206,280 +208,280 @@
 <span class="cp">#ifndef ORGANIZEDPOINTFILTERS_RS_SF</span>
 <span class="cp">#define ORGANIZEDPOINTFILTERS_RS_SF</span>
 
-<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;functional&gt;</span><span class="cp"></span>
 
-<span class="cp">#include</span> <span class="cpf">&quot;OrganizedPointFilters/RS/SpatialFilter.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&quot;OrganizedPointFilters/Types.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;OrganizedPointFilters/RS/SpatialFilter.hpp&quot;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;OrganizedPointFilters/Types.hpp&quot;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">OrganizedPointFilters</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">OrganizedPointFilters</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">namespace</span> <span class="n">RS</span> <span class="p">{</span>
+<span class="k">namespace</span><span class="w"> </span><span class="nn">RS</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">spatial_filter</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">source</span><span class="p">,</span> <span class="n">ImgDetails</span><span class="o">&amp;</span> <span class="n">details</span><span class="p">,</span> <span class="kt">float</span> <span class="n">spatial_alpha_param</span><span class="p">,</span>
-                              <span class="kt">float</span> <span class="n">spatial_edge_threshold</span><span class="p">,</span> <span class="kt">int</span> <span class="n">spatial_iterations</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">holes_filling_mode</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">spatial_filter</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">ImgDetails</span><span class="o">&amp;</span><span class="w"> </span><span class="n">details</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">spatial_alpha_param</span><span class="p">,</span><span class="w"></span>
+<span class="w">                              </span><span class="kt">float</span><span class="w"> </span><span class="n">spatial_edge_threshold</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">spatial_iterations</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">holes_filling_mode</span><span class="p">);</span><span class="w"></span>
 
 <span class="c1">// std::vector&lt;unsigned short&gt; spatial_filter(std::vector&lt;unsigned short&gt; &amp;source, ImgDetails &amp;details, float</span>
 <span class="c1">// spatial_alpha_param, float spatial_edge_threshold, int spatial_iterations, uint8_t holes_filling_mode);</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">prepare_target_frame</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">source</span><span class="p">,</span> <span class="n">ImgDetails</span><span class="o">&amp;</span> <span class="n">details</span><span class="p">);</span>
-<span class="kt">void</span> <span class="nf">recursive_filter_horizontal_fp</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">image_data</span><span class="p">,</span> <span class="kt">float</span> <span class="n">alpha</span><span class="p">,</span> <span class="kt">float</span> <span class="n">deltaZ</span><span class="p">,</span> <span class="n">ImgDetails</span><span class="o">&amp;</span> <span class="n">details</span><span class="p">);</span>
-<span class="kt">void</span> <span class="nf">recursive_filter_vertical_fp</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">image_data</span><span class="p">,</span> <span class="kt">float</span> <span class="n">alpha</span><span class="p">,</span> <span class="kt">float</span> <span class="n">deltaZ</span><span class="p">,</span> <span class="n">ImgDetails</span><span class="o">&amp;</span> <span class="n">details</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">prepare_target_frame</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">ImgDetails</span><span class="o">&amp;</span><span class="w"> </span><span class="n">details</span><span class="p">);</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">recursive_filter_horizontal_fp</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">image_data</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">deltaZ</span><span class="p">,</span><span class="w"> </span><span class="n">ImgDetails</span><span class="o">&amp;</span><span class="w"> </span><span class="n">details</span><span class="p">);</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">recursive_filter_vertical_fp</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">image_data</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">deltaZ</span><span class="p">,</span><span class="w"> </span><span class="n">ImgDetails</span><span class="o">&amp;</span><span class="w"> </span><span class="n">details</span><span class="p">);</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">recursive_filter_horizontal</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">image_data</span><span class="p">,</span> <span class="kt">float</span> <span class="n">alpha</span><span class="p">,</span> <span class="kt">float</span> <span class="n">deltaZ</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">holes_filling_radius</span><span class="p">,</span>
-                                 <span class="n">ImgDetails</span><span class="o">&amp;</span> <span class="n">details</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">v</span><span class="p">{},</span> <span class="n">u</span><span class="p">{};</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">recursive_filter_horizontal</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">image_data</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">deltaZ</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">holes_filling_radius</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                 </span><span class="n">ImgDetails</span><span class="o">&amp;</span><span class="w"> </span><span class="n">details</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">v</span><span class="p">{},</span><span class="w"> </span><span class="n">u</span><span class="p">{};</span><span class="w"></span>
 
-    <span class="c1">// Handle conversions for invalid input data</span>
-    <span class="kt">bool</span> <span class="n">fp</span> <span class="o">=</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_floating_point</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Handle conversions for invalid input data</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_floating_point</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">_height</span> <span class="o">=</span> <span class="n">details</span><span class="p">.</span><span class="n">h</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">_width</span> <span class="o">=</span> <span class="n">details</span><span class="p">.</span><span class="n">w</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">details</span><span class="p">.</span><span class="n">h</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">details</span><span class="p">.</span><span class="n">w</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// Filtering integer values requires round-up to the nearest discrete value</span>
-    <span class="k">const</span> <span class="kt">float</span> <span class="n">round</span> <span class="o">=</span> <span class="n">fp</span> <span class="o">?</span> <span class="mf">0.f</span> <span class="o">:</span> <span class="mf">0.5f</span><span class="p">;</span>
-    <span class="c1">// define invalid inputs</span>
-    <span class="k">const</span> <span class="n">T</span> <span class="n">valid_threshold</span> <span class="o">=</span> <span class="n">fp</span> <span class="o">?</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">epsilon</span><span class="p">())</span> <span class="o">:</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="k">const</span> <span class="n">T</span> <span class="n">delta_z</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">deltaZ</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Filtering integer values requires round-up to the nearest discrete value</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">round</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mf">0.f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// define invalid inputs</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">valid_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">epsilon</span><span class="p">())</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">delta_z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">deltaZ</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">image</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">image_data</span><span class="p">);</span>
-    <span class="kt">size_t</span> <span class="n">cur_fill</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">image_data</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">cur_fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">_height</span><span class="p">;</span> <span class="n">v</span><span class="o">++</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">// left to right</span>
-        <span class="n">T</span><span class="o">*</span> <span class="n">im</span> <span class="o">=</span> <span class="n">image</span> <span class="o">+</span> <span class="n">v</span> <span class="o">*</span> <span class="n">_width</span><span class="p">;</span>
-        <span class="n">T</span> <span class="n">val0</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-        <span class="n">cur_fill</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">_height</span><span class="p">;</span><span class="w"> </span><span class="n">v</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// left to right</span>
+<span class="w">        </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">im</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_width</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">T</span><span class="w"> </span><span class="n">val0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">        </span><span class="n">cur_fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="n">u</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="n">_width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">u</span><span class="o">++</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">T</span> <span class="n">val1</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">_width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">T</span><span class="w"> </span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">im</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w"></span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">val0</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">valid_threshold</span><span class="p">)</span>
-            <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">val1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">valid_threshold</span><span class="p">)</span>
-                <span class="p">{</span>
-                    <span class="n">cur_fill</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-                    <span class="n">T</span> <span class="n">diff</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">val1</span> <span class="o">-</span> <span class="n">val0</span><span class="p">));</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">val0</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">valid_threshold</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">val1</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">valid_threshold</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">cur_fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="n">T</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">val1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">val0</span><span class="p">));</span><span class="w"></span>
 
-                    <span class="k">if</span> <span class="p">(</span><span class="n">diff</span> <span class="o">&gt;=</span> <span class="n">valid_threshold</span> <span class="o">&amp;&amp;</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="n">delta_z</span><span class="p">)</span>
-                    <span class="p">{</span>
-                        <span class="kt">float</span> <span class="n">filtered</span> <span class="o">=</span> <span class="n">val1</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">val0</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0f</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">);</span>
-                        <span class="n">val1</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">filtered</span> <span class="o">+</span> <span class="n">round</span><span class="p">);</span>
-                        <span class="n">im</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">val1</span><span class="p">;</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
-                <span class="k">else</span> <span class="c1">// Only the old value is valid - appy holes filling</span>
-                <span class="p">{</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">holes_filling_radius</span><span class="p">)</span>
-                    <span class="p">{</span>
-                        <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">cur_fill</span> <span class="o">&lt;</span> <span class="n">holes_filling_radius</span><span class="p">)</span> <span class="n">im</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">val1</span> <span class="o">=</span> <span class="n">val0</span><span class="p">;</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">diff</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">valid_threshold</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">delta_z</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="kt">float</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">val0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">alpha</span><span class="p">);</span><span class="w"></span>
+<span class="w">                        </span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">filtered</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">round</span><span class="p">);</span><span class="w"></span>
+<span class="w">                        </span><span class="n">im</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val1</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="k">else</span><span class="w"> </span><span class="c1">// Only the old value is valid - appy holes filling</span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">holes_filling_radius</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">++</span><span class="n">cur_fill</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">holes_filling_radius</span><span class="p">)</span><span class="w"> </span><span class="n">im</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val0</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
 
-            <span class="n">val0</span> <span class="o">=</span> <span class="n">val1</span><span class="p">;</span>
-            <span class="n">im</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="p">}</span>
+<span class="w">            </span><span class="n">val0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val1</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">im</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 
-        <span class="c1">// right to left</span>
-        <span class="n">im</span> <span class="o">=</span> <span class="n">image</span> <span class="o">+</span> <span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">_width</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// end of row - two pixels</span>
-        <span class="n">T</span> <span class="n">val1</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-        <span class="n">cur_fill</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// right to left</span>
+<span class="w">        </span><span class="n">im</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="c1">// end of row - two pixels</span>
+<span class="w">        </span><span class="n">T</span><span class="w"> </span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">im</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span><span class="w"></span>
+<span class="w">        </span><span class="n">cur_fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="n">u</span> <span class="o">=</span> <span class="n">_width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">u</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="n">u</span><span class="o">--</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">T</span> <span class="n">val0</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_width</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">--</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">T</span><span class="w"> </span><span class="n">val0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="n">val1</span> <span class="o">&gt;=</span> <span class="n">valid_threshold</span><span class="p">)</span>
-            <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">val0</span> <span class="o">&gt;</span> <span class="n">valid_threshold</span><span class="p">)</span>
-                <span class="p">{</span>
-                    <span class="n">cur_fill</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-                    <span class="n">T</span> <span class="n">diff</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">val1</span> <span class="o">-</span> <span class="n">val0</span><span class="p">));</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">val1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">valid_threshold</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">val0</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">valid_threshold</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">cur_fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="n">T</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">val1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">val0</span><span class="p">));</span><span class="w"></span>
 
-                    <span class="k">if</span> <span class="p">(</span><span class="n">diff</span> <span class="o">&lt;=</span> <span class="n">delta_z</span><span class="p">)</span>
-                    <span class="p">{</span>
-                        <span class="kt">float</span> <span class="n">filtered</span> <span class="o">=</span> <span class="n">val0</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">val1</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0f</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">);</span>
-                        <span class="n">val0</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">filtered</span> <span class="o">+</span> <span class="n">round</span><span class="p">);</span>
-                        <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">val0</span><span class="p">;</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
-                <span class="k">else</span> <span class="c1">// &#39;inertial&#39; hole filling</span>
-                <span class="p">{</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">holes_filling_radius</span><span class="p">)</span>
-                    <span class="p">{</span>
-                        <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">cur_fill</span> <span class="o">&lt;</span> <span class="n">holes_filling_radius</span><span class="p">)</span> <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">val0</span> <span class="o">=</span> <span class="n">val1</span><span class="p">;</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">diff</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">delta_z</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="kt">float</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">val1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">alpha</span><span class="p">);</span><span class="w"></span>
+<span class="w">                        </span><span class="n">val0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">filtered</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">round</span><span class="p">);</span><span class="w"></span>
+<span class="w">                        </span><span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val0</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="k">else</span><span class="w"> </span><span class="c1">// &#39;inertial&#39; hole filling</span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">holes_filling_radius</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">++</span><span class="n">cur_fill</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">holes_filling_radius</span><span class="p">)</span><span class="w"> </span><span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val1</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
 
-            <span class="n">val1</span> <span class="o">=</span> <span class="n">val0</span><span class="p">;</span>
-            <span class="n">im</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">            </span><span class="n">val1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val0</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">im</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">recursive_filter_vertical</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">image_data</span><span class="p">,</span> <span class="kt">float</span> <span class="n">alpha</span><span class="p">,</span> <span class="kt">float</span> <span class="n">deltaZ</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">holes_filling_radius</span><span class="p">,</span>
-                               <span class="n">ImgDetails</span><span class="o">&amp;</span> <span class="n">details</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">v</span><span class="p">{},</span> <span class="n">u</span><span class="p">{};</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">recursive_filter_vertical</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">image_data</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">deltaZ</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">holes_filling_radius</span><span class="p">,</span><span class="w"></span>
+<span class="w">                               </span><span class="n">ImgDetails</span><span class="o">&amp;</span><span class="w"> </span><span class="n">details</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">v</span><span class="p">{},</span><span class="w"> </span><span class="n">u</span><span class="p">{};</span><span class="w"></span>
 
-    <span class="c1">// Handle conversions for invalid input data</span>
-    <span class="kt">bool</span> <span class="n">fp</span> <span class="o">=</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_floating_point</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Handle conversions for invalid input data</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_floating_point</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">_height</span> <span class="o">=</span> <span class="n">details</span><span class="p">.</span><span class="n">h</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">_width</span> <span class="o">=</span> <span class="n">details</span><span class="p">.</span><span class="n">w</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">details</span><span class="p">.</span><span class="n">h</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">details</span><span class="p">.</span><span class="n">w</span><span class="p">;</span><span class="w"></span>
 
-    <span class="c1">// Filtering integer values requires round-up to the nearest discrete value</span>
-    <span class="k">const</span> <span class="kt">float</span> <span class="n">round</span> <span class="o">=</span> <span class="n">fp</span> <span class="o">?</span> <span class="mf">0.f</span> <span class="o">:</span> <span class="mf">0.5f</span><span class="p">;</span>
-    <span class="c1">// define invalid range</span>
-    <span class="k">const</span> <span class="n">T</span> <span class="n">valid_threshold</span> <span class="o">=</span> <span class="n">fp</span> <span class="o">?</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">epsilon</span><span class="p">())</span> <span class="o">:</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-    <span class="k">const</span> <span class="n">T</span> <span class="n">delta_z</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">deltaZ</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Filtering integer values requires round-up to the nearest discrete value</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">round</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mf">0.f</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">0.5f</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// define invalid range</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">valid_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">epsilon</span><span class="p">())</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">delta_z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">deltaZ</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">image</span> <span class="o">=</span> <span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">image_data</span><span class="p">);</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">image_data</span><span class="p">);</span><span class="w"></span>
 
-    <span class="c1">// we&#39;ll do one row at a time, top to bottom, then bottom to top</span>
+<span class="w">    </span><span class="c1">// we&#39;ll do one row at a time, top to bottom, then bottom to top</span>
 
-    <span class="c1">// top to bottom</span>
+<span class="w">    </span><span class="c1">// top to bottom</span>
 
-    <span class="n">T</span><span class="o">*</span> <span class="n">im</span> <span class="o">=</span> <span class="n">image</span><span class="p">;</span>
-    <span class="n">T</span> <span class="n">im0</span><span class="p">{};</span>
-    <span class="n">T</span> <span class="n">imw</span><span class="p">{};</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">v</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">_height</span><span class="p">;</span> <span class="n">v</span><span class="o">++</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">u</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="n">_width</span><span class="p">;</span> <span class="n">u</span><span class="o">++</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">im0</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-            <span class="n">imw</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="n">_width</span><span class="p">];</span>
+<span class="w">    </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">im</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">image</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="n">im0</span><span class="p">{};</span><span class="w"></span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="n">imw</span><span class="p">{};</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">_height</span><span class="p">;</span><span class="w"> </span><span class="n">v</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">_width</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">im0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="n">imw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">im</span><span class="p">[</span><span class="n">_width</span><span class="p">];</span><span class="w"></span>
 
-            <span class="c1">// if ((fabs(im0) &gt;= valid_threshold) &amp;&amp; (fabs(imw) &gt;= valid_threshold))</span>
-            <span class="p">{</span>
-                <span class="n">T</span> <span class="n">diff</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">im0</span> <span class="o">-</span> <span class="n">imw</span><span class="p">));</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">diff</span> <span class="o">&lt;</span> <span class="n">delta_z</span><span class="p">)</span>
-                <span class="p">{</span>
-                    <span class="kt">float</span> <span class="n">filtered</span> <span class="o">=</span> <span class="n">imw</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">im0</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">);</span>
-                    <span class="n">im</span><span class="p">[</span><span class="n">_width</span><span class="p">]</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">filtered</span> <span class="o">+</span> <span class="n">round</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-            <span class="n">im</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">            </span><span class="c1">// if ((fabs(im0) &gt;= valid_threshold) &amp;&amp; (fabs(imw) &gt;= valid_threshold))</span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">T</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">im0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">imw</span><span class="p">));</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">diff</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">delta_z</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="kt">float</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">imw</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">im0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">1.f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">alpha</span><span class="p">);</span><span class="w"></span>
+<span class="w">                    </span><span class="n">im</span><span class="p">[</span><span class="n">_width</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">filtered</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">round</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="n">im</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// bottom to top</span>
-    <span class="n">im</span> <span class="o">=</span> <span class="n">image</span> <span class="o">+</span> <span class="p">(</span><span class="n">_height</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">_width</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">v</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">_height</span><span class="p">;</span> <span class="n">v</span><span class="o">++</span><span class="p">,</span> <span class="n">im</span> <span class="o">-=</span> <span class="p">(</span><span class="n">_width</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">u</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="n">_width</span><span class="p">;</span> <span class="n">u</span><span class="o">++</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">im0</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-            <span class="n">imw</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="n">_width</span><span class="p">];</span>
+<span class="w">    </span><span class="c1">// bottom to top</span>
+<span class="w">    </span><span class="n">im</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">_height</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_width</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">_height</span><span class="p">;</span><span class="w"> </span><span class="n">v</span><span class="o">++</span><span class="p">,</span><span class="w"> </span><span class="n">im</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="p">(</span><span class="n">_width</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">_width</span><span class="p">;</span><span class="w"> </span><span class="n">u</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">im0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w"></span>
+<span class="w">            </span><span class="n">imw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">im</span><span class="p">[</span><span class="n">_width</span><span class="p">];</span><span class="w"></span>
 
-            <span class="k">if</span> <span class="p">((</span><span class="n">fabs</span><span class="p">(</span><span class="n">im0</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">valid_threshold</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">imw</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">valid_threshold</span><span class="p">))</span>
-            <span class="p">{</span>
-                <span class="n">T</span> <span class="n">diff</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">im0</span> <span class="o">-</span> <span class="n">imw</span><span class="p">));</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">diff</span> <span class="o">&lt;</span> <span class="n">delta_z</span><span class="p">)</span>
-                <span class="p">{</span>
-                    <span class="kt">float</span> <span class="n">filtered</span> <span class="o">=</span> <span class="n">im0</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">imw</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">);</span>
-                    <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">filtered</span> <span class="o">+</span> <span class="n">round</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-            <span class="n">im</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">fabs</span><span class="p">(</span><span class="n">im0</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">valid_threshold</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">imw</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">valid_threshold</span><span class="p">))</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">T</span><span class="w"> </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">im0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">imw</span><span class="p">));</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">diff</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">delta_z</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="kt">float</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">im0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">imw</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">1.f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">alpha</span><span class="p">);</span><span class="w"></span>
+<span class="w">                    </span><span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">filtered</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">round</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="n">im</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-<span class="kr">inline</span> <span class="kt">void</span> <span class="n">intertial_holes_fill</span><span class="p">(</span><span class="n">T</span><span class="o">*</span> <span class="n">image_data</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">holes_filling_radius</span><span class="p">,</span> <span class="n">ImgDetails</span><span class="o">&amp;</span> <span class="n">details</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">fp_oper</span> <span class="o">=</span> <span class="p">[](</span><span class="n">T</span><span class="o">*</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!*</span><span class="p">((</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">ptr</span><span class="p">);</span> <span class="p">};</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">uint_oper</span> <span class="o">=</span> <span class="p">[](</span><span class="n">T</span><span class="o">*</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ptr</span><span class="p">);</span> <span class="p">};</span>
-    <span class="k">auto</span> <span class="n">empty</span> <span class="o">=</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_floating_point</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span> <span class="o">?</span> <span class="nl">fp_oper</span> <span class="p">:</span> <span class="n">uint_oper</span><span class="p">;</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">intertial_holes_fill</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">image_data</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">holes_filling_radius</span><span class="p">,</span><span class="w"> </span><span class="n">ImgDetails</span><span class="o">&amp;</span><span class="w"> </span><span class="n">details</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">fp_oper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">!*</span><span class="p">((</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">ptr</span><span class="p">);</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">(</span><span class="n">T</span><span class="o">*</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="n">uint_oper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[](</span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="o">*</span><span class="n">ptr</span><span class="p">);</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">empty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_floating_point</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">fp_oper</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">uint_oper</span><span class="p">;</span><span class="w"></span>
 
-    <span class="k">auto</span> <span class="n">_height</span> <span class="o">=</span> <span class="n">details</span><span class="p">.</span><span class="n">h</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">_width</span> <span class="o">=</span> <span class="n">details</span><span class="p">.</span><span class="n">w</span><span class="p">;</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">details</span><span class="p">.</span><span class="n">h</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">details</span><span class="p">.</span><span class="n">w</span><span class="p">;</span><span class="w"></span>
 
-    <span class="kt">size_t</span> <span class="n">cur_fill</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">cur_fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">T</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">image_data</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">_height</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="o">++</span><span class="n">p</span><span class="p">;</span>
-        <span class="n">cur_fill</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">T</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">image_data</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">_height</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="o">++</span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">cur_fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 
-        <span class="c1">// Left to Right</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">_width</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">empty</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
-            <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">cur_fill</span> <span class="o">&lt;</span> <span class="n">holes_filling_radius</span><span class="p">)</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="k">else</span>
-                <span class="n">cur_fill</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// Left to Right</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">_width</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">empty</span><span class="p">(</span><span class="n">p</span><span class="p">))</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">++</span><span class="n">cur_fill</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">holes_filling_radius</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">else</span><span class="w"></span>
+<span class="w">                </span><span class="n">cur_fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
 
-            <span class="o">++</span><span class="n">p</span><span class="p">;</span>
-        <span class="p">}</span>
+<span class="w">            </span><span class="o">++</span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
 
-        <span class="o">--</span><span class="n">p</span><span class="p">;</span>
-        <span class="n">cur_fill</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="c1">// Right to left</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">_width</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">empty</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
-            <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">cur_fill</span> <span class="o">&lt;</span> <span class="n">holes_filling_radius</span><span class="p">)</span>
-                <span class="p">{</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-            <span class="k">else</span>
-                <span class="n">cur_fill</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="o">--</span><span class="n">p</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">p</span> <span class="o">+=</span> <span class="n">_width</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">        </span><span class="o">--</span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">cur_fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Right to left</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">_width</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">empty</span><span class="p">(</span><span class="n">p</span><span class="p">))</span><span class="w"></span>
+<span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">++</span><span class="n">cur_fill</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">holes_filling_radius</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">else</span><span class="w"></span>
+<span class="w">                </span><span class="n">cur_fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">--</span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">_width</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">dxf_smooth</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">frame_data</span><span class="p">,</span> <span class="kt">float</span> <span class="n">alpha</span><span class="p">,</span> <span class="kt">float</span> <span class="n">delta</span><span class="p">,</span> <span class="kt">int</span> <span class="n">iterations</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">holes_filling_mode</span><span class="p">,</span>
-                <span class="kt">uint8_t</span> <span class="n">holes_filling_radius</span><span class="p">,</span> <span class="n">ImgDetails</span><span class="o">&amp;</span> <span class="n">details</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">static_assert</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">is_arithmetic</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">),</span> <span class="s">&quot;Spatial filter assumes numeric types&quot;</span><span class="p">);</span>
-    <span class="kt">bool</span> <span class="n">fp</span> <span class="o">=</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_floating_point</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">);</span>
+<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">dxf_smooth</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">frame_data</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">delta</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">iterations</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">holes_filling_mode</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">holes_filling_radius</span><span class="p">,</span><span class="w"> </span><span class="n">ImgDetails</span><span class="o">&amp;</span><span class="w"> </span><span class="n">details</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">static_assert</span><span class="p">((</span><span class="n">std</span><span class="o">::</span><span class="n">is_arithmetic</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;Spatial filter assumes numeric types&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">fp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_floating_point</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">iterations</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">fp</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">recursive_filter_horizontal_fp</span><span class="p">(</span><span class="n">frame_data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">details</span><span class="p">);</span>
-            <span class="n">recursive_filter_vertical_fp</span><span class="p">(</span><span class="n">frame_data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">details</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">else</span>
-        <span class="p">{</span>
-            <span class="n">recursive_filter_horizontal</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">frame_data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">holes_filling_radius</span><span class="p">,</span> <span class="n">details</span><span class="p">);</span>
-            <span class="n">recursive_filter_vertical</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">frame_data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">holes_filling_radius</span><span class="p">,</span> <span class="n">details</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">iterations</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fp</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">recursive_filter_horizontal_fp</span><span class="p">(</span><span class="n">frame_data</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">delta</span><span class="p">,</span><span class="w"> </span><span class="n">details</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">recursive_filter_vertical_fp</span><span class="p">(</span><span class="n">frame_data</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">delta</span><span class="p">,</span><span class="w"> </span><span class="n">details</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">recursive_filter_horizontal</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">frame_data</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">delta</span><span class="p">,</span><span class="w"> </span><span class="n">holes_filling_radius</span><span class="p">,</span><span class="w"> </span><span class="n">details</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">recursive_filter_vertical</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">frame_data</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="p">,</span><span class="w"> </span><span class="n">delta</span><span class="p">,</span><span class="w"> </span><span class="n">holes_filling_radius</span><span class="p">,</span><span class="w"> </span><span class="n">details</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
 
-    <span class="c1">// Disparity domain hole filling requires a second pass over the frame data</span>
-    <span class="c1">// For depth domain a more efficient in-place hole filling is performed</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">holes_filling_mode</span> <span class="o">&amp;&amp;</span> <span class="n">fp</span><span class="p">)</span> <span class="n">intertial_holes_fill</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">frame_data</span><span class="p">),</span> <span class="n">holes_filling_radius</span><span class="p">,</span> <span class="n">details</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="c1">// Disparity domain hole filling requires a second pass over the frame data</span>
+<span class="w">    </span><span class="c1">// For depth domain a more efficient in-place hole filling is performed</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">holes_filling_mode</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">fp</span><span class="p">)</span><span class="w"> </span><span class="n">intertial_holes_fill</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">frame_data</span><span class="p">),</span><span class="w"> </span><span class="n">holes_filling_radius</span><span class="p">,</span><span class="w"> </span><span class="n">details</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
 
-<span class="p">}</span> <span class="c1">// namespace RS</span>
-<span class="p">}</span> <span class="c1">// namespace OrganizedPointFilters</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace RS</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// namespace OrganizedPointFilters</span>
 
 <span class="cp">#endif</span>
 </pre></div>
 </div>
-</div>
+</section>
 
 
            </div>

@@ -1,0 +1,61 @@
+
+.. _file_include_OrganizedPointFilters_Filter_Decimate.hpp:
+
+File Decimate.hpp
+=================
+
+|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters_Filter>` (``include\OrganizedPointFilters\Filter``)
+
+.. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
+
+.. contents:: Contents
+   :local:
+   :backlinks: none
+
+Definition (``include\OrganizedPointFilters\Filter\Decimate.hpp``)
+------------------------------------------------------------------
+
+
+.. toctree::
+   :maxdepth: 1
+
+   program_listing_file_include_OrganizedPointFilters_Filter_Decimate.hpp.rst
+
+
+
+
+
+Includes
+--------
+
+
+- ``OrganizedPointFilters/Types.hpp``
+
+- ``iostream``
+
+
+
+
+
+
+Namespaces
+----------
+
+
+- :ref:`namespace_OrganizedPointFilters`
+
+- :ref:`namespace_OrganizedPointFilters__Filter`
+
+- :ref:`namespace_OrganizedPointFilters__Filter__DecimateCore`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function__decimate_8hpp_1a48b80c587325e24116d2280402205ba8`
+
+- :ref:`exhale_function__decimate_8hpp_1a45f8b88fdd1f859fe87b3cb8f20175bb`
+
+- :ref:`exhale_function__decimate_8hpp_1a3017de6b68cf44f45c3d94aca3d3ec2c`
+

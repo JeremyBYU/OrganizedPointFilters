@@ -1,0 +1,13 @@
+.. _exhale_function__spatial_filter_8hpp_1aa6cd66e0f7ef6f67534e89724fd7ddc1:
+
+Function OrganizedPointFilters::RS::recursive_filter_horizontal_fp
+==================================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_RS_SpatialFilter.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::RS::recursive_filter_horizontal_fp(void *, float, float, ImgDetails&)

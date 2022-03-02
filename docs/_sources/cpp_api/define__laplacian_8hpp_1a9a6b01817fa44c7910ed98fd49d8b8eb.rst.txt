@@ -1,0 +1,13 @@
+.. _exhale_define__laplacian_8hpp_1a9a6b01817fa44c7910ed98fd49d8b8eb:
+
+Define OPF_KERNEL_DEFAULT_ITER
+==============================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Filter_Laplacian.hpp`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: OPF_KERNEL_DEFAULT_ITER

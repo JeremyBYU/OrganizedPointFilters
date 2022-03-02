@@ -4,7 +4,7 @@
 File DisparityTransform.hpp
 ===========================
 
-|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters_RS>` (``include/OrganizedPointFilters/RS``)
+|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters_RS>` (``include\OrganizedPointFilters\RS``)
 
 .. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
 
@@ -12,7 +12,7 @@ File DisparityTransform.hpp
    :local:
    :backlinks: none
 
-Definition (``include/OrganizedPointFilters/RS/DisparityTransform.hpp``)
+Definition (``include\OrganizedPointFilters\RS\DisparityTransform.hpp``)
 ------------------------------------------------------------------------
 
 
@@ -29,7 +29,7 @@ Includes
 --------
 
 
-- ``OrganizedPointFilters/Types.hpp`` (:ref:`file_include_OrganizedPointFilters_Types.hpp`)
+- ``OrganizedPointFilters/Types.hpp``
 
 
 
@@ -55,7 +55,7 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_DisparityTransform_8hpp_1a01c39d60fc61b493a8bf34610b445d58`
+- :ref:`exhale_function__disparity_transform_8hpp_1a01c39d60fc61b493a8bf34610b445d58`
 
-- :ref:`exhale_function_DisparityTransform_8hpp_1a9d62212595787b4b065399749b0cf17b`
+- :ref:`exhale_function__disparity_transform_8hpp_1a7befa1bffc3981fef1438482bcb1c5ce`
 

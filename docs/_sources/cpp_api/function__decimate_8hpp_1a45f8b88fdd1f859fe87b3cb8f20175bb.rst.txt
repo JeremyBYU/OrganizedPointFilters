@@ -1,0 +1,13 @@
+.. _exhale_function__decimate_8hpp_1a45f8b88fdd1f859fe87b3cb8f20175bb:
+
+Template Function OrganizedPointFilters::Filter::DecimateCore::DecimateColumnPointT
+===================================================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Filter_Decimate.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::Filter::DecimateCore::DecimateColumnPointT(Eigen::Ref<RowMatrixXVec3f>, Eigen::Ref<RowMatrixXVec3f>, const int, const int)

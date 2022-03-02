@@ -4,7 +4,7 @@
 File Normal.hpp
 ===============
 
-|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters_Filter>` (``include/OrganizedPointFilters/Filter``)
+|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters_Filter>` (``include\OrganizedPointFilters\Filter``)
 
 .. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
 
@@ -12,7 +12,7 @@ File Normal.hpp
    :local:
    :backlinks: none
 
-Definition (``include/OrganizedPointFilters/Filter/Normal.hpp``)
+Definition (``include\OrganizedPointFilters\Filter\Normal.hpp``)
 ----------------------------------------------------------------
 
 
@@ -29,7 +29,7 @@ Includes
 --------
 
 
-- ``OrganizedPointFilters/Types.hpp`` (:ref:`file_include_OrganizedPointFilters_Types.hpp`)
+- ``OrganizedPointFilters/Types.hpp``
 
 - ``iostream``
 
@@ -61,20 +61,20 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_Normal_8hpp_1a8c01aca4351b8271d3426b3757bf5c1a`
+- :ref:`exhale_function__normal_8hpp_1a8c01aca4351b8271d3426b3757bf5c1a`
 
-- :ref:`exhale_function_Normal_8hpp_1acf94bceb0d0138b4415060331e3ac764`
+- :ref:`exhale_function__normal_8hpp_1acf94bceb0d0138b4415060331e3ac764`
 
-- :ref:`exhale_function_Normal_8hpp_1a4d2c31f73ae23a2eb5b95f4dd304b177`
+- :ref:`exhale_function__normal_8hpp_1a440ba5607c2407513ce2c819369599a9`
 
-- :ref:`exhale_function_Normal_8hpp_1a72b53dfe036e14ab7302c38dc5f99f36`
+- :ref:`exhale_function__normal_8hpp_1a72b53dfe036e14ab7302c38dc5f99f36`
 
-- :ref:`exhale_function_Normal_8hpp_1af4d8ff9e2c491a76f281bef10d71d558`
+- :ref:`exhale_function__normal_8hpp_1af4d8ff9e2c491a76f281bef10d71d558`
 
 
 Defines
 -------
 
 
-- :ref:`exhale_define_Normal_8hpp_1ac3629d4f4a11d2ee990a0520c5f26ebd`
+- :ref:`exhale_define__normal_8hpp_1ac3629d4f4a11d2ee990a0520c5f26ebd`
 

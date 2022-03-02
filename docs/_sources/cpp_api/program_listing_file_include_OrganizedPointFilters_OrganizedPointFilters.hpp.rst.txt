@@ -4,7 +4,7 @@
 Program Listing for File OrganizedPointFilters.hpp
 ==================================================
 
-|exhale_lsh| :ref:`Return to documentation for file <file_include_OrganizedPointFilters_OrganizedPointFilters.hpp>` (``include/OrganizedPointFilters/OrganizedPointFilters.hpp``)
+|exhale_lsh| :ref:`Return to documentation for file <file_include_OrganizedPointFilters_OrganizedPointFilters.hpp>` (``include\OrganizedPointFilters\OrganizedPointFilters.hpp``)
 
 .. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
 
@@ -47,6 +47,7 @@ Program Listing for File OrganizedPointFilters.hpp
    
    namespace OrganizedPointFilters {
    
+   std::string GetOrganizedPointFiltersVersion();
    
    } // namespace OrganizedPointFilters
    

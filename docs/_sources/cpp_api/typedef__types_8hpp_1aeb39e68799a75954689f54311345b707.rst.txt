@@ -1,0 +1,13 @@
+.. _exhale_typedef__types_8hpp_1aeb39e68799a75954689f54311345b707:
+
+Typedef OrganizedPointFilters::Z16_BUFFER
+=========================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Types.hpp`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: OrganizedPointFilters::Z16_BUFFER

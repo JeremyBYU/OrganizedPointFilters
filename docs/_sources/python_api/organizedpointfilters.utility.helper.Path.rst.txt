@@ -1,0 +1,9 @@
+organizedpointfilters.utility.helper.Path
+-----------------------------------------
+
+.. currentmodule:: organizedpointfilters.utility.helper
+
+.. autoclass:: Path
+    :members:
+    :undoc-members:
+    :inherited-members:

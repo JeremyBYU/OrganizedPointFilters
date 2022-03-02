@@ -4,7 +4,7 @@
 File Laplacian.hpp
 ==================
 
-|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters_Filter>` (``include/OrganizedPointFilters/Filter``)
+|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters_Filter>` (``include\OrganizedPointFilters\Filter``)
 
 .. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
 
@@ -12,7 +12,7 @@ File Laplacian.hpp
    :local:
    :backlinks: none
 
-Definition (``include/OrganizedPointFilters/Filter/Laplacian.hpp``)
+Definition (``include\OrganizedPointFilters\Filter\Laplacian.hpp``)
 -------------------------------------------------------------------
 
 
@@ -29,7 +29,7 @@ Includes
 --------
 
 
-- ``OrganizedPointFilters/Types.hpp`` (:ref:`file_include_OrganizedPointFilters_Types.hpp`)
+- ``OrganizedPointFilters/Types.hpp``
 
 - ``iostream``
 
@@ -59,28 +59,28 @@ Functions
 ---------
 
 
-- :ref:`exhale_function_Laplacian_8hpp_1aa42d065c596fbc910b6f00a3b4cc5826`
+- :ref:`exhale_function__laplacian_8hpp_1aceb3e6d888930cfe0b62333bc3c99f5c`
 
-- :ref:`exhale_function_Laplacian_8hpp_1aceb3e6d888930cfe0b62333bc3c99f5c`
+- :ref:`exhale_function__laplacian_8hpp_1a30f2e951c0a46a8a3d7ee5cb70e97a96`
 
-- :ref:`exhale_function_Laplacian_8hpp_1a30f2e951c0a46a8a3d7ee5cb70e97a96`
+- :ref:`exhale_function__laplacian_8hpp_1ad896c034ceec1b3e604c7e31ee501eb8`
 
-- :ref:`exhale_function_Laplacian_8hpp_1a8756ee08d114a035420c0275515c68a0`
+- :ref:`exhale_function__laplacian_8hpp_1a8756ee08d114a035420c0275515c68a0`
 
 
 Defines
 -------
 
 
-- :ref:`exhale_define_Laplacian_8hpp_1ab53328405fd9ba89990d9426d0e6389e`
+- :ref:`exhale_define__laplacian_8hpp_1ab53328405fd9ba89990d9426d0e6389e`
 
-- :ref:`exhale_define_Laplacian_8hpp_1a9a6b01817fa44c7910ed98fd49d8b8eb`
+- :ref:`exhale_define__laplacian_8hpp_1a9a6b01817fa44c7910ed98fd49d8b8eb`
 
-- :ref:`exhale_define_Laplacian_8hpp_1a17d51190792a0d04a81fb663fd8d799c`
+- :ref:`exhale_define__laplacian_8hpp_1a17d51190792a0d04a81fb663fd8d799c`
 
-- :ref:`exhale_define_Laplacian_8hpp_1a78b3c25efa819f92938531ff5624f02d`
+- :ref:`exhale_define__laplacian_8hpp_1a78b3c25efa819f92938531ff5624f02d`
 
-- :ref:`exhale_define_Laplacian_8hpp_1a0855e38ec835f00750b2561877542c32`
+- :ref:`exhale_define__laplacian_8hpp_1a0855e38ec835f00750b2561877542c32`
 
-- :ref:`exhale_define_Laplacian_8hpp_1a99e8eee63fd5ac8a240dd5001207b6ae`
+- :ref:`exhale_define__laplacian_8hpp_1a99e8eee63fd5ac8a240dd5001207b6ae`
 

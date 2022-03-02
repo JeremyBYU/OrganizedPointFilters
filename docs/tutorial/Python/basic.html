@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Example Point Cloud &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>Example Point Cloud &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/language_data.js"></script>
-        <script src="../../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
@@ -67,7 +68,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -91,12 +92,12 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Python</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Example Point Cloud</a><ul>
@@ -110,13 +111,14 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../python_api/organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../python_api/organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../python_api/organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_api/organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../cpp_api/cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -467,7 +469,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="section" id="Example-Point-Cloud">
+<section id="Example-Point-Cloud">
 <h1>Example Point Cloud<a class="headerlink" href="#Example-Point-Cloud" title="Permalink to this headline">¶</a></h1>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">pc</span></code> is a N X 3 Numpy array, while <code class="docutils literal notranslate"><span class="pre">pc_image</span></code> is a M X N X 3 organized point cloud</p>
 <div class="nbinput docutils container">
@@ -498,7 +500,7 @@ array([[ 1.37309742, -0.96145308, -0.96777892],
        [ 3.00051689,  2.07920647,  2.09741902]])
 </pre></div></div>
 </div>
-<div class="section" id="Visualize-Point-Cloud-and-Mesh">
+<section id="Visualize-Point-Cloud-and-Mesh">
 <h2>Visualize Point Cloud and Mesh<a class="headerlink" href="#Visualize-Point-Cloud-and-Mesh" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -528,9 +530,9 @@ array([[ 1.37309742, -0.96145308, -0.96777892],
 <img alt="../../_images/tutorial_Python_basic_5_0.png" src="../../_images/tutorial_Python_basic_5_0.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="Laplacian-Smoothing">
+</section>
+</section>
+<section id="Laplacian-Smoothing">
 <h1>Laplacian Smoothing<a class="headerlink" href="#Laplacian-Smoothing" title="Permalink to this headline">¶</a></h1>
 <p>First we import the organized point filter module <code class="docutils literal notranslate"><span class="pre">opf</span></code> and our type conversion class from numpy <code class="docutils literal notranslate"><span class="pre">Matrix3fRef</span></code>. Then we created a simple helper function called <code class="docutils literal notranslate"><span class="pre">laplacian_opc</span></code>.</p>
 <p>The function first converts from F64 to F32 floating point type (thats all that is handled currently). Next it wraps the F32 numpy array using <code class="docutils literal notranslate"><span class="pre">Matrix3fRef</span></code> (no copy) such that our C++ Module can understand it. Then it calls <code class="docutils literal notranslate"><span class="pre">opf.filter.laplacian_K3</span></code> or <code class="docutils literal notranslate"><span class="pre">K5</span></code> depending on the kernel size. Afterward it converts back to F64.</p>
@@ -613,8 +615,8 @@ INFO:PPB:OPC Mesh Smoothing Took (ms): 10.68
 <img alt="../../_images/tutorial_Python_basic_10_0.png" src="../../_images/tutorial_Python_basic_10_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="Bilateral-Smoothing">
+</section>
+<section id="Bilateral-Smoothing">
 <h1>Bilateral Smoothing<a class="headerlink" href="#Bilateral-Smoothing" title="Permalink to this headline">¶</a></h1>
 <p>Bilateral smoothing works on triangle <strong>normals</strong> of the mesh. Vertex updating is not implemented. The mesh needs to already be <em>sufficiently smooth</em>. For example we will be applying bilateral smoothing <em>after</em> Laplacian smoothing.</p>
 <p>Here is a helper function that performs conversions as before. Note that the return type is an (M-1) X (N-1) X 2 X 3 numpy array. Basically every 2 X 2 quad in the OPC creates <em>two</em> implicit triangles:</p>
@@ -712,11 +714,11 @@ INFO:PPB:OPC Bilateral Filter Took (ms): 26.97
 <img alt="../../_images/tutorial_Python_basic_14_0.png" src="../../_images/tutorial_Python_basic_14_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="GPU-Acceleration">
+</section>
+<section id="GPU-Acceleration">
 <h1>GPU Acceleration<a class="headerlink" href="#GPU-Acceleration" title="Permalink to this headline">¶</a></h1>
 <p>GPU Accelerated implementation of these filters are created as well. They currently only work on CUDA and have been tested on a NVIDIA 2070 Super. These filters are in the module <code class="docutils literal notranslate"><span class="pre">opf.cuda.kernel</span></code> and rely upon <a class="reference external" href="https://cupy.chainer.org/">cupy</a>. To see some of these in action please see the <code class="docutils literal notranslate"><span class="pre">examples/python</span></code> folder.</p>
-</div>
+</section>
 
 
            </div>

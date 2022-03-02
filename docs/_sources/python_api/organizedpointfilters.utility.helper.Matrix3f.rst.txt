@@ -1,0 +1,9 @@
+organizedpointfilters.utility.helper.Matrix3f
+---------------------------------------------
+
+.. currentmodule:: organizedpointfilters.utility.helper
+
+.. autoclass:: Matrix3f
+    :members:
+    :undoc-members:
+    :inherited-members:

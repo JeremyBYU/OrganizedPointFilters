@@ -28,23 +28,30 @@ Classes
 -------
 
 
-- :ref:`exhale_struct_structOrganizedPointFilters_1_1DepthInfo`
+- :ref:`exhale_struct_struct_organized_point_filters_1_1_depth_info`
 
-- :ref:`exhale_struct_structOrganizedPointFilters_1_1ImgDetails`
+- :ref:`exhale_struct_struct_organized_point_filters_1_1_img_details`
+
+
+Functions
+---------
+
+
+- :ref:`exhale_function__organized_point_filters_8hpp_1a9fca076fd43a5cd478286961f5843a28`
 
 
 Typedefs
 --------
 
 
-- :ref:`exhale_typedef_Types_8hpp_1a55661bd6be4719cb4f129ce3ea26833c`
+- :ref:`exhale_typedef__types_8hpp_1a55661bd6be4719cb4f129ce3ea26833c`
 
-- :ref:`exhale_typedef_Types_8hpp_1a08e14e768ff946973983c914a3c36d70`
+- :ref:`exhale_typedef__types_8hpp_1a08e14e768ff946973983c914a3c36d70`
 
-- :ref:`exhale_typedef_Types_8hpp_1ad4772ee99e90af958c2e8b8845e92f9e`
+- :ref:`exhale_typedef__types_8hpp_1ad4772ee99e90af958c2e8b8845e92f9e`
 
-- :ref:`exhale_typedef_Types_8hpp_1a4760c968d5de72692091f0853b0221f9`
+- :ref:`exhale_typedef__types_8hpp_1a4760c968d5de72692091f0853b0221f9`
 
-- :ref:`exhale_typedef_Types_8hpp_1a7828465025cf7170f980ab37a8895fba`
+- :ref:`exhale_typedef__types_8hpp_1a7828465025cf7170f980ab37a8895fba`
 
-- :ref:`exhale_typedef_Types_8hpp_1aeb39e68799a75954689f54311345b707`
+- :ref:`exhale_typedef__types_8hpp_1aeb39e68799a75954689f54311345b707`

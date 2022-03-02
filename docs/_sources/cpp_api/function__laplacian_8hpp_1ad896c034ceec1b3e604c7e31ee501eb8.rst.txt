@@ -1,0 +1,13 @@
+.. _exhale_function__laplacian_8hpp_1ad896c034ceec1b3e604c7e31ee501eb8:
+
+Template Function OrganizedPointFilters::Filter::LaplacianCore::SmoothPointT
+============================================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Filter_Laplacian.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::Filter::LaplacianCore::SmoothPointT(Eigen::Ref<RowMatrixXVec3f>&, Eigen::Ref<RowMatrixXVec3f>&, const int, const int, const float, float)

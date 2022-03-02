@@ -1,0 +1,13 @@
+.. _exhale_typedef__types_8hpp_1a7828465025cf7170f980ab37a8895fba:
+
+Typedef OrganizedPointFilters::RowMatrixXVec3X
+==============================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Types.hpp`
+
+
+Typedef Documentation
+---------------------
+
+
+.. doxygentypedef:: OrganizedPointFilters::RowMatrixXVec3X

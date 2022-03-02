@@ -12,9 +12,17 @@ organizedpointfilters
     OrganizedTriangleMatrix
 
 
+**Functions**
+
+.. autosummary::
+
+    get_opf_version
+
+
 .. toctree::
     :hidden:
 
     Matrix3f <organizedpointfilters.Matrix3f>
     Matrix3fRef <organizedpointfilters.Matrix3fRef>
     OrganizedTriangleMatrix <organizedpointfilters.OrganizedTriangleMatrix>
+    get_opf_version <organizedpointfilters.get_opf_version>

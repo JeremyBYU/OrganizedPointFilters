@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Full API &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>Full API &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
-        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -65,7 +66,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -89,23 +90,24 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.cuda.kernel.html">organizedpointfilters.cuda.kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_api/organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -194,15 +196,16 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="full-api">
+<section id="full-api">
 <h1>Full API<a class="headerlink" href="#full-api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="namespaces">
+<section id="namespaces">
 <h2>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="namespace_OrganizedPointFilters.html">Namespace OrganizedPointFilters</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="namespace_OrganizedPointFilters.html#namespaces">Namespaces</a></li>
 <li class="toctree-l2"><a class="reference internal" href="namespace_OrganizedPointFilters.html#classes">Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="namespace_OrganizedPointFilters.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="namespace_OrganizedPointFilters.html#typedefs">Typedefs</a></li>
 </ul>
 </li>
@@ -221,6 +224,14 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="namespace_OrganizedPointFilters__Filter__BilateralCore.html">Namespace OrganizedPointFilters::Filter::BilateralCore</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="namespace_OrganizedPointFilters__Filter__BilateralCore.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_OrganizedPointFilters__Filter__DecimateCore.html">Namespace OrganizedPointFilters::Filter::DecimateCore</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="namespace_OrganizedPointFilters__Filter__DecimateCore.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -258,388 +269,420 @@
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="classes-and-structs">
+</section>
+<section id="classes-and-structs">
 <h2>Classes and Structs<a class="headerlink" href="#classes-and-structs" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="structOrganizedPointFilters_1_1DepthInfo.html">Struct DepthInfo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structOrganizedPointFilters_1_1DepthInfo.html#struct-documentation">Struct Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="struct_organized_point_filters_1_1_depth_info.html">Struct DepthInfo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="struct_organized_point_filters_1_1_depth_info.html#struct-documentation">Struct Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="structOrganizedPointFilters_1_1ImgDetails.html">Struct ImgDetails</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="structOrganizedPointFilters_1_1ImgDetails.html#struct-documentation">Struct Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="struct_organized_point_filters_1_1_img_details.html">Struct ImgDetails</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="struct_organized_point_filters_1_1_img_details.html#struct-documentation">Struct Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="classOrganizedPointFilters_1_1Helper_1_1Timer.html">Class Timer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="classOrganizedPointFilters_1_1Helper_1_1Timer.html#class-documentation">Class Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_organized_point_filters_1_1_helper_1_1_timer.html">Class Timer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="class_organized_point_filters_1_1_helper_1_1_timer.html#class-documentation">Class Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="functions">
+</section>
+<section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Bilateral_8hpp_1ad992f303d13bbeecd96bf00f7db19931.html">Template Function OrganizedPointFilters::Filter::BilateralCore::BilateralNormalLoop</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Bilateral_8hpp_1ad992f303d13bbeecd96bf00f7db19931.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__bilateral_8hpp_1ad992f303d13bbeecd96bf00f7db19931.html">Template Function OrganizedPointFilters::Filter::BilateralCore::BilateralNormalLoop</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__bilateral_8hpp_1ad992f303d13bbeecd96bf00f7db19931.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Bilateral_8hpp_1ac5a7bf4be9797f1a5115abbc2a34278e.html">Function OrganizedPointFilters::Filter::BilateralCore::GaussianWeight</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Bilateral_8hpp_1ac5a7bf4be9797f1a5115abbc2a34278e.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__bilateral_8hpp_1ac5a7bf4be9797f1a5115abbc2a34278e.html">Function OrganizedPointFilters::Filter::BilateralCore::GaussianWeight</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__bilateral_8hpp_1ac5a7bf4be9797f1a5115abbc2a34278e.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Bilateral_8hpp_1aa3603b284ff516d98cd88665581aef99.html">Function OrganizedPointFilters::Filter::BilateralCore::IntegrateTriangle</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Bilateral_8hpp_1aa3603b284ff516d98cd88665581aef99.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__bilateral_8hpp_1aa3603b284ff516d98cd88665581aef99.html">Function OrganizedPointFilters::Filter::BilateralCore::IntegrateTriangle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__bilateral_8hpp_1aa3603b284ff516d98cd88665581aef99.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Bilateral_8hpp_1a93411964854e32a1b5e0a328c72c8ad9.html">Template Function OrganizedPointFilters::Filter::BilateralCore::SmoothNormal</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Bilateral_8hpp_1a93411964854e32a1b5e0a328c72c8ad9.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__bilateral_8hpp_1a93411964854e32a1b5e0a328c72c8ad9.html">Template Function OrganizedPointFilters::Filter::BilateralCore::SmoothNormal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__bilateral_8hpp_1a93411964854e32a1b5e0a328c72c8ad9.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Bilateral_8hpp_1a82795c0fa06b290a089b7df9c9a1049b.html">Template Function OrganizedPointFilters::Filter::BilateralFilterNormals</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Bilateral_8hpp_1a82795c0fa06b290a089b7df9c9a1049b.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__bilateral_8hpp_1a82795c0fa06b290a089b7df9c9a1049b.html">Template Function OrganizedPointFilters::Filter::BilateralFilterNormals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__bilateral_8hpp_1a82795c0fa06b290a089b7df9c9a1049b.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Normal_8hpp_1a8c01aca4351b8271d3426b3757bf5c1a.html">Function OrganizedPointFilters::Filter::ComputeCentroids</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Normal_8hpp_1a8c01aca4351b8271d3426b3757bf5c1a.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__normal_8hpp_1a8c01aca4351b8271d3426b3757bf5c1a.html">Function OrganizedPointFilters::Filter::ComputeCentroids</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__normal_8hpp_1a8c01aca4351b8271d3426b3757bf5c1a.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Normal_8hpp_1acf94bceb0d0138b4415060331e3ac764.html">Function OrganizedPointFilters::Filter::ComputeNormals</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Normal_8hpp_1acf94bceb0d0138b4415060331e3ac764.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__normal_8hpp_1acf94bceb0d0138b4415060331e3ac764.html">Function OrganizedPointFilters::Filter::ComputeNormals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__normal_8hpp_1acf94bceb0d0138b4415060331e3ac764.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Normal_8hpp_1a4d2c31f73ae23a2eb5b95f4dd304b177.html">Function OrganizedPointFilters::Filter::ComputeNormalsAndCentroids</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Normal_8hpp_1a4d2c31f73ae23a2eb5b95f4dd304b177.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__normal_8hpp_1a440ba5607c2407513ce2c819369599a9.html">Function OrganizedPointFilters::Filter::ComputeNormalsAndCentroids</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__normal_8hpp_1a440ba5607c2407513ce2c819369599a9.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Laplacian_8hpp_1aa42d065c596fbc910b6f00a3b4cc5826.html">Template Function OrganizedPointFilters::Filter::LaplacianCore::__attribute__</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Laplacian_8hpp_1aa42d065c596fbc910b6f00a3b4cc5826.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__decimate_8hpp_1a48b80c587325e24116d2280402205ba8.html">Template Function OrganizedPointFilters::Filter::DecimateColumnT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__decimate_8hpp_1a48b80c587325e24116d2280402205ba8.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Laplacian_8hpp_1aceb3e6d888930cfe0b62333bc3c99f5c.html">Template Function OrganizedPointFilters::Filter::LaplacianCore::LaplacianLoopT</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Laplacian_8hpp_1aceb3e6d888930cfe0b62333bc3c99f5c.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__decimate_8hpp_1a45f8b88fdd1f859fe87b3cb8f20175bb.html">Template Function OrganizedPointFilters::Filter::DecimateCore::DecimateColumnPointT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__decimate_8hpp_1a45f8b88fdd1f859fe87b3cb8f20175bb.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Laplacian_8hpp_1a30f2e951c0a46a8a3d7ee5cb70e97a96.html">Function OrganizedPointFilters::Filter::LaplacianCore::OppositePointK3</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Laplacian_8hpp_1a30f2e951c0a46a8a3d7ee5cb70e97a96.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__decimate_8hpp_1a3017de6b68cf44f45c3d94aca3d3ec2c.html">Template Function OrganizedPointFilters::Filter::DecimateCore::DecimateColumnTLoop</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__decimate_8hpp_1a3017de6b68cf44f45c3d94aca3d3ec2c.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Laplacian_8hpp_1a8756ee08d114a035420c0275515c68a0.html">Template Function OrganizedPointFilters::Filter::LaplacianT</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Laplacian_8hpp_1a8756ee08d114a035420c0275515c68a0.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__laplacian_8hpp_1aceb3e6d888930cfe0b62333bc3c99f5c.html">Template Function OrganizedPointFilters::Filter::LaplacianCore::LaplacianLoopT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__laplacian_8hpp_1aceb3e6d888930cfe0b62333bc3c99f5c.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Normal_8hpp_1a72b53dfe036e14ab7302c38dc5f99f36.html">Function OrganizedPointFilters::Filter::NormalCore::ComputeCentroid</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Normal_8hpp_1a72b53dfe036e14ab7302c38dc5f99f36.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__laplacian_8hpp_1a30f2e951c0a46a8a3d7ee5cb70e97a96.html">Function OrganizedPointFilters::Filter::LaplacianCore::OppositePointK3</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__laplacian_8hpp_1a30f2e951c0a46a8a3d7ee5cb70e97a96.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Normal_8hpp_1af4d8ff9e2c491a76f281bef10d71d558.html">Function OrganizedPointFilters::Filter::NormalCore::ComputeNormal</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Normal_8hpp_1af4d8ff9e2c491a76f281bef10d71d558.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__laplacian_8hpp_1ad896c034ceec1b3e604c7e31ee501eb8.html">Template Function OrganizedPointFilters::Filter::LaplacianCore::SmoothPointT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__laplacian_8hpp_1ad896c034ceec1b3e604c7e31ee501eb8.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Helper_8hpp_1a617e680649ef08b6c5b8fbdd3ba48aab.html">Function OrganizedPointFilters::Helper::get_depth_image</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Helper_8hpp_1a617e680649ef08b6c5b8fbdd3ba48aab.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__laplacian_8hpp_1a8756ee08d114a035420c0275515c68a0.html">Template Function OrganizedPointFilters::Filter::LaplacianT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__laplacian_8hpp_1a8756ee08d114a035420c0275515c68a0.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_Helper_8hpp_1a76d4d986abf42e204fb3b70d2c1ed24d.html">Function OrganizedPointFilters::Helper::get_depth_metadata</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_Helper_8hpp_1a76d4d986abf42e204fb3b70d2c1ed24d.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__normal_8hpp_1a72b53dfe036e14ab7302c38dc5f99f36.html">Function OrganizedPointFilters::Filter::NormalCore::ComputeCentroid</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__normal_8hpp_1a72b53dfe036e14ab7302c38dc5f99f36.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_DisparityTransform_8hpp_1a01c39d60fc61b493a8bf34610b445d58.html">Template Function OrganizedPointFilters::RS::disparity_convert</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_DisparityTransform_8hpp_1a01c39d60fc61b493a8bf34610b445d58.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__normal_8hpp_1af4d8ff9e2c491a76f281bef10d71d558.html">Function OrganizedPointFilters::Filter::NormalCore::ComputeNormal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__normal_8hpp_1af4d8ff9e2c491a76f281bef10d71d558.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_DisparityTransform_8hpp_1a9d62212595787b4b065399749b0cf17b.html">Template Function OrganizedPointFilters::RS::disparity_transform</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_DisparityTransform_8hpp_1a9d62212595787b4b065399749b0cf17b.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__organized_point_filters_8hpp_1a9fca076fd43a5cd478286961f5843a28.html">Function OrganizedPointFilters::GetOrganizedPointFiltersVersion</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__organized_point_filters_8hpp_1a9fca076fd43a5cd478286961f5843a28.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_SpatialFilter_8hpp_1ac6fbfc0c0639e8d955ef84e181d2ca22.html">Template Function OrganizedPointFilters::RS::dxf_smooth</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_SpatialFilter_8hpp_1ac6fbfc0c0639e8d955ef84e181d2ca22.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__helper_8hpp_1a617e680649ef08b6c5b8fbdd3ba48aab.html">Function OrganizedPointFilters::Helper::get_depth_image</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__helper_8hpp_1a617e680649ef08b6c5b8fbdd3ba48aab.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_SpatialFilter_8hpp_1ae198a98150340eb97097b737d6912e6a.html">Template Function OrganizedPointFilters::RS::intertial_holes_fill</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_SpatialFilter_8hpp_1ae198a98150340eb97097b737d6912e6a.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__helper_8hpp_1a39ffe616907e8c84f41f51a765214dcc.html">Function OrganizedPointFilters::Helper::get_depth_metadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__helper_8hpp_1a39ffe616907e8c84f41f51a765214dcc.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_SpatialFilter_8hpp_1add560b42439fc1f4f2f6f8cf62eaaee0.html">Template Function OrganizedPointFilters::RS::prepare_target_frame</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_SpatialFilter_8hpp_1add560b42439fc1f4f2f6f8cf62eaaee0.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__disparity_transform_8hpp_1a01c39d60fc61b493a8bf34610b445d58.html">Template Function OrganizedPointFilters::RS::disparity_convert</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__disparity_transform_8hpp_1a01c39d60fc61b493a8bf34610b445d58.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_SpatialFilter_8hpp_1ac6da5b3d50089bc68f7fe12efd6ec06b.html">Template Function OrganizedPointFilters::RS::recursive_filter_horizontal</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_SpatialFilter_8hpp_1ac6da5b3d50089bc68f7fe12efd6ec06b.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__disparity_transform_8hpp_1a7befa1bffc3981fef1438482bcb1c5ce.html">Template Function OrganizedPointFilters::RS::disparity_transform</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__disparity_transform_8hpp_1a7befa1bffc3981fef1438482bcb1c5ce.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_SpatialFilter_8hpp_1aa6cd66e0f7ef6f67534e89724fd7ddc1.html">Function OrganizedPointFilters::RS::recursive_filter_horizontal_fp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_SpatialFilter_8hpp_1aa6cd66e0f7ef6f67534e89724fd7ddc1.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__spatial_filter_8hpp_1ac6fbfc0c0639e8d955ef84e181d2ca22.html">Template Function OrganizedPointFilters::RS::dxf_smooth</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__spatial_filter_8hpp_1ac6fbfc0c0639e8d955ef84e181d2ca22.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_SpatialFilter_8hpp_1a57b29c5736a78fd052397fd464fb458d.html">Template Function OrganizedPointFilters::RS::recursive_filter_vertical</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_SpatialFilter_8hpp_1a57b29c5736a78fd052397fd464fb458d.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__spatial_filter_8hpp_1ae198a98150340eb97097b737d6912e6a.html">Template Function OrganizedPointFilters::RS::intertial_holes_fill</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__spatial_filter_8hpp_1ae198a98150340eb97097b737d6912e6a.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_SpatialFilter_8hpp_1a16dcc8463147aec614d9d49831c8f540.html">Function OrganizedPointFilters::RS::recursive_filter_vertical_fp</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_SpatialFilter_8hpp_1a16dcc8463147aec614d9d49831c8f540.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__spatial_filter_8hpp_1aa224d45a75dcd8058a8c30e209a52d26.html">Template Function OrganizedPointFilters::RS::prepare_target_frame</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__spatial_filter_8hpp_1aa224d45a75dcd8058a8c30e209a52d26.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="function_SpatialFilter_8hpp_1acc27846a5fff6964c91f6ae7f3476ebd.html">Template Function OrganizedPointFilters::RS::spatial_filter</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="function_SpatialFilter_8hpp_1acc27846a5fff6964c91f6ae7f3476ebd.html#function-documentation">Function Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function__spatial_filter_8hpp_1ac6da5b3d50089bc68f7fe12efd6ec06b.html">Template Function OrganizedPointFilters::RS::recursive_filter_horizontal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__spatial_filter_8hpp_1ac6da5b3d50089bc68f7fe12efd6ec06b.html#function-documentation">Function Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function__spatial_filter_8hpp_1aa6cd66e0f7ef6f67534e89724fd7ddc1.html">Function OrganizedPointFilters::RS::recursive_filter_horizontal_fp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__spatial_filter_8hpp_1aa6cd66e0f7ef6f67534e89724fd7ddc1.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
 </div>
-<div class="section" id="defines">
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function__spatial_filter_8hpp_1a57b29c5736a78fd052397fd464fb458d.html">Template Function OrganizedPointFilters::RS::recursive_filter_vertical</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__spatial_filter_8hpp_1a57b29c5736a78fd052397fd464fb458d.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function__spatial_filter_8hpp_1a16dcc8463147aec614d9d49831c8f540.html">Function OrganizedPointFilters::RS::recursive_filter_vertical_fp</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__spatial_filter_8hpp_1a16dcc8463147aec614d9d49831c8f540.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function__spatial_filter_8hpp_1a9198783d94f5a47295936d169ea0fa70.html">Template Function OrganizedPointFilters::RS::spatial_filter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function__spatial_filter_8hpp_1a9198783d94f5a47295936d169ea0fa70.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="defines">
 <h2>Defines<a class="headerlink" href="#defines" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="define_Laplacian_8hpp_1ab53328405fd9ba89990d9426d0e6389e.html">Define eps</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_Laplacian_8hpp_1ab53328405fd9ba89990d9426d0e6389e.html#define-documentation">Define Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define__laplacian_8hpp_1ab53328405fd9ba89990d9426d0e6389e.html">Define eps</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define__laplacian_8hpp_1ab53328405fd9ba89990d9426d0e6389e.html#define-documentation">Define Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="define_Bilateral_8hpp_1a71cc5540066e0ef3b77e305ef5259efd.html">Define OPF_BILATERAL_DEFAULT_ITER</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_Bilateral_8hpp_1a71cc5540066e0ef3b77e305ef5259efd.html#define-documentation">Define Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define__bilateral_8hpp_1a71cc5540066e0ef3b77e305ef5259efd.html">Define OPF_BILATERAL_DEFAULT_ITER</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define__bilateral_8hpp_1a71cc5540066e0ef3b77e305ef5259efd.html#define-documentation">Define Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="define_Bilateral_8hpp_1a6ff7aef607123c6dc41484ba289fe21e.html">Define OPF_BILATERAL_DEFAULT_SIGMA_ANGLE</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_Bilateral_8hpp_1a6ff7aef607123c6dc41484ba289fe21e.html#define-documentation">Define Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define__bilateral_8hpp_1a6ff7aef607123c6dc41484ba289fe21e.html">Define OPF_BILATERAL_DEFAULT_SIGMA_ANGLE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define__bilateral_8hpp_1a6ff7aef607123c6dc41484ba289fe21e.html#define-documentation">Define Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="define_Bilateral_8hpp_1a773172382e2484dfa21a020c5a98daa3.html">Define OPF_BILATERAL_DEFAULT_SIGMA_LENGTH</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_Bilateral_8hpp_1a773172382e2484dfa21a020c5a98daa3.html#define-documentation">Define Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define__bilateral_8hpp_1a773172382e2484dfa21a020c5a98daa3.html">Define OPF_BILATERAL_DEFAULT_SIGMA_LENGTH</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define__bilateral_8hpp_1a773172382e2484dfa21a020c5a98daa3.html#define-documentation">Define Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="define_Bilateral_8hpp_1ac4c017f33d802b4f4f2863f69b838c22.html">Define OPF_BILATERAL_OMP_MAX_THREAD</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_Bilateral_8hpp_1ac4c017f33d802b4f4f2863f69b838c22.html#define-documentation">Define Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define__bilateral_8hpp_1ac4c017f33d802b4f4f2863f69b838c22.html">Define OPF_BILATERAL_OMP_MAX_THREAD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define__bilateral_8hpp_1ac4c017f33d802b4f4f2863f69b838c22.html#define-documentation">Define Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="define_Laplacian_8hpp_1a9a6b01817fa44c7910ed98fd49d8b8eb.html">Define OPF_KERNEL_DEFAULT_ITER</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_Laplacian_8hpp_1a9a6b01817fa44c7910ed98fd49d8b8eb.html#define-documentation">Define Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define__laplacian_8hpp_1a9a6b01817fa44c7910ed98fd49d8b8eb.html">Define OPF_KERNEL_DEFAULT_ITER</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define__laplacian_8hpp_1a9a6b01817fa44c7910ed98fd49d8b8eb.html#define-documentation">Define Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="define_Laplacian_8hpp_1a17d51190792a0d04a81fb663fd8d799c.html">Define OPF_KERNEL_DEFAULT_KERNEL_SIZE</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_Laplacian_8hpp_1a17d51190792a0d04a81fb663fd8d799c.html#define-documentation">Define Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define__laplacian_8hpp_1a17d51190792a0d04a81fb663fd8d799c.html">Define OPF_KERNEL_DEFAULT_KERNEL_SIZE</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define__laplacian_8hpp_1a17d51190792a0d04a81fb663fd8d799c.html#define-documentation">Define Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="define_Laplacian_8hpp_1a78b3c25efa819f92938531ff5624f02d.html">Define OPF_KERNEL_DEFAULT_LAMBDA</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_Laplacian_8hpp_1a78b3c25efa819f92938531ff5624f02d.html#define-documentation">Define Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define__laplacian_8hpp_1a78b3c25efa819f92938531ff5624f02d.html">Define OPF_KERNEL_DEFAULT_LAMBDA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define__laplacian_8hpp_1a78b3c25efa819f92938531ff5624f02d.html#define-documentation">Define Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="define_Laplacian_8hpp_1a0855e38ec835f00750b2561877542c32.html">Define OPF_KERNEL_MAX_FLOAT</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_Laplacian_8hpp_1a0855e38ec835f00750b2561877542c32.html#define-documentation">Define Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define__laplacian_8hpp_1a0855e38ec835f00750b2561877542c32.html">Define OPF_KERNEL_MAX_FLOAT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define__laplacian_8hpp_1a0855e38ec835f00750b2561877542c32.html#define-documentation">Define Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="define_Laplacian_8hpp_1a99e8eee63fd5ac8a240dd5001207b6ae.html">Define OPF_KERNEL_OMP_MAX_THREAD</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_Laplacian_8hpp_1a99e8eee63fd5ac8a240dd5001207b6ae.html#define-documentation">Define Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define__laplacian_8hpp_1a99e8eee63fd5ac8a240dd5001207b6ae.html">Define OPF_KERNEL_OMP_MAX_THREAD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define__laplacian_8hpp_1a99e8eee63fd5ac8a240dd5001207b6ae.html#define-documentation">Define Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="define_Normal_8hpp_1ac3629d4f4a11d2ee990a0520c5f26ebd.html">Define OPF_NORMAL_OMP_MAX_THREAD</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="define_Normal_8hpp_1ac3629d4f4a11d2ee990a0520c5f26ebd.html#define-documentation">Define Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="define__normal_8hpp_1ac3629d4f4a11d2ee990a0520c5f26ebd.html">Define OPF_NORMAL_OMP_MAX_THREAD</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="define__normal_8hpp_1ac3629d4f4a11d2ee990a0520c5f26ebd.html#define-documentation">Define Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
-</div>
-<div class="section" id="typedefs">
+</section>
+<section id="typedefs">
 <h2>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="typedef_Types_8hpp_1a55661bd6be4719cb4f129ce3ea26833c.html">Typedef OrganizedPointFilters::EigenDoubleVector3f</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="typedef_Types_8hpp_1a55661bd6be4719cb4f129ce3ea26833c.html#typedef-documentation">Typedef Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typedef__types_8hpp_1a55661bd6be4719cb4f129ce3ea26833c.html">Typedef OrganizedPointFilters::EigenDoubleVector3f</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef__types_8hpp_1a55661bd6be4719cb4f129ce3ea26833c.html#typedef-documentation">Typedef Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="typedef_Types_8hpp_1a08e14e768ff946973983c914a3c36d70.html">Typedef OrganizedPointFilters::OrganizedTriangleMatrix</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="typedef_Types_8hpp_1a08e14e768ff946973983c914a3c36d70.html#typedef-documentation">Typedef Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typedef__types_8hpp_1a08e14e768ff946973983c914a3c36d70.html">Typedef OrganizedPointFilters::OrganizedTriangleMatrix</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef__types_8hpp_1a08e14e768ff946973983c914a3c36d70.html#typedef-documentation">Typedef Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="typedef_Types_8hpp_1ad4772ee99e90af958c2e8b8845e92f9e.html">Typedef OrganizedPointFilters::RowMatrixXd</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="typedef_Types_8hpp_1ad4772ee99e90af958c2e8b8845e92f9e.html#typedef-documentation">Typedef Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typedef__types_8hpp_1ad4772ee99e90af958c2e8b8845e92f9e.html">Typedef OrganizedPointFilters::RowMatrixXd</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef__types_8hpp_1ad4772ee99e90af958c2e8b8845e92f9e.html#typedef-documentation">Typedef Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="typedef_Types_8hpp_1a4760c968d5de72692091f0853b0221f9.html">Typedef OrganizedPointFilters::RowMatrixXVec3f</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="typedef_Types_8hpp_1a4760c968d5de72692091f0853b0221f9.html#typedef-documentation">Typedef Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typedef__types_8hpp_1a4760c968d5de72692091f0853b0221f9.html">Typedef OrganizedPointFilters::RowMatrixXVec3f</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef__types_8hpp_1a4760c968d5de72692091f0853b0221f9.html#typedef-documentation">Typedef Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="typedef_Types_8hpp_1a7828465025cf7170f980ab37a8895fba.html">Typedef OrganizedPointFilters::RowMatrixXVec3X</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="typedef_Types_8hpp_1a7828465025cf7170f980ab37a8895fba.html#typedef-documentation">Typedef Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typedef__types_8hpp_1a7828465025cf7170f980ab37a8895fba.html">Typedef OrganizedPointFilters::RowMatrixXVec3X</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef__types_8hpp_1a7828465025cf7170f980ab37a8895fba.html#typedef-documentation">Typedef Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="typedef_Types_8hpp_1aeb39e68799a75954689f54311345b707.html">Typedef OrganizedPointFilters::Z16_BUFFER</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="typedef_Types_8hpp_1aeb39e68799a75954689f54311345b707.html#typedef-documentation">Typedef Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="typedef__types_8hpp_1aeb39e68799a75954689f54311345b707.html">Typedef OrganizedPointFilters::Z16_BUFFER</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="typedef__types_8hpp_1aeb39e68799a75954689f54311345b707.html#typedef-documentation">Typedef Documentation</a></li>
 </ul>
 </li>
 </ul>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

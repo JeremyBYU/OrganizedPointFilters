@@ -4,7 +4,7 @@
 File Helper.hpp
 ===============
 
-|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters>` (``include/OrganizedPointFilters``)
+|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters>` (``include\OrganizedPointFilters``)
 
 .. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
 
@@ -12,7 +12,7 @@ File Helper.hpp
    :local:
    :backlinks: none
 
-Definition (``include/OrganizedPointFilters/Helper.hpp``)
+Definition (``include\OrganizedPointFilters\Helper.hpp``)
 ---------------------------------------------------------
 
 
@@ -29,7 +29,7 @@ Includes
 --------
 
 
-- ``OrganizedPointFilters/Types.hpp`` (:ref:`file_include_OrganizedPointFilters_Types.hpp`)
+- ``OrganizedPointFilters/Types.hpp``
 
 - ``chrono``
 
@@ -57,14 +57,14 @@ Classes
 -------
 
 
-- :ref:`exhale_class_classOrganizedPointFilters_1_1Helper_1_1Timer`
+- :ref:`exhale_class_class_organized_point_filters_1_1_helper_1_1_timer`
 
 
 Functions
 ---------
 
 
-- :ref:`exhale_function_Helper_8hpp_1a617e680649ef08b6c5b8fbdd3ba48aab`
+- :ref:`exhale_function__helper_8hpp_1a617e680649ef08b6c5b8fbdd3ba48aab`
 
-- :ref:`exhale_function_Helper_8hpp_1a76d4d986abf42e204fb3b70d2c1ed24d`
+- :ref:`exhale_function__helper_8hpp_1a39ffe616907e8c84f41f51a765214dcc`
 

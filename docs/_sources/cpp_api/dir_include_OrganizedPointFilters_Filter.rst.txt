@@ -5,17 +5,18 @@ Directory Filter
 ================
 
 
-|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters>` (``include/OrganizedPointFilters``)
+|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters>` (``include\OrganizedPointFilters``)
 
 .. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
 
-*Directory path:* ``include/OrganizedPointFilters/Filter``
+*Directory path:* ``include\OrganizedPointFilters\Filter``
 
 
 Files
 -----
 
 - :ref:`file_include_OrganizedPointFilters_Filter_Bilateral.hpp`
+- :ref:`file_include_OrganizedPointFilters_Filter_Decimate.hpp`
 - :ref:`file_include_OrganizedPointFilters_Filter_Laplacian.hpp`
 - :ref:`file_include_OrganizedPointFilters_Filter_Normal.hpp`
 

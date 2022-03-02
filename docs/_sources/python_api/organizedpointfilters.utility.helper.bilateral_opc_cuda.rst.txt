@@ -1,0 +1,6 @@
+organizedpointfilters.utility.helper.bilateral_opc_cuda
+-------------------------------------------------------
+
+.. currentmodule:: organizedpointfilters.utility.helper
+
+.. autofunction:: bilateral_opc_cuda

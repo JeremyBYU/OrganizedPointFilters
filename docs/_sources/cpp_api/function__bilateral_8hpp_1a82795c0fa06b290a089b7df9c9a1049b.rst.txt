@@ -1,0 +1,13 @@
+.. _exhale_function__bilateral_8hpp_1a82795c0fa06b290a089b7df9c9a1049b:
+
+Template Function OrganizedPointFilters::Filter::BilateralFilterNormals
+=======================================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Filter_Bilateral.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::Filter::BilateralFilterNormals(Eigen::Ref<RowMatrixXVec3f>, int, float, float)

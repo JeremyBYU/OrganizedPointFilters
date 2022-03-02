@@ -1,0 +1,13 @@
+.. _exhale_function__normal_8hpp_1acf94bceb0d0138b4415060331e3ac764:
+
+Function OrganizedPointFilters::Filter::ComputeNormals
+======================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Filter_Normal.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::Filter::ComputeNormals(Eigen::Ref<RowMatrixXVec3f>)

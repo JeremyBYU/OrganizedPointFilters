@@ -1,0 +1,13 @@
+.. _exhale_define__bilateral_8hpp_1a6ff7aef607123c6dc41484ba289fe21e:
+
+Define OPF_BILATERAL_DEFAULT_SIGMA_ANGLE
+========================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Filter_Bilateral.hpp`
+
+
+Define Documentation
+--------------------
+
+
+.. doxygendefine:: OPF_BILATERAL_DEFAULT_SIGMA_ANGLE

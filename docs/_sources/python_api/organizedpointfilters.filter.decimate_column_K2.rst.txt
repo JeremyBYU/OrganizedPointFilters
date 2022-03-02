@@ -1,0 +1,6 @@
+organizedpointfilters.filter.decimate_column_K2
+-----------------------------------------------
+
+.. currentmodule:: organizedpointfilters.filter
+
+.. autofunction:: decimate_column_K2

@@ -4,7 +4,7 @@
 File RS.hpp
 ===========
 
-|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters_RS>` (``include/OrganizedPointFilters/RS``)
+|exhale_lsh| :ref:`Parent directory <dir_include_OrganizedPointFilters_RS>` (``include\OrganizedPointFilters\RS``)
 
 .. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
 
@@ -12,7 +12,7 @@ File RS.hpp
    :local:
    :backlinks: none
 
-Definition (``include/OrganizedPointFilters/RS/RS.hpp``)
+Definition (``include\OrganizedPointFilters\RS\RS.hpp``)
 --------------------------------------------------------
 
 
@@ -29,9 +29,9 @@ Includes
 --------
 
 
-- ``OrganizedPointFilters/RS/DisparityTransform.hpp`` (:ref:`file_include_OrganizedPointFilters_RS_DisparityTransform.hpp`)
+- ``OrganizedPointFilters/RS/DisparityTransform.hpp``
 
-- ``OrganizedPointFilters/RS/SpatialFilter.hpp`` (:ref:`file_include_OrganizedPointFilters_RS_SpatialFilter.hpp`)
+- ``OrganizedPointFilters/RS/SpatialFilter.hpp``
 
 
 

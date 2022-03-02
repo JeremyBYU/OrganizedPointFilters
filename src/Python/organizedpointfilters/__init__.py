@@ -9,3 +9,6 @@ try:
     __version__ = pkg_resources.require("opf")[0].version
 except Exception:
     __version__ = '@PROJECT_VERSION@'
+
+# import organizedpointfilters.utility as utility
+# import organizedpointfilters.cuda as cuda

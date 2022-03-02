@@ -4,7 +4,7 @@
 Program Listing for File Helper.hpp
 ===================================
 
-|exhale_lsh| :ref:`Return to documentation for file <file_include_OrganizedPointFilters_Helper.hpp>` (``include/OrganizedPointFilters/Helper.hpp``)
+|exhale_lsh| :ref:`Return to documentation for file <file_include_OrganizedPointFilters_Helper.hpp>` (``include\OrganizedPointFilters\Helper.hpp``)
 
 .. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
 

@@ -4,7 +4,7 @@
 Program Listing for File Types.hpp
 ==================================
 
-|exhale_lsh| :ref:`Return to documentation for file <file_include_OrganizedPointFilters_Types.hpp>` (``include/OrganizedPointFilters/Types.hpp``)
+|exhale_lsh| :ref:`Return to documentation for file <file_include_OrganizedPointFilters_Types.hpp>` (``include\OrganizedPointFilters\Types.hpp``)
 
 .. |exhale_lsh| unicode:: U+021B0 .. UPWARDS ARROW WITH TIP LEFTWARDS
 
@@ -19,7 +19,7 @@ Program Listing for File Types.hpp
    #include <limits>
    
    // #define EIGEN_RUNTIME_NO_MALLOC // Define this symbol to enable runtime tests for allocations
-   #include "eigen3/Eigen/Dense"
+   #include "Eigen/Dense"
    
    
    namespace OrganizedPointFilters {

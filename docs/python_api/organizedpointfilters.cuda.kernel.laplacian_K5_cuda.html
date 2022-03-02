@@ -5,10 +5,11 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>organizedpointfilters.cuda.kernel.laplacian_K5_cuda &mdash; OrganizedPointFilters 0.1.0 documentation</title>
+  <title>organizedpointfilters.cuda.kernel.laplacian_K5_cuda &mdash; OrganizedPointFilters 0.2.2 documentation</title>
   
 
   
@@ -25,8 +26,8 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/language_data.js"></script>
-        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
-        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+        <script src="../_static/collapsible-lists\js\CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists\js\apply-collapsible-lists.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -39,7 +40,7 @@
   <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="C++ Library API" href="../cpp_api/cpp_library_root.html" />
+    <link rel="next" title="organizedpointfilters.utility.helper" href="organizedpointfilters.utility.helper.html" />
     <link rel="prev" title="organizedpointfilters.cuda.kernel.laplacian_K3_cuda" href="organizedpointfilters.cuda.kernel.laplacian_K3_cuda.html" /> 
 </head>
 
@@ -67,7 +68,7 @@
             
             
               <div class="version">
-                0.1.0
+                0.2.2
               </div>
             
           
@@ -91,17 +92,17 @@
               
             
             
-              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <p><span class="caption-text">Getting Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introducing Organized Point Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../builddocs.html">Building Documentation</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Tutorial</span></p>
+<p><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/Python/index.html">Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial/C++/index.html">C++</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Python API</span></p>
+<p><span class="caption-text">Python API</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="organizedpointfilters.html">organizedpointfilters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="organizedpointfilters.filter.html">organizedpointfilters.filter</a></li>
@@ -111,8 +112,9 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">laplacian_K5_cuda</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="organizedpointfilters.utility.helper.html">organizedpointfilters.utility.helper</a></li>
 </ul>
-<p class="caption"><span class="caption-text">C++ API</span></p>
+<p><span class="caption-text">C++ API</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../cpp_api/cpp_library_root.html">C++ Library API</a></li>
 </ul>
@@ -203,29 +205,29 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="organizedpointfilters-cuda-kernel-laplacian-k5-cuda">
+<section id="organizedpointfilters-cuda-kernel-laplacian-k5-cuda">
 <h1>organizedpointfilters.cuda.kernel.laplacian_K5_cuda<a class="headerlink" href="#organizedpointfilters-cuda-kernel-laplacian-k5-cuda" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="organizedpointfilters.cuda.kernel.laplacian_K5_cuda">
 <code class="sig-prename descclassname">organizedpointfilters.cuda.kernel.</code><code class="sig-name descname">laplacian_K5_cuda</code><span class="sig-paren">(</span><em class="sig-param">opc_float</em>, <em class="sig-param">loops=5</em>, <em class="sig-param">_lambda=0.5</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#organizedpointfilters.cuda.kernel.laplacian_K5_cuda" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform laplacian smoothing on point cloud using CUDA</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>{ndarray} -- Numpy array of size MXNX3 dtype==np.float32</strong> (<em>opc_float</em>) – </p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>{ndarray} -- Organized Point Cloud</strong><strong>, </strong><strong>numpy array of size M X N X 3 dtype==np.float32</strong> (<em>opc_float</em>) – </p>
 </dd>
-<dt class="field-even">Keyword Arguments</dt>
+<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>{int} -- Number of loop interations of smoothing</strong><strong> (</strong><strong>default</strong> (<em>loops</em>) – {5})</p></li>
 <li><p><strong>{float} --</strong><strong> [</strong><strong>0-1.0</strong><strong>] </strong><strong>(</strong><strong>default</strong> (<em>_lambda</em>) – {0.5})</p></li>
 </ul>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>ndarray – MXNX3 smoothed point cloud, dtype==np.float32</p>
 </dd>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
            </div>
@@ -235,7 +237,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../cpp_api/cpp_library_root.html" class="btn btn-neutral float-right" title="C++ Library API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="organizedpointfilters.utility.helper.html" class="btn btn-neutral float-right" title="organizedpointfilters.utility.helper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="organizedpointfilters.cuda.kernel.laplacian_K3_cuda.html" class="btn btn-neutral float-left" title="organizedpointfilters.cuda.kernel.laplacian_K3_cuda" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -40,6 +40,11 @@ Files
 .. toctree::
    :maxdepth: 5
 
+   file_include_OrganizedPointFilters_Filter_Decimate.hpp.rst
+
+.. toctree::
+   :maxdepth: 5
+
    file_include_OrganizedPointFilters_RS_DisparityTransform.hpp.rst
 
 .. toctree::

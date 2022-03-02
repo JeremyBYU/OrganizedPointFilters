@@ -1,0 +1,13 @@
+.. _exhale_function__helper_8hpp_1a39ffe616907e8c84f41f51a765214dcc:
+
+Function OrganizedPointFilters::Helper::get_depth_metadata
+==========================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Helper.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::Helper::get_depth_metadata(std::string)

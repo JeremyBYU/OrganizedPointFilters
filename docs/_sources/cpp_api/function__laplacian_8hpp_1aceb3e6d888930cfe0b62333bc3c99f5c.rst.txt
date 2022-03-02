@@ -1,0 +1,13 @@
+.. _exhale_function__laplacian_8hpp_1aceb3e6d888930cfe0b62333bc3c99f5c:
+
+Template Function OrganizedPointFilters::Filter::LaplacianCore::LaplacianLoopT
+==============================================================================
+
+- Defined in :ref:`file_include_OrganizedPointFilters_Filter_Laplacian.hpp`
+
+
+Function Documentation
+----------------------
+
+
+.. doxygenfunction:: OrganizedPointFilters::Filter::LaplacianCore::LaplacianLoopT(Eigen::Ref<RowMatrixXVec3f>, Eigen::Ref<RowMatrixXVec3f>, const float, float)
