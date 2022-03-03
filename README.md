@@ -18,15 +18,20 @@ Here is an example GIF of Laplacian and Bilateral Filtering of a noisy organized
 
 ## Installation
 
-Installation is entirely through CMake now. You must have CMake 3.14 or higher installed and a C++ compiler with C++ 14 or higher. No built binaries are included currently.
+If you just want to install the python bindings and have a supported architecture, use pip: pip install polylidar. Binary wheels have been created for Windows, Linux, and MacOS. If this fails see below to install from source.
 
-### Build Project Library
+### Build Python Library (Fast)
+Building is entirely through CMake now. You must have CMake 3.14 or higher installed and a C++ compiler with C++ 14 or higher. CLone the project and then call `pip install .`. That its! It actually will call CMake for you and build the python library.
+
+### Build C++ Project Library
+
+Building is entirely through CMake now. You must have CMake 3.14 or higher installed and a C++ compiler with C++ 14 or higher. 
 
 1. `mkdir cmake-build && cd cmake-build`. - create build folder directory 
 2. `cmake ../ -DCMAKE_BUILD_TYPE=Release` . For windows also add `-DCMAKE_GENERATOR_PLATFORM=x64` 
 3. `cmake --build . -j$(nproc) --config Release`  - Build OPF
 
-### Build and Install Python Extension
+### Build and Install Python Extension after C++ Library (Slow)
 
 1. Install [conda](https://conda.io/projects/conda/en/latest/) or create a python virtual envrionment ([Why?](https://medium.freecodecamp.org/why-you-need-python-environments-and-how-to-manage-them-with-conda-85f155f4353c)). I recommend conda for Windows users.
 2. `cd cmake-build && cmake --build . --target python-package --config Release -j$(nproc)` 
@@ -62,6 +67,12 @@ url = {https://www.mdpi.com/1424-8220/20/17/4819},
 issn = {1424-8220}
 }
 ```
+
+## Bugs
+
+A recent update to `cupy` is showing issues when using cuda for GPU filtering. When working on organized point clouds bigger than (430 X 430 X 3) the cupy error is: `cupy_backends.cuda.api.driver.CUDADriverError: CUDA_ERROR_ILLEGAL_ADDRESS: an illegal memory access was encountered`. This happened after the kernel is completed and trying to get the data from GPU to cpu. I have no idea why and don't really have the time to investigate. This error shows up on Windows 10 with RTX 2070 Super on March 1 2022.
+
+Everything works superb for "smaller" organized point clouds however! 
 
 
 
